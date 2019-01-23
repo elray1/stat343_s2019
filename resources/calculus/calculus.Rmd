@@ -1,0 +1,174 @@
+---
+title: "Calculus for Stat 343"
+output:
+  pdf_document:
+    keep_tex: true
+header-includes:
+   - \usepackage{booktabs}
+geometry: margin=1.5cm
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
+```
+
+# Pre-Calculus
+
+### Sums
+
+You can factor anything that doesn't depend on the summation index out of a sum:
+
+$$\sum_{i = 1}^n c x_i = (c x_1 + c x_2 + \cdots + c x_n) = c(x_1 + x_2 + \cdots + x_n) = c \sum_{i = 1}^n x_i$$
+
+### Products
+
+You can factor anything that doesn't depend on the product index out of a product, but you have to raise it to the power of the number of terms in the product:
+
+$$\prod_{i = 1}^n c x_i = (c x_1)(c x_2) \cdots (c x_n) = c^n \prod_{i = 1}^n x_i$$
+
+### Logarithms and Exponents
+
+$a$, $b$, and $c$ are real numbers, $e \approx 2.718281828459$ is Euler's number.
+
+$\log(a)$ is defined to be the number to which you raise $e$ in order to get $a$: $e^{\log(a)} = a$.
+
+$\log(e) = 1$
+
+$\log(ab) = \log(a) + \log(b)$
+
+$\log(a^b) = b \log(a)$
+
+$\log(a/b) = \log(a) - \log(b)$
+
+$a^b \cdot a^c = a^{b + c}$
+
+### Gamma Function
+
+The Gamma ($\Gamma$) function is basically a continuous version of the factorial.  If $a$ is an integer, then
+
+$\Gamma(a) = (a-1)!$
+
+If $a$ is a real number, the $\Gamma$ function is still defined, and it's basically a smooth interpolation between the factorials of nearby integers.  There's a way to define the $\Gamma$ function as an integral, but we won't need to know that.
+
+\newpage
+
+# Differential Calculus in One Variable
+
+### Chain rule:
+
+Suppose $f$ and $g$ are functions, and define $h$ by $h(x) = f(g(x))$.  Then $h'(x) = f'(g(x)) \cdot g'(x)$
+
+### Derivative of a polynomial:
+
+If $a \neq 0$ then $\frac{d}{dx} x^a = a x^{a-1}$
+
+Two special cases that come up a lot are $a = -1$ and $a = -2$:
+
+If $a = -1$ then $\frac{d}{dx} \frac{1}{x} = \frac{d}{dx} x^{-1} = -1 x^{-2} = \frac{-1}{x^2}$
+
+If $a = -2$ then $\frac{d}{dx} \frac{1}{x^2} = \frac{d}{dx} x^{-2} = -2 x^{-3} = \frac{-2}{x^3}$
+
+### Derivative of an exponential:
+
+$\frac{d}{dx} e^{x} = e^x$
+
+In combination with the chain rule, we get
+
+$\frac{d}{dx} e^{f(x)} = e^{f(x)} f'(x)$
+
+### Derivative of a logarithm:
+
+$\frac{d}{dx} \log(x) = \frac{1}{x}$
+
+In combination with the chain rule, we get
+
+$\frac{d}{dx} \log(f(x)) = \frac{1}{f(x)} f'(x)$
+
+### Finding maximum and minimum of a function
+
+To find a maximum or minimum of a function $f(x)$, we can often use this procedure:
+
+1. Find a **critical point** $x^*$ by setting the first derivative to 0 and solving for $x$.
+2. Verify that the critical point is a maximum or minimum; in this class, we will typically use the second derivative test to do this:
+    1. If $f''(x^*) > 0$ (at the critical point), the critical point is a **local minimum** of $f$
+    2. If $f''(x) > 0$ (at all values of $x$), the critical point is a **global minimum** of $f$
+    3. If $f''(x^*) < 0$ (at the critical point), the critical point is a **local maximum** of $f$
+    4. If $f''(x) < 0$ (at all values of $x$), the critical point is a **global maximum** of $f$
+
+Let's illustrate by finding an extreme point of the function $f(x) = 3x^2 - 12x + 14$ and seeing whether it is a local or global minimum or maximum.
+
+Step 1: Find a critical point
+
+$$\frac{d}{dx} f(x) = \frac{d}{dx} 3x^2 - 12x + 14 = 6x - 12 = 0$$
+
+Solving for $x$, we find that $x^* = 2$ is a critical point.
+
+Step 2: Determine whether the critical point is a maximum or minimum, and whether it is local or global
+
+$$\frac{d^2}{dx^2} f(x) = \frac{d^2}{dx^2} 3x^2 - 12x + 14 = \frac{d}{dx} 6x - 12 = 6$$
+
+Since the second derivative is positive for all values of $x$, the critical point $x^* = 2$ is a global minimum of $f$.  Here's a picture:
+
+```{r}
+library(ggplot2)
+f <- function(x) {
+  3*x^2 - 12*x + 14
+}
+
+ggplot(data = data.frame(x = c(-5, 9)), mapping = aes(x = x)) +
+  stat_function(fun = f) +
+  geom_vline(xintercept = 2)
+```
+
+### Taylor's Theorem
+
+I adapted this statement of Taylor's theorem from Wikipedia: https://en.wikipedia.org/wiki/Taylor%27s_theorem#Taylor's_theorem_in_one_real_variable
+
+Let $k \geq 1$ be an integer and suppose that the function $f: \mathbb{R} \rightarrow \mathbb{R}$ is $k$ times differentiable at the point $a \in \mathbb{R}$.  Define the $k$-th order polynomial approximation to $f$ centered at $a$ by
+
+$P_k(x) = f(a) + f'(a) (x - a) + \frac{f''(a)}{2!} (x - a)^2 + \cdots + \frac{f^{(k)}(a)}{k!}(x - a)^k$
+
+Then there exists a function $h_k: \mathbb{R} \rightarrow \mathbb{R}$ such that:
+\begin{itemize}
+\item $f(x) = P_k(x) + h_k(x) (x - a)^k$ and
+\item $\lim_{x \rightarrow a} h_k(x) = 0$
+\end{itemize}
+
+(You can get more specific about what the function $h_k$ looks like and rates of convergence to 0, but we don't need to do that.)
+
+The main points are:
+
+1. For values of $x$ near $a$, the function $f(x)$ can be well approximated by a polynomial, and the polynomial's coefficients can be obtained by the derivatives of $f$.
+2. The approximation is better if you use a higher degree polynomial.
+
+\newpage
+
+As an example, let's approximate $f(x) = e^{5x}$ by a second-order Taylor polynomial centered at $a = 1$.  We will need the first and second derivatives of $f(x)$:
+
+\begin{align*}
+\frac{d}{dx} e^{5x} &= e^{5x} \cdot 5 \\
+\frac{d^2}{dx^2} e^{5x} &= \frac{d}{dx} e^{5x} \cdot 5 = e^{5x} \cdot 25
+\end{align*}
+
+\begin{align*}
+P_2(x) &= f(1) + f'(1) (x - 1) + \frac{f''(1)}{2} (x - 1)^2 \\
+&= e^{5 \cdot 1} + 5 e^{5 \cdot 1}(x - 1) + \frac{25 e^{5 \cdot 1}}{2}(x - 1)^2
+\end{align*}
+
+The claim is that $f(x)$ looks very similar to $P_2(x)$ for values of $x$ near $a = 1$.  Let's verify with a picture:
+
+```{r}
+library(ggplot2)
+f <- function(x) {
+  exp(5 * x)
+}
+
+P_2 <- function(x) {
+  exp(5) + 5 * exp(5) * (x - 1) + (25 * exp(5)) / 2 * (x - 1)^2
+}
+
+temp_df <- data.frame(x = c(0.5, 1.5))
+ggplot(data = temp_df, mapping = aes(x =x)) +
+  stat_function(fun = f) +
+  stat_function(fun = P_2, color = "orange")
+```

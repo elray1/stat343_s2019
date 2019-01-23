@@ -1,0 +1,13 @@
+---
+title: "Resources"
+---
+
+ * Prerequisites
+    * Topics from probability: [pdf](resources/probability/probability.pdf) (also posted on resources page)
+    * Common probability distributions: [pdf](resources/probability/probability_distributions.pdf) (also posted on resources page; you don't need to memorize this material)
+    * Topics from calculus (not discussed today, please review after class): [pdf](resources/calculus/calculus.pdf) (also posted on resources page)
+ * R
+    * [dplyr cheatsheet (pdf)](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf)
+    * [Summary of some R commands, focusing on the dplyr package (pdf)](resources/R/r_overview.pdf)
+    * [ggplot2 cheatsheet (pdf)](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)
+    * [Overview of ggplot2](resources/R/ggplot2_overview.pdf)

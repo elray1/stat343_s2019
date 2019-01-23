@@ -1,0 +1,306 @@
+---
+title: "Schedule"
+---
+
+**Click on the text like "Week 1: Jan 22 -- 25" to expand or collapse the items we covered in that week.**
+
+I will fill in more detail and provide links to lecture notes and labs as we go along.  Items for future dates are tentative and subject to change.
+
+```{r, echo = FALSE}
+make_week_box <- function(id, open, title, contents) {
+  cat('
+<div class="panel panel-default">
+<div class="panel-heading" role="tab" id="headingOne">
+<h5 class="mb-0">
+<a data-toggle="collapse" href="#',
+id,
+'" aria-expanded="true" aria-controls="collapseOne">
+',
+title,
+'</a>
+</h5>
+</div>
+
+<div id="',
+id,
+'" class="collapse',
+ifelse(open, " in", ""),
+'">
+<div class="panel-body">
+',
+contents,
+'
+</div>
+</div>
+</div>',
+  sep = "")
+}
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week1", TRUE, "Week 1: Jan 22 -- 25",
+"
+* Introduction; review of topics from probability; properties of the sample mean for a simple random sample from a finite populaiton
+
+#### Wed, Jan 23
+
+ * **In class**, we will work on: Overview and review
+    * Discuss [syllabus](syllabus/syllabus_stat_343.pdf), overview of course
+    * Review of prerequisites
+        * Topics from probability: [pdf](resources/probability/probability.pdf) (also posted on resources page)
+        * Practice examples for probability: [pdf](materials/20180123_probability/probability_practice.pdf)
+        * Common probability distributions: [pdf](resources/probability/probability_distributions.pdf) (also posted on resources page; you don't need to memorize this material)
+        * Topics from calculus (not discussed today, please review after class): [pdf](resources/calculus/calculus.pdf) (also posted on resources page)
+ * **After class**, please do the following:
+    * **Register for GitHub** [here](https://github.com) if you haven't already; I will ask you to provide your GitHub user name in the questionairre below.
+    * **Fill out** a brief [questionnairre](https://goo.gl/forms/qFlzOcikqxAkDrJE2)
+    * **Fill out** this brief [poll about when my office hours should be held](http://whenisgood.net/n4ahdz3)
+    * **Sign up** for our class at Piazza (anonymous question and answer forum): [https://piazza.com/mtholyoke/spring2019/stat343](https://piazza.com/mtholyoke/spring2019/stat343)
+    * **Reading**
+        * Review the prerequisite material from probability and calculus.  If there are any topics from probability or calculus that you don't have memorized, please start memorizing them.  This will make the rest of this class go much more smoothly for you.  If you have any questions on this material, please don't hesitate to ask me in office hours or on Piazza.  I am happy to help with this material.
+        * Over the next few classes we will cover material from Sections 7.1 - 7.3 of the text.  Give those sections in the book a brief skim.
+    * **Homework 0** due Wed, Jan 30
+
+#### Fri, Jan 25
+ * **In class**, we will work on: Sections 7.1, 7.2, 7.3.1, and 7.3.2 (mostly lecture)
+    * Definitions: population parameter, statistic, estimator, estimate, simple random sample, sampling distribution, bias, variance, mean squared error
+    * Expected value, variance, and MSE of the sample mean based on a simple random sample from a finite population.
+    * Estimating the population variance based on a simple random sample from a finite population.
+    * Set up git on RStudio (if you took Stat 340 with me, you can leave early)
+ * **After class**, please do the following:
+    * Start memorizing any definitions from today's class that you don't know yet.
+    * **Problem Set 0** due Wed, Jan 30
+"
+  )
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week2", TRUE, "Week 2: Jan 28 -- Feb 1",
+"
+Section 7.3.3 (see Stat 344SM, survey sampling, for the rest of Chapter 7 and much more); start on Chapter 8
+
+#### Mon, Jan 28
+ * **In Class**, we will work on: Section 5.3 and part of 7.3.3 (mostly lab)
+    * Central Limit Theorem, more on the sampling distribution of the sample mean
+    * Topics from R:
+        * `for` loops
+        * `dplyr::sample_n`
+ * **After class**, please do the following:
+    * **Problem Set 0** due Wed, Jan 30
+
+#### Wed, Jan 30
+ * **Problem Set 0 due today!!**
+ * **In Class**, we will work on: Finish Section 7.3.3
+    * A first look at confidence intervals
+ * **After class**, please do the following:
+    * **Problem Set 1** due Wed, Feb 6
+
+#### Fri, Feb 1
+ * **In Class**, we will work on: Start Chapter 8
+    * Not exactly sure what yet
+ * **After class**, please do the following:
+    * **Problem Set 1** due Wed, Feb 6
+"
+  )
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week3", FALSE, "Week 3: Feb 4 -- 8",
+"
+
+#### Mon, Feb 4
+ * **In Class**, we will work on:
+
+#### Wed, Feb 6
+ * **In Class**, we will work on:
+
+#### Fri, Feb 8
+ * **In Class**, we will work on:
+"
+  )
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week4", FALSE, "Week 4: Feb 11 -- 15",
+"
+
+#### Mon, Feb 11
+ * **In Class**, we will work on:
+
+#### Wed, Feb 13
+ * **In Class**, we will work on:
+
+#### Fri, Feb 15
+ * **In Class**, we will work on:
+"
+  )
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week5", FALSE, "Week 5: Feb 18 -- 22",
+"
+
+#### Mon, Feb 18
+ * **In Class**, we will work on:
+
+#### Wed, Feb 20
+ * **In Class**, we will work on:
+
+#### Fri, Feb 22
+ * **In Class**, we will work on:
+"
+  )
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week6", FALSE, "Week 6: Feb 25 -- Mar 1",
+"
+
+#### Mon, Feb 25
+ * **In Class**, we will work on:
+
+#### Wed, Feb 27
+ * **In Class**, we will work on:
+
+#### Fri, Mar 1
+ * **In Class**, we will work on:
+"
+  )
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week7", FALSE, "Week 7: Mar 4 -- 8",
+"
+
+#### Mon, Mar 4
+ * **In Class**, we will work on:
+
+#### Wed, Mar 6
+ * **In Class**, we will work on:
+
+#### Fri, Mar 8
+ * **In Class**, we will work on:
+"
+  )
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week8", FALSE, "Week 8: Mar 11 -- 15",
+"
+#### Spring Break: safe travels!
+"
+  )
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week9", FALSE, "Week 9: Mar 18 -- 22",
+"
+
+#### Mon, Mar 18
+ * **In Class**, we will work on:
+
+#### Wed, Mar 20
+ * **In Class**, we will work on:
+
+#### Fri, Mar 22
+ * **In Class**, we will work on:
+"
+  )
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week10", FALSE, "Week 10: Mar 25 -- 29",
+"
+
+#### Mon, Mar 15
+ * **In Class**, we will work on:
+
+#### Wed, Mar 27
+ * **In Class**, we will work on:
+
+#### Fri, Mar 29
+ * **In Class**, we will work on:
+"
+  )
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week11", FALSE, "Week 11: Apr 1 -- 5",
+"
+
+#### Mon, Apr 1
+ * **In Class**, we will work on:
+
+#### Tue, Apr 3
+ * **In Class**, we will work on:
+
+#### Fri, Apr 5
+ * **In Class**, we will work on:
+"
+  )
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week12", FALSE, "Week 12: Apr 8 -- 12",
+"
+
+#### Mon, Apr 8
+ * **In Class**, we will work on:
+
+#### Wed, Apr 10
+ * **In Class**, we will work on:
+
+#### Fri, Apr 12
+ * **In Class**, we will work on:
+"
+  )
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week13", FALSE, "Week 13: Apr 15 -- 19",
+"
+
+#### Mon, Apr 15
+ * **In Class**, we will work on:
+
+#### Wed, Apr 17
+ * **In Class**, we will work on:
+
+#### Fri, Apr 19
+ * **In Class**, we will work on:
+"
+  )
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week14", FALSE, "Week 14: Apr 22 -- 26",
+"
+
+#### Mon, Apr 22
+ * **In Class**, we will work on:
+
+#### Wed, Apr 24
+ * **In Class**, we will work on:
+
+#### Fri, Apr 26
+ * **In Class**, we will work on:
+"
+  )
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week15", FALSE, "Week 15: Apr 29 -- 30",
+"
+
+#### Mon, Apr 29
+ * **In Class**, we will work on:
+"
+  )
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("finals", TRUE, "Final Exams: Fri, May 3 at 7pm -- Tue, May 7 at noon",
+"We will have a cumulative final exam.
+"
+  )
+```

@@ -1,0 +1,114 @@
+---
+title: "Probability Practice Examples"
+output:
+  pdf_document:
+    keep_tex: true
+header-includes:
+   - \usepackage{booktabs}
+geometry: margin=1.5cm
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
+```
+
+### Example 1
+
+I toss a fair coin three times and record whether each toss resulted in heads or tails.  For your reference, here is an enumeration of the sample space for this experiment, where $htt$ represents the outcome that a heads came up on the first toss, and tails on the second and third tosses:
+
+$\{hhh, hht, hth, htt, thh, tht, tth, ttt\}$
+
+Define the following random variables:
+
+$X$ = the number of heads on the first toss
+
+$Y$ = the total number of heads across all three tosses
+
+#### (a) By counting outcomes in the sample space, fill in the table below to specify the marginal distribution of $Y$.  (A number inside the table should be a value of $f_{Y}(y)$.)
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{rllll}
+\toprule
+ & y = 0 & y = 1 & y = 2 & y = 3 \\
+\midrule
+$f_Y(y)$ & & & & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+#### (b) By counting outcomes in the sample space, fill in the table below to specify the joint p.m.f. of $(X, Y)$.  (A number inside the table should be a value of $f_{X,Y}(x, y)$.)
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{rllll}
+\toprule
+ & y = 0 & y = 1 & y = 2 & y = 3 \\
+\midrule
+x = 0 & & & & \\
+\midrule
+x = 1 & & & & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+#### (c) By counting outcomes in the sample space, fill in the table below to specify the conditional p.m.f. of $X$ given that $Y = 1$.  (A number inside the table should be a value of $f_{X|Y}(x | Y = 1)$.)
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{rllll}
+\toprule
+ & $f_{X|Y}(x| Y = 1)$ \\
+\midrule
+x = 0 & \\
+\midrule
+x = 1 & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+#### (d) Verify that $f_{X|Y}(0 | Y = 1) = \frac{f_{X,Y}(0, 1)}{f_Y(1)}$, and similar for $f_{X|Y}(1 | Y = 1)$
+
+\newpage
+
+### Example 2
+
+The marginal distribution of $X$ and the conditional distribution of $Y$ given $X$ are as follows:
+
+\begin{eqnarray*}
+f_X(x) &=&    e^{-x} \ \ \ \ \ \ \ \ \ \ 0 < x < \infty  \\
+f_{Y|X=x} (y| X=x) &=& e^{-(y-x)} \ \ \ \ \  0 < x < y < \infty \\
+\end{eqnarray*}
+
+#### (a) Find the joint distribution of $X$ and $Y$, $f_{X,Y}(x,y)$.
+
+\vspace{6cm}
+
+#### (b) Find the marginal distribution of $Y$, $f_Y(y)$.
+
+\vspace{6cm}
+
+#### (c) Why doesn't $f_{X,Y}(x,y) = f_X(x) f_Y(y)$?  (Under what condition would $f_{X,Y}(x,y) = f_X(x) f_Y(y)$, and what does the fact that this equation doesn't hold mean about $X$ and $Y$?)
+
+\vspace{6cm}
+
+#### (d) Find the conditional distribution of $X$ given that $Y = y$.
+
+\vspace{6cm}
+
+### Example 3
+
+The continuous random variables $X$ and $Y$ have a joint pdf with the following form:
+
+$$f_{X,Y}(x,y) = c (x + y)^2, \qquad 0 \leq x \leq 1, \qquad 0 \leq y \leq 1$$
+
+Find the value of $c$.
+
+\vspace{6cm}
+
+
+### Example 4
+
+Suppose that $E(X) = \mu$ and $Var(X) = \sigma^2$, and define $Z = \frac{X - \mu}{\sigma}$.
+
+Show that $E(Z) = 0$ and $Var(Z) = 1$.
