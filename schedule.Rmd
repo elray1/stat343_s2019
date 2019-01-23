@@ -41,7 +41,7 @@ contents,
 make_week_box("week1", TRUE, "Week 1: Jan 22 -- 25",
 "
 * Introduction; review of topics from probability; properties of the sample mean for a simple random sample from a finite populaiton
-
+ 
 #### Wed, Jan 23
 
  * **In class**, we will work on: Overview and review
