@@ -1,0 +1,103 @@
+---
+title: "Problem Set 0: Written Part"
+author: "Your Name Goes Here"
+output:
+  pdf_document:
+    keep_tex: true
+header-includes:
+   - \usepackage{booktabs}
+geometry: margin=1.5cm
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Details
+
+### Due Date
+
+This assignment is due at 1:00 PM on Wednesday, Sept 19.
+
+### How to Write Up
+
+The written part of this assignment can be either typeset using latex or hand written.
+
+### Grading
+
+5% of your grade on this assignment is for turning in something legible.  This means it should be organized, and any Rmd files should knit to pdf without issue.
+
+An additional 20% of your grade is for completion.  A quick pass will be made to ensure that you've made a reasonable attempt at all problems.
+
+In the range of 1 to 3 problems will be graded more carefully for correctness.  In grading these problems, an emphasis will be placed on full explanations of your thought process.  You don't need to write more than a few sentences for any given problem, but you should write complete sentences!  Understanding and explaining the reasons behind what you are doing is at least as important as solving the problems correctly.
+
+Solutions to all problems will be provided.
+
+### Collaboration
+
+You are allowed to work with others on this assignment, but you must complete and submit your own write up.  You should not copy large blocks of code or written text from another student.
+
+### Sources
+
+You may refer to our text, Wikipedia, and other online sources.  All sources you refer to must be cited in the space I have provided at the end of this problem set.
+
+## Problem 1:
+
+If $f(x)$ and $g(x)$ are probability density functions, show that $h(x) = \alpha f(x) + (1 - \alpha) g(x)$ is a probability density function.
+
+
+## Problem 2:
+
+Suppose $X_1$ and $X_2$ are continuous random variables with
+
+\begin{align*}
+X_1 &\sim \text{Unif}(0, 1) \\
+X_2 | X_1 = x_1 &\sim \text{Unif}(0, X_1) \\
+\end{align*}
+
+#### (a) Find the pdf for the joint distribution of $X_1$ and $X_2$
+
+#### (b) Find the pdf for the marginal distribution of $X_1$
+
+#### (c) Find the pdf for the marginal distribution of $X_2$
+
+#### (d) Find the pdf for the conditional distribution of $X_1 | X_2 = x_2$
+
+#### (e) Write 1 or 2 sentences explaining how this problem relates to Bayes' Rule
+
+## Problem 3:
+
+Let $X$ be a continuous random variable with density function
+
+$$f(x) = 2x, \qquad 0 \leq x \leq 1$$
+
+#### (a) Find $E(X)$
+
+#### (b) Find $E(X^2)$
+
+#### (c) Find $Var(X)$
+
+## Problem 4:
+
+Suppose I have two choices for stocks to invest in.  The return for the first stock is modelled as a random variable $X_1$ with $E(X_1) = \mu_1 = 1$ and $Var(X_1) = \sigma^2_1 = 0.1$; similarly, the return for the second stock is modelled as a random variable $X_2$ with $E(X_2) = \mu_2 = 0.8$ and $Var(X_2) = \sigma^2_2 = 0.12$.  Additionally, suppose that the correlation between $X_1$ and $X_2$ as $Cor(X_1, X_2) = -0.8$.
+
+Recall that if $X_1$ and $X_2$ are random variables, then
+
+$$Var(X_1 + X_2) = Var(X_1) + Var(X_2) + 2 Cov(X_1, X_2)$$
+
+Additionally, $Cor(X_1, X_2) = \frac{Cov(X_1, X_2)}{\left[Var(X_1) Var(X_2)\right]^{0.5}}$.
+
+#### (a) If you could invest in only one of the stocks, which would you choose and why?
+
+#### (b) Suppose you invest half of your money in the first stock and half of your money in the second stock.  Define $Y = 0.5 X_1 + 0.5 X_2$ to be the return for this strategy.  Find the expected return for your investment and the variance of the return.
+
+#### (c) If the proportion invested in the first stock is $\pi = 0.8$ and the proportion invested in the second stock is $(1 - \pi) = 0.2$, what is the expected return and the variance of the return?
+
+#### (d) Find an expression for the expected return as a function of the proportion invested in the first stock, $\pi$.
+
+#### (e) Find an expression for the variance of the return as a function of the proportion invested in the first stock, $\pi$.
+
+#### (f) Repeat parts d and e if $Cor(X_1, X_2) = 0.1$
+
+
+

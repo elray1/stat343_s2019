@@ -5,7 +5,14 @@ title: "Homework"
 +--------------+-----------------------------------------------+-----------+-------+----------------------------------------------------+
 | Assignment # | Description                                   | Due Date  | Value | Solutions                                          |
 +==============+===============================================+===========+=======+====================================================+
-|    0         | Review/Foundations.  Probability, a little    | 2/15/2018 |  1    |                                                    |
+|    0         | Review/Foundations.  Probability, a little    | 1/30/2018 |  1    |                                                    |
 |              | calculus, and R.                              |           |       |                                                    |
-|              | Will be assigned by end of day 1/22/2019.     |           |       |                                                    |
+|              |                                               |           |       |                                                    |
+|              | Written part:                                 |           |       |                                                    |
+|              | [pdf](homework/ps0/ps0_written.pdf)           |           |       |                                                    |
+|              | [Rmd](homework/ps0/ps0_written.Rmd)           |           |       |                                                    |
+|              |                                               |           |       |                                                    |
+|              | R part: Data Camp assignments posted now.     |           |       |                                                    |
+|              | Remainder to be assigned on Friday via GitHub.|           |       |                                                    |
 +--------------+-----------------------------------------------+-----------+-------+----------------------------------------------------+
+
