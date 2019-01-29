@@ -5,7 +5,7 @@ title: "Homework"
 +--------------+-----------------------------------------------+-----------+-------+----------------------------------------------------+
 | Assignment # | Description                                   | Due Date  | Value | Solutions                                          |
 +==============+===============================================+===========+=======+====================================================+
-|    0         | Review/Foundations.  Probability, a little    | 1/30/2018 |  1    |                                                    |
+|    0         | Review/Foundations.  Probability, a little    | 2/1/2018  |  1    |                                                    |
 |              | calculus, and R.                              |           |       |                                                    |
 |              |                                               |           |       |                                                    |
 |              | Written part:                                 |           |       |                                                    |
@@ -13,6 +13,6 @@ title: "Homework"
 |              | [Rmd](homework/ps0/ps0_written.Rmd)           |           |       |                                                    |
 |              |                                               |           |       |                                                    |
 |              | R part: Data Camp assignments posted now.     |           |       |                                                    |
-|              | Remainder to be assigned on Friday via GitHub.|           |       |                                                    |
+|              | Remainder via GitHub.                         |           |       |                                                    |
 +--------------+-----------------------------------------------+-----------+-------+----------------------------------------------------+
 
