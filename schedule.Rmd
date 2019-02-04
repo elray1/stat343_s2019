@@ -69,6 +69,7 @@ make_week_box("week1", FALSE, "Week 1: Jan 22 -- 25",
     * Definitions from Chapter 7 (some on motivating example handout): population parameter, statistic, estimator, estimate, simple random sample, sampling distribution, bias, variance, mean squared error
     * Start on some derivations of the expected value, variance, and MSE of the sample mean based on a simple random sample from a finite population.
     * If time (unlikely), start on estimating the population variance based on a simple random sample from a finite population.
+    * Lecture notes for Sections 7.1, 7.2, 7.3.1, and 7.3.2: [pdf](materials/20180125_srs/lecture_notes.pdf)
     * Set up git on RStudio (if you took Stat 340 with me, you can leave early)
  * **After class**, please do the following:
     * Start memorizing any definitions from today's class that you don't know yet.
@@ -101,7 +102,7 @@ Section 7.3.3 (see Stat 344SM, survey sampling, for the rest of Chapter 7 and mu
 #### Fri, Feb 1
  * **Problem Set 0 due today!!**
  * **In Class**, we will work on: Section 7.3.3
-    * Mean Squared Error = Bias$^2$ + Variance
+    * Mean Squared Error = Bias$^2$ + Variance.  Lecture notes: [pdf](materials/20190201_mse/20190201_mse_lecture_notes.pdf)
     * Finish lab from last time
  * **After class**, please do the following:
     * **Problem Set 1** due Fri, Feb 8
@@ -114,19 +115,22 @@ make_week_box("week3", TRUE, "Week 3: Feb 4 -- 8",
 "
 
 #### Mon, Feb 4
- * **In Class**, we will work on: Finish Section 7.3.3
-    * A first look at confidence intervals
+ * **In Class**, we will work on: Section 7.3.3
+    * A first look at confidence intervals for a population mean based on a simple random sample.  [pdf](materials/20190204_srs_ci_lecture_notes/20190204_lecture_notes.pdf)  (not on the lecture notes but discussed in class are the coverage probability and nominal coverage probability of a confidence interval)
+    * R topics: Logical operations on vectors, mutate and summarize [pdf](resources/R/mutate_summarize.pdf)
+    * Lab 2: confidence intervals for simple random sampling
  * **After class**, please do the following:
     * **Problem Set 1** due Fri, Feb 8
 
 #### Wed, Feb 6
- * **In Class**, we will work on: Start on Sections 8.1 through 8.5
-    * Maximum likelihood estimation
+ * **In Class**, we will work on: Finish Section 7.3.3
+    * Finish confidence intervals lab from last class
+    * If you finish early, free time or work on homework
  * **After class**, please do the following:
     * **Problem Set 1** due Fri, Feb 8
 
 #### Fri, Feb 8
- * **In Class**, we will work on: Sections 8.1 through 8.5
+ * **In Class**, we will work on: Start on Sections 8.1 through 8.5
  * **After class**, please do the following:
     * **Problem Set 1** due Fri, Feb 8
 "
