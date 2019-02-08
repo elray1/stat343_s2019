@@ -79,7 +79,7 @@ make_week_box("week1", FALSE, "Week 1: Jan 22 -- 25",
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week2", TRUE, "Week 2: Jan 28 -- Feb 1",
+make_week_box("week2", FALSE, "Week 2: Jan 28 -- Feb 1",
 "
 Section 7.3.3 (see Stat 344SM, survey sampling, for the rest of Chapter 7 and much more); start on Chapter 8
 
@@ -105,7 +105,7 @@ Section 7.3.3 (see Stat 344SM, survey sampling, for the rest of Chapter 7 and mu
     * Mean Squared Error = Bias$^2$ + Variance.  Lecture notes: [pdf](materials/20190201_mse/20190201_mse_lecture_notes.pdf)
     * Finish lab from last time
  * **After class**, please do the following:
-    * **Problem Set 1** due Fri, Feb 8
+    * **Problem Set 1** due Fri, Feb 15
 "
   )
 ```
@@ -120,35 +120,41 @@ make_week_box("week3", TRUE, "Week 3: Feb 4 -- 8",
     * R topics: Logical operations on vectors, mutate and summarize [pdf](resources/R/mutate_summarize.pdf)
     * Lab 2: confidence intervals for simple random sampling
  * **After class**, please do the following:
-    * **Problem Set 1** due Fri, Feb 8
+    * **Problem Set 1** due Fri, Feb 15
 
 #### Wed, Feb 6
  * **In Class**, we will work on: Finish Section 7.3.3
     * Finish confidence intervals lab from last class
     * If you finish early, free time or work on homework
  * **After class**, please do the following:
-    * **Problem Set 1** due Fri, Feb 8
+    * **Problem Set 1** due Fri, Feb 15
 
 #### Fri, Feb 8
  * **In Class**, we will work on: Start on Sections 8.1 through 8.5
+    * Introductory worksheet, friend or foe: [pdf](materials/20190208_mle/20180208_mle_friend_or_foe.pdf)
+    * Some plots to go with the introductory worksheet: [pdf](materials/20190208_mle/20180208_mle_friend_or_foe_2.pdf)
+        * Rmd file in case you want to see code for making the plots: [Rmd](materials/20190208_mle/20180208_mle_friend_or_foe_2.Rmd)
+    * Defined the likelihood function, log-likelihood function, maximum likelihood estimator, maximum likelihood estimate
+    * Argued that the parameter value that maximizes the log-likelihood also maximizes the likelihood, since log is an increasing function.
+    * Reviewed some calculus related to finding a maximum of a univariate function
  * **After class**, please do the following:
-    * **Problem Set 1** due Fri, Feb 8
+    * **Problem Set 1** due Fri, Feb 15
 "
   )
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week4", FALSE, "Week 4: Feb 11 -- 15",
+make_week_box("week4", TRUE, "Week 4: Feb 11 -- 15",
 "
 
 #### Mon, Feb 11
- * **In Class**, we will work on:
+ * **In Class**, we will work on: Sections 8.1 through 8.5
 
 #### Wed, Feb 13
- * **In Class**, we will work on:
+ * **In Class**, we will work on: Sections 8.1 through 8.5
 
 #### Fri, Feb 15
- * **In Class**, we will work on:
+ * **In Class**, we will work on: Sections 8.1 through 8.5, or move on to 8.6.
 "
   )
 ```

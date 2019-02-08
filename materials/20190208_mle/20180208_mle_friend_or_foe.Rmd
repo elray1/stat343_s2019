@@ -1,0 +1,67 @@
+---
+title: "20180125 - Friend or Foe"
+author: "Evan L. Ray, adapted from Allan Rossman and Beth Chance"
+date: "February 8, 2019"
+output:
+  pdf_document:
+    keep_tex: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+Do children who are less than a year old recognize the difference between nice, friendly behavior as
+opposed to mean, unhelpful behavior? Do they make choices based on such behavior? In a
+study reported in the November 2007 issue of Nature, researchers investigated whether infants
+take into account an individual's actions towards others in evaluating that individual as appealing
+or aversive (Hamlin, Wynn, and Bloom, 2007).
+
+In one component of the study, sixteen 10-month-old infants were shown a "climber" character
+(a piece of wood with "google" eyes glued onto it) that
+could not make it up a hill in two tries. Then they were alternately shown two scenarios for the
+climber's next try, one where the climber was pushed to the top of the hill by another character
+("friend") and one where the climber was pushed back down the hill by another character
+("foe"). The infant was alternately shown these two scenarios several times. Then the child was
+presented with both pieces of wood (representing the friend and the foe) and asked to pick one to
+play with. Videos of this study are available at websites for the UBC Center for Infant Cognition Lab (<http://cic.psych.ubc.ca/example-stimuli/>) and the Yale Infant Cognition Center (<https://campuspress.yale.edu/infantlab/>).
+
+The "climber" character was a yellow triangle; helper and hinderer were a red square and a blue circle.  Which of the square and the circle was the helper and which was the hinderer was determined randomly for each baby.  Also randomized were which event (helping or hindering) they observed first and the positions of helper and hinderer when presented to the infants (on left or right).
+
+Let the random variable $X$ denote the number of babies (out of the total of 16 in our sample) who preferred the helpful toy.
+
+### 1. What statistical model would be appropriate for the distribution of $X$?
+
+\vspace{0.5cm}
+
+$X$ $\sim \,$
+
+### 2. The researchers are interested in the underlying proportion of 10-month-old infants who express a preference for the helpful character.  How does this relate to the statistical model you wrote down in part 1?
+
+\newpage
+
+### 3. Write down the probability mass function for $X$, based on the model you specified in part 1.  What are the possible values of $x$?  What are the possible values of any parameters?
+
+\vspace{3cm}
+
+In the actual experiment, the researchers found that $x=14$ of the 16 infants in the study selected the nice toy.
+
+### 4. Suppose that the underlying proportion of 10-month-old infants who prefer the helpful character is really $p = 0.5$ (half of babies will choose the helpful character).  By plugging the values 14, 16, and 0.5 into the pmf in part 3, find an expression for the probability of obtaining the data we observed.  Use the `dbinom` function in R to calculate the probability of obtaining the observed data.
+
+\vspace{3cm}
+
+### 5. Suppose that the underlying proportion of 10-month-old infants who prefer the helpful character is really $p = 0.1$.  By plugging the values 14, 16, and 0.1 into the pmf in part 3, find an expression for the probability of obtaining the data we observed.  Use the `dbinom` function in R to calculate the probability of obtaining the observed data.
+
+\vspace{3cm}
+
+### 6. Suppose that the underlying proportion of 10-month-old infants who prefer the helpful character is really $p = 0.9$.  By plugging the values 14, 16, and 0.1 into the pmf in part 3, find an expression for the probability of obtaining the data we observed.  Use the `dbinom` function in R to calculate the probability of obtaining the observed data.
+
+\vspace{3cm}
+
+### 7. In reality, we don't know what $p$ is.  Suppose we knew that $p$ had to be one of the three values 0.1, 0.5, and 0.9.  Which would you guess and why?
+
+\vspace{3cm}
+
+### 8. If you have extra time: Make a plot in R that has values of p (for more than just 3 values - maybe 100 or 1000) on the horizontal axis and the probability of the observed data for a given value of p on the vertical axis.  Make a conjecture about what value of p would b best.  Can you confirm based on your plot or further numerical exploration?

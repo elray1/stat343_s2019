@@ -1,0 +1,113 @@
+---
+title: "20190208 - Friend or Foe Plots"
+output:
+  pdf_document:
+    keep_tex: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Here is a plot of the probability mass functions for our three values of $p$:
+
+```{r, message=FALSE, fig.height=2.5, echo = FALSE}
+library(ggplot2)
+library(dplyr)
+
+x_grid <- seq(from = 0, to = 16)
+
+pmfs <- bind_rows(
+  data.frame(
+    x = x_grid,
+    pmf = dbinom(x_grid, size = 16, p = 0.1),
+    p = 0.1
+  ),
+  data.frame(
+    x = x_grid,
+    pmf = dbinom(x_grid, size = 16, p = 0.5),
+    p = 0.5
+  ),
+  data.frame(
+    x = x_grid,
+    pmf = dbinom(x_grid, size = 16, p = 0.9),
+    p = 0.9
+  )
+)
+
+ggplot(data = pmfs,
+    mapping = aes(x = x, y = pmf, color = factor(p), shape = factor(p))) +
+  geom_point(size = 2) +
+  facet_wrap( ~ factor(p), nrow = 1) +
+  theme_bw() +
+  ylab("P(X = x | p), for each x = 0, ..., 16")
+```
+
+Here is a plot of the probability of the observed data (x = 14) as a function of the unknown parameter p:
+
+```{r, fig.height=2.5, echo = FALSE}
+lik <- function(p_vector) {
+  result <- vector("numeric", length(p_vector))
+  
+  for(i in seq_along(p_vector)) {
+    p <- p_vector[i]
+    result[i] <- dbinom(x = 14, size = 16, p)
+  }
+  
+  return(result)
+}
+
+points <- data.frame(
+  p = c(0.1, 0.5, 0.9),
+  prob_of_data = c(
+    dbinom(x = 14, size = 16, prob = 0.1),
+    dbinom(x = 14, size = 16, prob = 0.5),
+    dbinom(x = 14, size = 16, prob = 0.9)
+  )
+)
+
+ggplot(data = data.frame(p = c(0, 1)),
+    mapping = aes(x = p)) +
+  stat_function(fun = lik, n = 1001) +
+  geom_point(data = points,
+    mapping = aes(x = p, y = prob_of_data, color = factor(p), shape = factor(p)),
+    size = 2) +
+  ylab("P(X = 14 | p), for p in [0, 1]") +
+  theme_bw()
+```
+
+
+Here is a plot of the **log** of the probability of the observed data (x = 14) as a function of the unknown parameter p:
+
+```{r, fig.height=2.5, echo = FALSE}
+loglik <- function(p_vector) {
+  result <- vector("numeric", length(p_vector))
+  
+  for(i in seq_along(p_vector)) {
+    p <- p_vector[i]
+    result[i] <- dbinom(x = 14, size = 16, p, log = TRUE)
+  }
+  
+  return(result)
+}
+
+
+points <- data.frame(
+  p = c(0.1, 0.5, 0.9),
+  prob_of_data = c(
+    dbinom(x = 14, size = 16, prob = 0.1, log = TRUE),
+    dbinom(x = 14, size = 16, prob = 0.5, log = TRUE),
+    dbinom(x = 14, size = 16, prob = 0.9, log = TRUE)
+  )
+)
+
+ggplot(data = data.frame(p = c(0, 1)),
+    mapping = aes(x = p)) +
+  stat_function(fun = loglik, n = 1001) +
+  geom_point(data = points,
+    mapping = aes(x = p, y = prob_of_data, color = factor(p), shape = factor(p)),
+    size = 2) +
+  ylab("log{P(X = 14 | p)}, for p in [0, 1]") +
+  theme_bw()
+```
+
