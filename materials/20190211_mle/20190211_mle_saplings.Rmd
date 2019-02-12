@@ -1,0 +1,93 @@
+---
+title: "Stat 343 MLE Practice: Saplings"
+output:
+  pdf_document:
+    keep_tex: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+This example comes from "Introduction to Statistical Thought," by Michael Lavine. Lavine writes:
+
+> Tree populations move by dispersing their seeds. Seeds become seedlings, seedlings become saplings, and saplings become adults which eventually produce more seeds. Over time, whole populations may migrate in response to climate change. One instance occurred at the end of the Ice Age when species that had been sequestered in the south were free to move north. Another instance may be occurring today in response to global warming. One critical feature of the migration is its speed. Some of the factors determining the speed are the typical distances of long range seed dispersal, the proportion of seeds that germinate and emerge from the forest floor to become seedlings, and the proportion of seedlings that survive each year. To learn about emergence and survival, ecologists return annually to forest quadrats (square meter sites) to count seedlings that have emerged since the previous year. One such study was reported in Lavine et al. [2002].
+
+In each year from 1991 to 1997, the ecologists recorded the number of "old" seedlings in each of 60 quadrats, where an old seedling is at least 1 year old (they can identify old seedlings by whether they have a bud mark). These values are recorded in the columns of the data frame named like `91_old`. For the years 1992 through 1997, they also recorded the number of "new" seedlings, i.e. the number of seedlings that were less than 1 year old. The number of new seedlings and the number of old seedlings in each quadrat don't add up like you might expect. This might be due to a variety of factors,
+like seedlings dying or errors in data collection.
+
+```{r, message=FALSE, warning=FALSE}
+library(tidyverse)
+
+seedlings <- read_table("http://www.evanlray.com/data/lavine_intro_stat_thought/seedlings.txt") %>%
+  select(quadrat = Block,
+    old_1991 = `91`,
+    old_1992 = `92-t`,
+    old_1993 = `93-t`,
+    old_1994 = `94-t`,
+    old_1995 = `95-t`,
+    old_1996 = `96-t`,
+    old_1997 = `97-t`,
+    new_1992 = `92-1`,
+    new_1993 = `93-1`,
+    new_1994 = `94-1`,
+    new_1995 = `95-1`,
+    new_1996 = `96-1`,
+    new_1997 = `97-1`
+  )
+
+head(seedlings)
+dim(seedlings)
+```
+
+For today, let's analyze the number of new seedlings observed in each of the 60 quadrats during 1993. Here's a plot:
+
+```{r, fig.height=3}
+ggplot(data = seedlings, mapping = aes(x = new_1993)) +
+  geom_histogram(binwidth = 1)
+```
+
+Define the random variables $X_i$, $i = 1, \ldots, 60$ to represent the number of new seedlings observed in each quadrat  $i$ in 1993.
+
+### 1. What statistical model would be appropriate for the distribution of each $X_i$?
+
+Note that the seedlings are very small, so it's reasonable to assume that they do not affect each other. So, an assumption of independence for the seedlings within each quadrat is roughly plausible.
+
+\vspace{0.5cm}
+
+$X_i$ $\sim \,$
+
+### 2. Ecologists want to learn about the rate at which new seedlings emerge in a quadrat. How does this relate to the statistical model you wrote down in part 1?
+
+\newpage
+
+### 3. Write down the probability mass function for $X_i$, the number of new seedlings in the first quadrat number $i$, based on the model you specified in part 1.
+
+\vspace{3cm}
+
+### 4. Write down the joint p.m.f. for $X_{1}, \ldots, X_{60}$.
+
+For now, let's assume that the number of seedlings that emerge in different quadrats are i.i.d., although this may not be realistic (for example, some quadrats may have better than soil than others, so may tend to have more seedlings).
+It will be helpful later if you simplify this joint pmf as much as you reasonably can before moving on.
+
+\vspace{10cm}
+
+### 5. Prove that the maximum likelihood estimator for the model parameter is the sample mean: $\hat{\lambda}_{MLE} = \frac{1}{n} \sum_{i = 1}^n X_i$
+
+We will break this down into a few steps.
+
+#### i. Find the log-likelihood function.
+
+\newpage
+
+#### ii. Find a critical point of the log-likelihood function.
+
+\vspace{10cm}
+
+#### iii. Verify that the critical point occurs at a global maximum of the log-likelihood function.
+
+\vspace{9cm}
+
+### 6. In RStudio, find the maximum likelihood estimate and overlay a visualization of the pmf on a density histogram of the data.
+

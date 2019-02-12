@@ -111,7 +111,7 @@ Section 7.3.3 (see Stat 344SM, survey sampling, for the rest of Chapter 7 and mu
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week3", TRUE, "Week 3: Feb 4 -- 8",
+make_week_box("week3", FALSE, "Week 3: Feb 4 -- 8",
 "
 
 #### Mon, Feb 4
@@ -149,6 +149,8 @@ make_week_box("week4", TRUE, "Week 4: Feb 11 -- 15",
 
 #### Mon, Feb 11
  * **In Class**, we will work on: Sections 8.1 through 8.5
+    * Finish first example of maximum likelihood from last class
+    * Second example: [pdf](materials/20190211_mle/20190211_mle_saplings.pdf) Solutions: [pdf](materials/20190211_mle/20190211_mle_saplings_solutions.pdf).  See also R part and solutions posted as lab 3 on GitHub.
 
 #### Wed, Feb 13
  * **In Class**, we will work on: Sections 8.1 through 8.5
