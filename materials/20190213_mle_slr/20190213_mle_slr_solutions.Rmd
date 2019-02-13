@@ -1,0 +1,154 @@
+---
+title: "Stat 343: MLE for Simple Linear Regression"
+output:
+  pdf_document:
+    keep_tex: yes
+---
+
+\newcommand{\simiid}{{\mathrel {\mathop {\sim}\limits _{}^{\rm iid}}\,}}
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+For a variety of reasons, scientists are interested in the relationship between the climate of a region and characteristics of the plants and animals that live there. For example, this could inform thinking about the impacts of climate change on natural resources, and could be used by paleontologists to learn about historical climatological conditions from the fossil record.
+
+In 1979, the US Geological service published a report discussing a variety of characteristics of forests throughout the world and discussed connections to the climates in those different regions (J. A. Wolfe, 1979, Temperature parameters of humid to mesic forests of eastern Asia and relation to forests of other regions of the Northern Hemisphere and Australasia, USGS Professional Paper, 1106). One part of this report discussed the connection between the temperature of a region and the shapes of tree leaves in the forests in that region. Generally, leaves can be described as either "serrated" (having a rough edge like a saw blade) or "entire" (having a smooth edge) - see the picture here: https://en.wikibooks.org/wiki/Historical_Geology/Leaf_shape_and_temperature. One plot in the report displaysthe relationship between the mean annual temperature in a forested region (in degrees Celsius) and the percent of leaves in the forest canopy that are "entire".
+
+I pulled the data out of that plot and put them into the data set that the code below reads in and plots:
+
+```{r, fig.height = 3.5}
+library(readr)
+library(dplyr)
+library(ggplot2)
+
+leaf <- read_csv("http://www.evanlray.com/data/misc/leaf_margins/leaf_margins.csv")
+head(leaf)
+
+ggplot(data = leaf, mapping = aes(x = mean_annual_temp_C, y = pct_entire_margined)) +
+  geom_point() +
+  theme_bw()
+```
+
+Let's consider a model for the percent of leaves in the forest canopy as a function of the mean annual temperature in that forest in degrees Celsius.
+
+## Notation and Model Statement
+
+We define the following random variables:
+
+$Y_i =$ percent of leaves in forest number $i$ that are entire margined, $i = 1, \ldots, n$.
+
+$X_i =$ mean annual temperature in forest number $i$ in degrees Celsius, $i = 1, \ldots, n$.
+
+We specify our model as follows:
+
+\begin{align*}
+(Y_i | X_i = x_i) &= \beta_0 + \beta_1 x_i + \varepsilon_i \\
+\varepsilon_i &\simiid \text{Normal}(0, \sigma^2)
+\end{align*}
+
+If we condition on the value $x_i$, then $\beta_0 + \beta_1 x_i$ is just a constant.  Therefore, we could equivalently state this model as follows:
+
+\begin{align*}
+Y_i | X_i = x_i &\simiid \text{Normal}(\beta_0 + \beta_1 x_i, \sigma^2)
+\end{align*}
+
+This is a model for the conditional distribution of the percent of leaves that are entire margined in a particular forest given the mean annual temperature in that forest.
+
+The model has three parameters $\beta_0$, $\beta_1$, and $\sigma^2$.  For today, let's pretend that $\sigma^2$ is a known constant, and focus on estimation of $\beta_0$ and $\beta_1$.
+
+### 1. Write down the probability density function for $Y_i | X_i = x_i$.
+
+$f(y_i | x_i) = (2 \pi \sigma^2)^{-0.5} e^{\left[ -0.5 \frac{\left\{y_i - (\beta_0 + \beta_1 x_i)\right\}^2}{\sigma^2} \right]}$
+
+\vspace{3cm}
+
+### 2. Write down the joint pdf for $Y_1, \ldots, Y_n | X_{1} = x_1, \ldots, X_{n} = x_{n}$.
+
+\begin{align*}
+f(y_1, \ldots, y_n | x_1, \ldots, x_n) &= \prod_{i = 1}^n \left[(2 \pi \sigma^2)^{-0.5} e^{\left[ -0.5 \frac{\left\{y_i - (\beta_0 + \beta_1 x_i)\right\}^2}{\sigma^2} \right]}\right] \\
+ &= (2 \pi \sigma^2)^{-0.5n} e^{\left[ -0.5 \frac{\sum_{i = 1}^n\left\{y_i - (\beta_0 + \beta_1 x_i)\right\}^2}{\sigma^2} \right]}
+\end{align*}
+
+\vspace{6cm}
+
+### 3. Find the log-likelihood function $\ell(\beta_0, \beta_1, \sigma^2 | x_1, y_1, \ldots, x_n, y_n)$
+
+\begin{align*}
+&\ell(\beta_0, \beta_1 | x_1, y_1, \ldots, x_n, y_n, \sigma^2) = \log\{ \mathcal{L}(\beta_0, \beta_1, \sigma^2 | x_1, y_1, \ldots, x_n, y_n) \} \\
+&\qquad = \log\{ f(y_1, \ldots, y_n | x_1, \ldots, x_n) \} \\
+&\qquad = \log\left\{  (2 \pi \sigma^2)^{-0.5n} e^{\left[ -0.5 \frac{\sum_{i = 1}^n\left\{y_i - (\beta_0 + \beta_1 x_i)\right\}^2}{\sigma^2} \right]} \right\} \\
+&\qquad = \log\left\{  (2 \pi \sigma^2)^{-0.5n}\right\} -0.5 \frac{\sum_{i = 1}^n\left\{y_i - (\beta_0 + \beta_1 x_i)\right\}^2}{\sigma^2}
+\end{align*}
+
+
+### 4. Find a critical point of the log-likelihood function.  This will involve taking the partial derivatives with respect to each of $\beta_0$ and $\beta_1$ and setting the results equal to 0 (remember, we're pretending $\sigma$ is a known constant; if we were trying to estimate that too, we would need to also differentiate with respect to $\sigma$).  You will have a system of 2 equations to solve.
+
+You should get answers of the form:
+
+\begin{align*}
+\beta_0 &= \frac{1}{n}\sum_{i = 1}^n y_i - \beta_1 \frac{1}{n} \sum_{i = 1}^n x_i = \frac{\left(\sum_{i = 1}^n x_i^2\right) \left(\sum_{i = 1}^n y_i\right) - \left(\sum_{i = 1}^n x_i\right) \left(\sum_{i = 1}^n x_i y_i \right)}{n \sum_{i = 1}^n x_i^2 - \left(\sum_{i = 1}^n x_i\right)^2} \\
+\beta_1 &= \frac{n \sum_{i = 1}^n x_i y_i - \left(\sum_{i = 1}^n x_i\right) \left(\sum_{i = 1}^n y_i\right)}{n \sum_{i = 1}^n x_i^2 - \left(\sum_{i = 1}^n x_i\right)^2}
+\end{align*}
+
+To find a critical point, we need to find the partial derivatives of the log-likelihood with respect to each parameter, set the results equal to 0, and solve.  For the derivative with respect to $\beta_0$, we have:
+
+\begin{alignat}{2}
+& & 0 &= \frac{\partial}{\partial \beta_0} \ell(\beta_0, \beta_1 | x_1, y_1, \ldots, x_n, y_n, \sigma^2) \nonumber \\
+& & &= \frac{\partial}{\partial \beta_0} \left[ \log\left\{  (2 \pi \sigma^2)^{-0.5n}\right\} -0.5 \frac{\sum_{i = 1}^n\left\{y_i - (\beta_0 + \beta_1 x_i)\right\}^2}{\sigma^2} \right] \nonumber \\
+& & &= -\frac{0.5}{\sigma^2} \sum_{i = 1}^n 2\left\{y_i - (\beta_0 + \beta_1 x_i)\right\} (-1) \nonumber \\
+& & &= \frac{1}{\sigma^2} \sum_{i = 1}^n \left\{y_i - (\beta_0 + \beta_1 x_i)\right\} \nonumber \\
+&\Rightarrow & 0 &= \sum_{i = 1}^n y_i - \sum_{i = 1}^n\beta_0 - \sum_{i = 1}^n\beta_1 x_i \nonumber \\
+&\Rightarrow & \beta_0 &= \frac{1}{n}\sum_{i = 1}^n y_i - \beta_1 \frac{1}{n} \sum_{i = 1}^n x_i
+\end{alignat}
+
+Now we turn to the equation obtained by differentiating with respect to $\beta_1$:
+
+\begin{alignat}{2}
+& & 0 &= \frac{\partial}{\partial \beta_1} \ell(\beta_0, \beta_1 | x_1, y_1, \ldots, x_n, y_n, \sigma^2) \nonumber \\
+& & &= \frac{\partial}{\partial \beta_1} \left[ \log\left\{  (2 \pi \sigma^2)^{-0.5n}\right\} -0.5 \frac{\sum_{i = 1}^n\left\{y_i - (\beta_0 + \beta_1 x_i)\right\}^2}{\sigma^2} \right] \nonumber \\
+& & &= -\frac{0.5}{\sigma^2} \sum_{i = 1}^n 2\left\{y_i - (\beta_0 + \beta_1 x_i)\right\} (-x_i) \nonumber \\
+& & &= \frac{1}{\sigma^2} \sum_{i = 1}^n \left\{y_i x_i - (\beta_0 x_i + \beta_1 x_i^2)\right\} \nonumber \\
+&\Rightarrow & 0 &= \sum_{i = 1}^n y_i x_i - \beta_0 \sum_{i = 1}^n x_i - \beta_1 \sum_{i = 1}^n x_i^2
+\end{alignat}
+
+Plugging the expression for $\beta_0$ obtained in equation (1) into equation (2), we obtain
+
+\begin{alignat}{2}
+& & 0 &= \sum_{i = 1}^n y_i x_i - \left(\frac{1}{n}\sum_{i = 1}^n y_i - \beta_1 \frac{1}{n} \sum_{i = 1}^n x_i\right) \sum_{i = 1}^n x_i - \beta_1 \sum_{i = 1}^n x_i^2 \nonumber \\
+&\Rightarrow & \beta_1 \left\{\sum_{i = 1}^n x_i^2 - \frac{1}{n} \left(\sum_{i = 1}^n x_i \right)^2 \right\} &= \sum_{i = 1}^n y_i x_i - \left(\frac{1}{n}\sum_{i = 1}^n y_i \right) \left(\sum_{i = 1}^n x_i \right) \nonumber \\
+&\Rightarrow & \beta_1 &= \frac{\sum_{i = 1}^n y_i x_i - \left(\frac{1}{n}\sum_{i = 1}^n y_i \right) \left(\sum_{i = 1}^n x_i \right)}{\sum_{i = 1}^n x_i^2 - \frac{1}{n} \left(\sum_{i = 1}^n x_i \right)^2 } \nonumber \\
+&\Rightarrow & \beta_1 &= \frac{n\sum_{i = 1}^n y_i x_i - \left(\sum_{i = 1}^n y_i \right) \left(\sum_{i = 1}^n x_i \right)}{n\sum_{i = 1}^n x_i^2 - \left(\sum_{i = 1}^n x_i \right)^2 }
+\end{alignat}
+
+The expression in Equation (3) agrees with the answer stated above.
+
+We now can substitute the result in Equation (3) back into Equation (1) to obtain
+
+\begin{alignat*}{2}
+& & \beta_0 &= \frac{1}{n}\sum_{i = 1}^n y_i - \beta_1 \frac{1}{n} \sum_{i = 1}^n x_i \\
+& & &= \frac{1}{n}\sum_{i = 1}^n y_i - \frac{n\sum_{i = 1}^n y_i x_i - \left(\sum_{i = 1}^n y_i \right) \left(\sum_{i = 1}^n x_i \right)}{n\sum_{i = 1}^n x_i^2 - \left(\sum_{i = 1}^n x_i \right)^2 } \frac{1}{n} \sum_{i = 1}^n x_i \\
+& & &= \frac{\frac{1}{n}\sum_{i = 1}^n y_i\left(n\sum_{i = 1}^n x_i^2\right) - \frac{1}{n}\sum_{i = 1}^n y_i \left(\sum_{i = 1}^n x_i \right)^2 -n \left(\sum_{i = 1}^n y_i x_i\right) \left(\frac{1}{n} \sum_{i = 1}^n x_i \right) + \frac{1}{n}\left(\sum_{i = 1}^n y_i \right)  \left(\sum_{i = 1}^n x_i \right)^2}{n\sum_{i = 1}^n x_i^2 - \left(\sum_{i = 1}^n x_i \right)^2 } \\
+& & &= \frac{\left(\sum_{i = 1}^n x_i^2\right) \left(\sum_{i = 1}^n y_i\right) - \left(\sum_{i = 1}^n x_i\right) \left(\sum_{i = 1}^n x_i y_i \right)}{n \sum_{i = 1}^n x_i^2 - \left(\sum_{i = 1}^n x_i\right)^2}
+\end{alignat*}
+
+This agrees with the espression for $\beta_0$ given above.
+
+To formally identify this critical point as a maximum, you'd have to also verify that the Hessian was negative definite; I won't ask us to do that in this class.
+
+### 5. If you have extra time: In RStudio, find the maximum likelihood estimates for $\beta_0$ and $\beta_1$.  Confirm that your answers match those from the `lm` function.  Add a plot of the estimated regression line to the scatterplot (consider using `geom_abline`).
+
+See solutions posted on GitHub.
+
+### 6. If you have even more extra time: Argue that maximizing the log-likelihood function from part 3 is equivalent to minimizing the sum of squared errors $SSE = \sum_{i = 1}^n \left\{y_i - (\beta_0 + \beta_2 x_{i}) \right\}^2$.  Thus, for this model, maximum likelihood is equivalent to estimating the coefficients by ordinary least squares.
+
+The first term of the log-likelihood function does not involve $\beta_0$ or $\beta_1$ at all, so we can ignore it for the purpose of thinking about estimating those coefficients.  The second term can be written as 
+
+$$-0.5 \frac{\sum_{i = 1}^n\left\{y_i - (\beta_0 + \beta_1 x_i)\right\}^2}{\sigma^2} =  \frac{-0.5}{\sigma^2}\sum_{i = 1}^n\left\{y_i - (\beta_0 + \beta_1 x_i)\right\}^2 = \frac{-0.5}{\sigma^2} SSE$$
+
+The values of $\beta_0$ and $\beta_1$ that make SSE as small as possible will make $\frac{-0.5}{\sigma^2} SSE$ as large as possible.
+
+
+

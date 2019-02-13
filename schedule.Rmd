@@ -154,6 +154,11 @@ make_week_box("week4", TRUE, "Week 4: Feb 11 -- 15",
 
 #### Wed, Feb 13
  * **In Class**, we will work on: Sections 8.1 through 8.5
+    * Maximum likelihood for models with more than 1 parameter.
+    * Example of normal distribution.  Lecture notes: [pdf](materials/20190213_mle_slr/lecture_notes_normal_mle.pdf)
+    * Example of simple linear regression, variance known
+        * Handout: [pdf](materials/20190213_mle_slr/20190213_mle_slr.pdf)
+        * Solutions: [pdf](materials/20190213_mle_slr/20190213_mle_slr_solutions.pdf).  Solutions to R part posted on GitHub.
 
 #### Fri, Feb 15
  * **In Class**, we will work on: Sections 8.1 through 8.5, or move on to 8.6.
