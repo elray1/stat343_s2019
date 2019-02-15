@@ -1,0 +1,138 @@
+---
+title: 'Stat 343: Motivation for Numerical Optimization of the Likelihood'
+author: "Evan Ray"
+output:
+  pdf_document:
+    fig_height: 2.7
+    fig_width: 6.5
+geometry: margin=2cm
+header-includes:
+   - \usepackage{booktabs}
+   - \usepackage{multicol}
+---
+
+```{r, include=FALSE, warning=FALSE}
+require(readr)
+require(tidyr)
+require(dplyr)
+require(ggplot2)
+require(knitr)
+require(mosaic)
+
+options(digits=4)
+
+opts_chunk$set(
+  tidy=FALSE,     # display code as typed
+  size="small"    # slightly smaller font for code
+)
+```
+
+# Rainfall in Illinois, all storms from 1960 - 1964
+
+The code below reads in the data and makes an initial plot:
+
+```{r, message=FALSE}
+library(tidyverse)
+
+# Precipitation in Illinois
+# Amount of rainfall in 272 storms from 1960 to 1962
+il_storms <- bind_rows(
+  read_csv("http://www.evanlray.com/data/rice/Chapter%2010/illinois60.txt",
+    col_names = FALSE),
+  read_csv("http://www.evanlray.com/data/rice/Chapter%2010/illinois61.txt",
+    col_names = FALSE),
+  read_csv("http://www.evanlray.com/data/rice/Chapter%2010/illinois62.txt",
+    col_names = FALSE),
+  read_csv("http://www.evanlray.com/data/rice/Chapter%2010/illinois63.txt",
+    col_names = FALSE),
+  read_csv("http://www.evanlray.com/data/rice/Chapter%2010/illinois64.txt",
+    col_names = FALSE)
+)
+names(il_storms) <- "precipitation"
+
+ggplot(data = il_storms, mapping = aes(x = precipitation)) +
+  geom_histogram(center = 0.005, binwidth = 0.01, mapping = aes(y = ..density..)) +
+  theme_bw()
+```
+
+Let's model these data with a Gamma distribution and estimate the parameters by maximum likelihood
+
+\newpage
+
+## Gamma$(\alpha, \lambda)$ Distribution (copied from the "Common Distributions" handout)
+
+A non-negative real number.  Be careful -- there are multiple other parameterizations used in other sources.
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{rl}
+\toprule
+parameters & $\alpha \geq 0$: shape parameter, $\lambda > 0$: rate parameter \\
+p.f. & $f(x | \alpha, \lambda) = \frac{\lambda^\alpha}{\Gamma(\alpha)} x^{\alpha - 1} e^{-\lambda x}$ \\
+Mean & $\frac{\alpha}{\lambda}$ \\
+Variance & ${\alpha}{\lambda^2}$ \\
+R functions & {\tt dgamma(..., shape = $\alpha$, rate = $\lambda$), pgamma, qgamma, rgamma} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+```{r, fig.height=1.75}
+ggplot(data = data.frame(x = c(0, 4)), mapping = aes(x = x)) +
+  stat_function(fun = dgamma, args = list(shape = 0.8, rate = 1), color = "black") +
+  stat_function(fun = dgamma, args = list(shape = 2, rate = 0.5), color = "orange") +
+  stat_function(fun = dgamma, args = list(shape = 4, rate = 2), color = "cornflowerblue") +
+  theme_bw()
+```
+
+## Preview
+
+For our data set, the maximum likelihood estimates are approximately $\hat{\alpha}_{MLE} = 0.440813$ and $\hat{\beta}_{MLE} = 1.964378$
+
+```{r}
+ggplot(data = il_storms, mapping = aes(x = precipitation)) +
+  geom_histogram(center = 0.005, binwidth = 0.01, mapping = aes(y = ..density..)) +
+  stat_function(fun = dgamma, args = list(shape = 0.440813, rate = 1.964378), color = "orange") +
+  theme_bw()
+```
+
+\newpage
+
+## Maximum Likelihood for a Gamma($\alpha$, $\beta$)
+
+Suppose we model $X_1, \ldots, X_n$ as i.i.d. with each $X_i \sim \text{Gamma}(\alpha, \beta)$.
+
+The likelihood function is
+
+\begin{align*}
+\mathcal{L}(\alpha, \beta | x_1, \ldots, x_n) &= \prod_{i = 1}^n \frac{\lambda^\alpha}{\Gamma(\alpha)} x_i^{\alpha - 1} e^{-\lambda x_i} \\
+&= \left\{\frac{\lambda^\alpha}{\Gamma(\alpha)}\right\}^n \left\{\prod_{i = 1}^n x_i^{\alpha - 1}\right\} e^{-\lambda \sum_{i=1}^n x_i}
+\end{align*}
+
+The log-likelihood function is
+
+\begin{align*}
+\ell(\alpha, \beta | x_1, \ldots, x_n) &= n \alpha \log(\lambda) - n \log\left\{\Gamma(\alpha)\right\} +  \sum_{i = 1}^n (\alpha - 1) \log(x_i) - \lambda \sum_{i=1}^n x_i
+\end{align*}
+
+The partial derivatives are
+
+\begin{align}
+\frac{\partial}{\partial \alpha} \ell(\alpha, \beta | x_1, \ldots, x_n) &= n \log(\lambda) - n \frac{\Gamma'(\alpha)}{\Gamma(\alpha)} + \sum_{i = 1}^n \log(x_i) \\
+\frac{\partial}{\partial \beta} \ell(\alpha, \beta | x_1, \ldots, x_n) &= \frac{n \alpha}{\lambda} - \sum_{i = 1}^n x_i
+\end{align}
+
+Setting Equation (2) equal to 0 and solving for $\lambda$, we obtain
+
+\begin{align}
+\lambda = \frac{n \alpha}{\sum_{i = 1}^n x_i} = \frac{\alpha}{\bar{x}}
+\end{align}
+
+Substituting Equation (3) into Equation (1) and setting equal to 0, we obtain
+
+\begin{align}
+n \log(\alpha) - n \log(\bar{x}) + \sum_{i = 1}^n \log(x_i) - n \frac{\Gamma'(\alpha)}{\Gamma(\alpha)} = 0
+\end{align}
+
+However, there is no way to rearrange Equation (4) to solve for $\alpha$!  We are stuck!!!
+
+

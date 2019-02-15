@@ -1,0 +1,232 @@
+---
+title: "Normal Likelihood and Estimation"
+---
+
+## Pulse Rates
+
+We have a data set with the pulses (heart rate, beats per minute) for 130 subjects.  Can we fit a normal distribution to these values?
+
+```{r, echo = TRUE, message = FALSE}
+library(rgl)
+library(mvtnorm)
+library(plyr)
+library(dplyr)
+library(ggplot2)
+library(readr)
+```
+
+```{r, echo = FALSE, message = FALSE}
+pulses <- read_csv("http://www.evanlray.com/data/jse/normtemp/bodytemp.csv")
+```
+
+```{r}
+nrow(pulses)
+ggplot(data = pulses, mapping = aes(x = hr)) +
+  geom_histogram(bins = 15)
+```
+
+To make the plots easier to think about, suppose we only had 5 subjects.
+
+```{r}
+pulses_5 <- pulses %>% slice(1:5)
+ggplot(data = pulses_5) +
+  geom_point(mapping = aes(x = hr, y = 0)) +
+  ylim(c(0, 1))
+```
+
+### Our Model
+
+Suppose $X_i$ is the heart rate for subject number $i$.  We adopt the model that these random variables are i.i.d.
+
+$X_i \sim \text{Normal}(\mu, \sigma)$
+
+We found last class that the maximum likelihood estimators for the model parameters are
+
+$$\hat{\mu}_{MLE} = \bar{X} = \frac{1}{n} \sum_{i = 1}^n X_i$$
+
+$$\hat{\sigma}_{MLE} = \frac{1}{n}\sqrt{\sum_{i = 1}^n (X_i - \bar{X})^2}$$
+
+For a particular data set we can calculate the maximum likelihood estimates:
+
+```{r}
+mle_est <- data.frame(
+  mu = mean(pulses_5$hr),
+  sigma = sqrt(mean((pulses_5$hr - mean(pulses_5$hr))^2)),
+  est_name = "Maximum Likelihood Estimate"
+)
+
+mle_est
+```
+
+### 3 candidate sets of parameter values
+
+Model 1: $X_i \sim \text{Normal}(73, 4)$
+
+```{r}
+mean_1 <- 73
+sd_1 <- 4
+```
+
+Model 2: $X_i \sim \text{Normal}(73, 2)$
+
+```{r}
+mean_2 <- 73
+sd_2 <- 2
+```
+
+Model 3: $X_i \sim \text{Normal}(76, 4)$
+
+```{r}
+mean_3 <- 76
+sd_3 <- 4
+```
+
+Question: For each model, what is the probability of
+
+ * each of our observations individually, and
+ * to all 5 observations together?
+
+#### Numerically:
+
+Individual probabilities:
+
+For model 1, individual probabilities are calculated as:
+
+$$f(x_i | \mu = 73, \sigma = 4) = (2 \pi 4^2)^{\frac{-1}{2}} \exp\left[ \frac{-1}{2 \cdot 4^2} (x_i - 73)^2 \right]$$
+
+In R, for all 3 models:
+
+```{r}
+dnorm(pulses_5$hr, mean = mean_1, sd = sd_1)
+dnorm(pulses_5$hr, mean = mean_2, sd = sd_2)
+dnorm(pulses_5$hr, mean = mean_3, sd = sd_3)
+```
+
+Joint probability:
+
+For model 1, joint probability is calculated as:
+
+$$f(x_1, x_2, x_3, x_4, x_5 | \mu = 73, \sigma = 4) = \prod_{i = 1}^5f(x_i | \mu = 73, \sigma = 4) = \prod_{i = 1}^5 (2 \pi 4^2)^{\frac{-1}{2}} \exp\left[ \frac{-1}{2 4^2} (x_i - 73)^2 \right]$$
+
+In R, for all 3 models:
+
+```{r}
+dnorm(pulses_5$hr, mean = mean_1, sd = sd_1) %>% prod()
+dnorm(pulses_5$hr, mean = mean_2, sd = sd_2) %>% prod()
+dnorm(pulses_5$hr, mean = mean_3, sd = sd_3) %>% prod()
+```
+
+#### Graphically:
+
+```{r}
+ggplot(data = pulses_5) +
+  geom_point(mapping = aes(x = hr, y = 0)) +
+  geom_vline(mapping = aes(xintercept = hr)) +
+  stat_function(fun = dnorm, args = list(mean = mean_1, sd = sd_1), color = "cornflowerblue") +
+  geom_point(mapping = aes(x = hr, y = dnorm(hr, mean = mean_1, sd = sd_1)), color = "cornflowerblue") +
+  xlim(c(60, 90)) +
+  ylim(c(0, 0.25)) +
+  theme_bw() +
+  ggtitle(expression(paste("Model 1: Normal(73, ", 4^2, ")")))
+```
+
+
+```{r}
+ggplot(data = pulses_5) +
+  geom_point(mapping = aes(x = hr, y = 0)) +
+  geom_vline(mapping = aes(xintercept = hr)) +
+  stat_function(fun = dnorm, args = list(mean = mean_2, sd = sd_2), color = "cornflowerblue") +
+  geom_point(mapping = aes(x = hr, y = dnorm(hr, mean = mean_2, sd = sd_2)), color = "cornflowerblue") +
+  xlim(c(60, 90)) +
+  ylim(c(0, 0.25)) +
+  theme_bw() +
+  ggtitle(expression(paste("Model 2: Normal(73, ", 2^2, ")")))
+```
+
+
+```{r}
+ggplot(data = pulses_5) +
+  geom_point(mapping = aes(x = hr, y = 0)) +
+  geom_vline(mapping = aes(xintercept = hr)) +
+  stat_function(fun = dnorm, args = list(mean = mean_3, sd = sd_3), color = "cornflowerblue") +
+  geom_point(mapping = aes(x = hr, y = dnorm(hr, mean = mean_3, sd = sd_3)), color = "cornflowerblue") +
+  xlim(c(60, 90)) +
+  ylim(c(0, 0.25)) +
+  theme_bw() +
+  ggtitle(expression(paste("Model 3: Normal(76, ", 4^2, ")")))
+```
+
+### Plots of the likelihood function
+
+Here's an R function that calculates the value of the likelihood function at given values of the parameters $\mu$ and $\sigma$.
+
+```{r}
+calc_likelihood <- function(mu, sigma) {
+  dnorm(pulses_5$hr, mean = mu, sd = sigma) %>% prod()
+}
+```
+
+Let's make a couple of plots of the likelihood function.  First, some set up: we'll evaluate it along a grid of values for $\mu$ and $\sigma$.
+
+```{r}
+# Set up a grid of values to use in making a plot
+# I chose these through experimentation to make the plot look "nice"
+mu_min <- mean(pulses_5$hr) - 3
+mu_max <- mean(pulses_5$hr) + 3
+sigma_min <- sd(pulses_5$hr) - 2
+sigma_max <- sd(pulses_5$hr) + 2
+mu <- seq(from = mu_min, to = mu_max, length = 201)
+sigma <- seq(from = sigma_min, to = sigma_max, length = 201)
+  
+parameter_grid <- expand.grid(
+  mu = mu,
+  sigma = sigma,
+  likelihood = NA
+)
+
+for(i in seq_len(nrow(parameter_grid))) {
+  parameter_grid$likelihood[i] <- calc_likelihood(parameter_grid$mu[i], parameter_grid$sigma[i])
+}
+```
+
+Here's a 3d plot of the likelihood function.  It's a surface since we have 2 parameters, $\mu$ and $\sigma$.
+
+```{r, echo = TRUE, message = FALSE}
+color_n <- 1000 # number of colors used
+
+joint_density_lim <- range(parameter_grid$likelihood)
+joint_density_range <- joint_density_lim[2] - joint_density_lim[1]
+joint_density_colorlut <- rev(rainbow(1000, start = 0, end = 4/6)) # height color lookup table
+joint_density_col <- joint_density_colorlut[ floor(color_n * (parameter_grid$likelihood - joint_density_lim[1])/joint_density_range) + 1 ]
+
+junk <- open3d()
+z_max <- joint_density_lim[2]
+plot3d(mu, sigma, xlim=c(mu_min, mu_max), ylim=c(sigma_min, sigma_max), zlim=c(0, z_max), zlab="L(mu, sigma)", xlab = "mu", ylab = "sigma", mouseMode = "zAxis", type = "s")
+surface3d(mu, sigma, parameter_grid$likelihood, alpha = 0.3, col = joint_density_col)
+
+#plotids <- with(iris, plot3d(Sepal.Length, Sepal.Width, Petal.Length, 
+#                  type="s", col=as.numeric(Species)))
+rglwidget(elementId = "plot_bivarnorm0")
+```
+
+Here's a 2d visualization, with color used for values of the likelihood function.
+
+```{r, echo = TRUE}
+# Reminder of the maximum likelihood estimates of the parameters
+mle_est
+
+# Make a plot
+# geom_raster fills in colors in a grid of rectangular cells
+# scale_fill_viridis_c is a colorblind-friendly color palette for continuous variables
+# expression is R's "plotmath" expressions, for greek letters and similar
+ggplot() +
+  geom_raster(data = parameter_grid, mapping = aes(x = mu, y = sigma, fill = likelihood)) +
+  geom_point(data = mle_est, mapping = aes(x = mu, y = sigma, shape = est_name)) +
+  scale_shape_manual("Maximum\nLikelihood\nEstimate", labels = NULL, values = 3) +
+  scale_fill_gradientn("Probability\nof Observed\nData", colors = c("#0D0887FF", "#6A00A8FF", "#B12A90FF", "#E16462FF", "#FCA636FF", "#F0F921FF")) +
+  xlim(c(mu_min, mu_max)) +
+  ylim(c(sigma_min, sigma_max)) +
+  xlab(expression(mu)) +
+  ylab(expression(sigma))
+```
+

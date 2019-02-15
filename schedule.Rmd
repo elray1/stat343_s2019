@@ -161,17 +161,22 @@ make_week_box("week4", TRUE, "Week 4: Feb 11 -- 15",
         * Solutions: [pdf](materials/20190213_mle_slr/20190213_mle_slr_solutions.pdf).  Solutions to R part posted on GitHub.
 
 #### Fri, Feb 15
- * **In Class**, we will work on: Sections 8.1 through 8.5, or move on to 8.6.
+ * **In Class**, we will work on: Sections 8.1 through 8.5
+    * Wrap up examples from last class
+        * Talk through the likelihood for the normal distribution model with 2 unknown parameters: [html](materials/20190215/normal_likelihood.html) [Rmd](materials/20190215/normal_likelihood.Rmd)
+        * Highlights from solutions for simple linear regression handout, posted for Wed, Feb 13
+    * Introduce methods for numerical maximization of functions.
 "
   )
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week5", FALSE, "Week 5: Feb 18 -- 22",
+make_week_box("week5", TRUE, "Week 5: Feb 18 -- 22",
 "
 
 #### Mon, Feb 18
  * **In Class**, we will work on:
+    * Numerical maximimization of the likelihood function
 
 #### Wed, Feb 20
  * **In Class**, we will work on:
