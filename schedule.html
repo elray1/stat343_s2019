@@ -482,7 +482,7 @@ $(document).ready(function () {
 <a data-toggle="collapse" href="#week4" aria-expanded="true" aria-controls="collapseOne"> Week 4: Feb 11 – 15</a>
 </h5>
 </div>
-<div id="week4" class="collapse in">
+<div id="week4" class="collapse">
 <div class="panel-body">
 <h4 id="mon-feb-11">Mon, Feb 11</h4>
 <ul>
@@ -514,7 +514,12 @@ $(document).ready(function () {
 <li>Talk through the likelihood for the normal distribution model with 2 unknown parameters: <a href="materials/20190215/normal_likelihood.html">html</a> <a href="materials/20190215/normal_likelihood.Rmd">Rmd</a></li>
 <li>Highlights from solutions for simple linear regression handout, posted for Wed, Feb 13</li>
 </ul></li>
-<li>Introduce methods for numerical maximization of functions.</li>
+<li>Review of Taylor’s Theorem. See last 2 pages of handout about calculus from first day, also posted on resources page.</li>
+<li>Introduce methods for numerical maximization of functions. Slides: <a href="materials/20190215/Newton%20Raphson%20for%20Optimization.pdf">pdf</a>
+<ul>
+<li>Note that on slide 5 I should have had lower case <span class="math inline">\(\ell\)</span> (for the log-likelihood) rather than upper case <span class="math inline">\(L\)</span>.</li>
+</ul></li>
+<li>Start Lab 5, on numeric optimization via Newton’s method; posted on GitHub</li>
 </ul></li>
 </ul>
 </div>
@@ -532,16 +537,30 @@ $(document).ready(function () {
 <ul>
 <li><strong>In Class</strong>, we will work on:
 <ul>
-<li>Numerical maximimization of the likelihood function</li>
+<li>Finish Lab 5</li>
 </ul></li>
 </ul>
 <h4 id="wed-feb-20">Wed, Feb 20</h4>
 <ul>
-<li><strong>In Class</strong>, we will work on:</li>
+<li><strong>In Class</strong>, we will work on:
+<ul>
+<li>Numeric maximum likelihood in Stan
+<ul>
+<li>Example <a href="materials/20190220_stan_optimization/20190220_stan_optimization.pdf">pdf</a></li>
+<li>Lab 6</li>
+</ul></li>
+<li>Prepare for next class: Lab 7a</li>
+</ul></li>
 </ul>
 <h4 id="fri-feb-22">Fri, Feb 22</h4>
 <ul>
-<li><strong>In Class</strong>, we will work on:</li>
+<li><strong>In Class</strong>, we will work on:
+<ul>
+<li><p><strong>Before class</strong>, please complete Lab 7a!! Note that in the calls to <code>qbeta</code>, you will need to change the <code>shape2</code> parameter to <code>b</code>. Your revised code will look like this:</p>
+<pre class="{r}"><code>qbeta(c(0.25, 0.75), shape1 = a, shape2 = b)
+qbeta(c(0.05, 0.95), shape1 = a, shape2 = b)</code></pre></li>
+<li><p>Bayesian Estimation: Section 8.6</p></li>
+</ul></li>
 </ul>
 </div>
 </div>

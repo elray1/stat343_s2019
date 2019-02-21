@@ -316,9 +316,9 @@ A positive number.  If $X \sim \text{Lognormal}(\mu, \sigma^2)$ and $Y = \log(X)
 \begin{tabular}{rl}
 \toprule
 parameters & $\mu$: mean of $\log(X)$, $\sigma^2 > 0$: variance of $\log(X)$ \\
-p.f. & $f(x | \mu, \sigma^2) = (2 \pi \sigma^2)^{-\frac{1}{2}}e^{-\frac{1}{2}\frac{(x - \mu)^2}{\sigma^2}}$ \\
-Mean & $\mu$ \\
-Variance & $\sigma^2$ \\
+p.f. & $f(x | \mu, \sigma^2) = x^{-1}(2 \pi \sigma^2)^{-\frac{1}{2}}\exp\left[-\frac{1}{2}\frac{\{\log(x) - \mu\}^2}{\sigma^2}\right]$ \\
+Mean & $\exp\left(\mu + \frac{\sigma^2}{2}\right)$ \\
+Variance & $\{\exp(\sigma^2) + 1\}\exp(2 \mu + \sigma^2)$ \\
 R functions & {\tt dlnorm(..., meanlog = $\mu$, sdlog = $\sigma$), plnorm, qlnorm, rlnorm} \\
 \bottomrule
 \end{tabular}
@@ -368,7 +368,7 @@ A non-negative real number.  Often used as a model for waiting times -- but need
 \begin{tabular}{rl}
 \toprule
 parameters & $\alpha \geq 0$: shape parameter, $\lambda > 0$: rate parameter \\
-p.f. & $f(x | \alpha, \lambda) = \frac{\lambda}{\Gamma(\alpha)} x^{\alpha - 1} e^{-\lambda x}$ \\
+p.f. & $f(x | \alpha, \lambda) = \frac{\lambda^\alpha}{\Gamma(\alpha)} x^{\alpha - 1} e^{-\lambda x}$ \\
 Mean & $\frac{\alpha}{\lambda}$ \\
 Variance & ${\alpha}{\lambda^2}$ \\
 R functions & {\tt dgamma(..., shape = $\alpha$, rate = $\lambda$), pgamma, qgamma, rgamma} \\

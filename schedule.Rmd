@@ -144,7 +144,7 @@ make_week_box("week3", FALSE, "Week 3: Feb 4 -- 8",
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week4", TRUE, "Week 4: Feb 11 -- 15",
+make_week_box("week4", FALSE, "Week 4: Feb 11 -- 15",
 "
 
 #### Mon, Feb 11
@@ -165,7 +165,10 @@ make_week_box("week4", TRUE, "Week 4: Feb 11 -- 15",
     * Wrap up examples from last class
         * Talk through the likelihood for the normal distribution model with 2 unknown parameters: [html](materials/20190215/normal_likelihood.html) [Rmd](materials/20190215/normal_likelihood.Rmd)
         * Highlights from solutions for simple linear regression handout, posted for Wed, Feb 13
-    * Introduce methods for numerical maximization of functions.
+    * Review of Taylor's Theorem.  See last 2 pages of handout about calculus from first day, also posted on resources page.
+    * Introduce methods for numerical maximization of functions.  Slides: [pdf](materials/20190215/Newton%20Raphson%20for%20Optimization.pdf)
+        * Note that on slide 5 I should have had lower case $\\ell$ (for the log-likelihood) rather than upper case $L$.
+    * Start Lab 5, on numeric optimization via Newton's method; posted on GitHub
 "
   )
 ```
@@ -176,13 +179,23 @@ make_week_box("week5", TRUE, "Week 5: Feb 18 -- 22",
 
 #### Mon, Feb 18
  * **In Class**, we will work on:
-    * Numerical maximimization of the likelihood function
+    * Finish Lab 5
 
 #### Wed, Feb 20
  * **In Class**, we will work on:
+    * Numeric maximum likelihood in Stan
+        * Example [pdf](materials/20190220_stan_optimization/20190220_stan_optimization.pdf)
+        * Lab 6
+    * Prepare for next class: Lab 7a
 
 #### Fri, Feb 22
  * **In Class**, we will work on:
+    * **Before class**, please complete Lab 7a!!  Note that in the calls to `qbeta`, you will need to change the \`shape2\` parameter to \`b\`.  Your revised code will look like this:
+\`\`\`{r}
+qbeta(c(0.25, 0.75), shape1 = a, shape2 = b)
+qbeta(c(0.05, 0.95), shape1 = a, shape2 = b)
+\`\`\`
+    * Bayesian Estimation: Section 8.6
 "
   )
 ```
