@@ -196,16 +196,19 @@ qbeta(c(0.25, 0.75), shape1 = a, shape2 = b)
 qbeta(c(0.05, 0.95), shape1 = a, shape2 = b)
 \`\`\`
     * Bayesian Estimation: Section 8.6
+        * Lecture notes: [pdf](materials/20190222_binomial_bayes/lecture_notes.pdf)
+        * Lab 7b
 "
   )
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week6", FALSE, "Week 6: Feb 25 -- Mar 1",
+make_week_box("week6", TRUE, "Week 6: Feb 25 -- Mar 1",
 "
 
 #### Mon, Feb 25
- * **In Class**, we will work on:
+ * **In Class**, we will work on: Section 8.6
+    * Examples of Bayesian inference with conjugate priors.
 
 #### Wed, Feb 27
  * **In Class**, we will work on:

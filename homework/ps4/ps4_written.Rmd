@@ -1,0 +1,59 @@
+---
+title: "Problem Set 4: Written Part"
+author: "Your Name Goes Here"
+output:
+  pdf_document:
+    keep_tex: true
+header-includes:
+   - \usepackage{booktabs}
+geometry: margin=1.5cm
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+\def\simiid{\stackrel{{\mbox{\text{\tiny i.i.d.}}}}{\sim}}
+
+# Details
+
+### Due Date
+
+This assignment is due at 4:00 PM on Friday, March 1.
+
+### How to Write Up
+
+The written part of this assignment can be either typeset using latex or hand written.
+
+### Grading
+
+5% of your grade on this assignment is for turning in something legible.  This means it should be organized, and any Rmd files should knit to pdf without issue.
+
+An additional 20% of your grade is for completion.  A quick pass will be made to ensure that you've made a reasonable attempt at all problems.
+
+Across both the written part and the R part, in the range of 1 to 3 problems will be graded more carefully for correctness.  In grading these problems, an emphasis will be placed on full explanations of your thought process.  You don't need to write more than a few sentences for any given problem, but you should write complete sentences!  Understanding and explaining the reasons behind what you are doing is at least as important as solving the problems correctly.
+
+Solutions to all problems will be provided.
+
+### Collaboration
+
+You are allowed to work with others on this assignment, but you must complete and submit your own write up.  You should not copy large blocks of code or written text from another student.
+
+### Sources
+
+You may refer to our text, Wikipedia, and other online sources.  All sources you refer to must be cited in the space I have provided at the end of this problem set.
+
+## Problem I: Likelihood intuition
+
+Write one or two paragraphs explaining why maximum likelihood estimation is a reasonable idea.  Your answer should define the likelihood function, explain what it is a function of and what it measures, and explain why choosing a parameter estimate by maximizing the likelihood function is a reasonable idea.  You should also illustrate all of these ideas in the context of a specific example such as estimating the proportion of M&Ms that are blue based on a sample of $n$ M&Ms (you can pick a different example if you prefer).
+
+This problem will be graded by Evan, and you will have an opportunity to submit a revision to your answer for up to full credit after receiving feedback from me.
+
+
+
+## Problem II: Newton's method intuition
+
+Write a 1 or 2 paragraph explanation of what Newton's method is in the context of optimization.  You should explain what the goal of the method is, how the method works, and how it relates to Taylor's theorem.  You should include a supporting illustration and/or some pseudo code for the method.
+
+
