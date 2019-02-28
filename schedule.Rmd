@@ -208,23 +208,28 @@ make_week_box("week6", TRUE, "Week 6: Feb 25 -- Mar 1",
 
 #### Mon, Feb 25
  * **In Class**, we will work on: Section 8.6
-    * Examples of Bayesian inference with conjugate priors.
+    * Examples of Bayesian inference with conjugate priors: [pdf](materials/20190225_bayes_practice/20190225_bayes_practice.pdf).  Solutions: [pdf](materials/20190225_bayes_practice/20190225_bayes_practice_solutions.pdf).
 
 #### Wed, Feb 27
- * **In Class**, we will work on:
+ * **In Class**, we will work on: Section 8.6
+    * Lab 8
 
 #### Fri, Mar 1
  * **In Class**, we will work on:
+    * MCMC for Bayesian inference.
+        * Reading 1: the discussion of the law of large numbers and its application for numerical integration, discussed in Section 5.2 of Rice.
+        * Reading 2 (optional?): I've posted a chapter from Introduction to Statistical Thought by Michael Lavine.  This goes into more depth than we will, but it's the most readable less-than-book-length introduction to this topic at an undergraduate level that I have found.  It is linked to from the resources page: http://www.evanlray.com/stat343_s2019/resources.html
 "
   )
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week7", FALSE, "Week 7: Mar 4 -- 8",
+make_week_box("week7", TRUE, "Week 7: Mar 4 -- 8",
 "
 
 #### Mon, Mar 4
  * **In Class**, we will work on:
+    * MCMC for Bayesian inference using Stan
 
 #### Wed, Mar 6
  * **In Class**, we will work on:
@@ -255,6 +260,7 @@ make_week_box("week9", FALSE, "Week 9: Mar 18 -- 22",
 
 #### Fri, Mar 22
  * **In Class**, we will work on:
+    * **Midterm** on PS1 through PS5
 "
   )
 ```

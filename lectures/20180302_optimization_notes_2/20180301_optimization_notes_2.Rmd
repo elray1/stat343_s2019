@@ -1,0 +1,168 @@
+---
+title: 'Stat 343: Numerical Optimization for Maximum Likelihood Estimation'
+author: "Evan Ray"
+output:
+  pdf_document:
+    fig_height: 2.7
+    fig_width: 6.5
+geometry: margin=2cm
+header-includes:
+   - \usepackage{multicol}
+---
+
+
+```{r, include=FALSE}
+require(readr)
+require(tidyr)
+require(dplyr)
+require(ggplot2)
+require(knitr)
+require(mosaic)
+
+options(digits=4)
+
+opts_chunk$set(
+  tidy=FALSE,     # display code as typed
+  size="small"    # slightly smaller font for code
+)
+```
+
+# Rainfall in Illinois, all storms from 1960 - 1964
+
+The code below reads in the data and makes an initial plot:
+
+```{r, message=FALSE}
+library(tidyverse)
+
+# Precipitation in Illinois
+# Amount of rainfall in 272 storms from 1960 to 1962
+il_storms <- bind_rows(
+  read_csv("http://www.evanlray.com/stat343_s2018/data/rice/Chapter%2010/illinois60.txt",
+    col_names = FALSE),
+  read_csv("http://www.evanlray.com/stat343_s2018/data/rice/Chapter%2010/illinois61.txt",
+    col_names = FALSE),
+  read_csv("http://www.evanlray.com/stat343_s2018/data/rice/Chapter%2010/illinois62.txt",
+    col_names = FALSE),
+  read_csv("http://www.evanlray.com/stat343_s2018/data/rice/Chapter%2010/illinois63.txt",
+    col_names = FALSE),
+  read_csv("http://www.evanlray.com/stat343_s2018/data/rice/Chapter%2010/illinois64.txt",
+    col_names = FALSE)
+)
+names(il_storms) <- "precipitation"
+
+ggplot(data = il_storms, mapping = aes(x = precipitation)) +
+  geom_histogram(center = 0.005, binwidth = 0.01, mapping = aes(y = ..density..))
+```
+
+## Maximum Likelihood for a Gamma($\alpha$, $\beta$) by Numerical Optimization
+
+```{r, fig.height = 1.5}
+# Part 1: Define a function that calculates -1 * the log-likelihood function.
+negative_loglikelihood <- function(log_params, x) {
+  alpha <- exp(log_params[1])
+  beta <- exp(log_params[2])
+  
+  result <- -1 * sum(dgamma(x = x, shape = alpha, rate = beta, log = TRUE))
+  return(result)
+}
+
+# Part 2. Call R's optim function to numerically minimize  -1 * the log-likelihood,
+#    which is equivalent to maximizing the log-likelihood.
+init_params <- c(0, 0)
+optim_result <- optim(
+  par = init_params,
+  fn = negative_loglikelihood,
+  x = il_storms$precipitation)
+
+# Part 3. Extract the parameter estimates and plot
+optim_result
+log_params_hat <- optim_result$par
+alpha_hat <- exp(log_params_hat[1])
+beta_hat <- exp(log_params_hat[2])
+
+ggplot(data = il_storms, mapping = aes(x = precipitation)) +
+  geom_histogram(center = 0.005, binwidth = 0.01, mapping = aes(y = ..density..)) +
+  stat_function(fun = dgamma, args = list(shape = alpha_hat, rate = beta_hat), color = "red")
+```
+
+\newpage
+
+## Code breakdown
+
+Here's an outline of and summary of the main points in the code above.  There are three main sections:
+
+\begin{enumerate}
+  \item Define a function that calculates -1 * the log-likelihood function.
+  \begin{itemize}
+    \item \textbf{Why -1 * log-likelihood?}
+      \begin{itemize}
+        \item By default the function in R that does optimization finds the minimum of a function.
+        \item Minimizing the negative of the log-likelihood is equivalent to maximizing the log-likelihood.
+      \end{itemize}
+    \item The first argument to this function has to be the parameter vector; any other arguments are optional
+    \item \textbf{Why set} \verb&alpha <- exp(log_params[1])& \textbf{?}
+    \begin{itemize}
+      \item For the Gamma distribution, both parameters must be positive.
+      \item It's technically possible to specify bounds on the parameter values, but in practice many optimization algorithms struggle with this
+      \item Using \verb&alpha <- exp(log_params[1])& enforces the constraint that \verb&alpha& > 0
+      \item It's important that the transformation be differentiable
+    \end{itemize}
+  \end{itemize}
+  \item Call R's `optim` function to numerically minimize the negative log-likelihood.  We have specified 3 arguments to optim:
+  \begin{enumerate}
+    \item \verb&par&: initial values for the first argument to the function we're minimizing
+    \item \verb&fn&: the function we want to minimize, \verb&negative_loglikelihood&
+    \item \verb&x&: the value that should be used for the \verb&x& argument to the \verb&negative_loglikelihood& function when it is called.
+  \end{enumerate}
+  \item Extract the parameter estimates and plot the density estimate
+  \begin{itemize}
+    \item The return value from \verb&optim& is a list with 5 elements:
+    \begin{enumerate}
+      \item \verb&par&: the final parameter values that minimized the function
+      \item \verb&value&: the minimum value of the function
+      \item \verb&counts&: how many times the function (and the gradient function if provided) were evaluated during the optimization process
+      \item \verb&convergence&: did the optimization process work?  If so, this will be 0.  Otherwise, an error number that you can look up online.
+      \item \verb&message&: If convergence is something other than 0, a pretty useless message about what happened.
+    \end{enumerate}
+  \item Note that we have to re-do any parameter transformations that were performed inside of the function we optimized.
+  \end{itemize}
+\end{enumerate}
+
+\newpage
+
+## A note on transformations for parameters with constraints
+
+The two most common types of constraints on parameter values are:
+
+### Constraint: $\theta > 0$
+
+This type of constraint often comes up with parameters that play a role like a variance in a distribution; in some sense, the parameter says how "wide" the distribution is, and the "width" has to be positive.
+
+In this case, it's common to use an exponential transformation as in the example above:
+
+$\theta = \exp(\text{input})$, where "input" represents the value passed in to the function.
+
+```{r, fig.height = 2}
+ggplot(data = data.frame(x = c(-10, 10)), mapping = aes(x = x)) +
+  stat_function(fun = exp) +
+  xlab("input") +
+  ylab(expression(theta))
+```
+
+
+### Constraint: $0 \leq \theta \leq 1$
+
+This type of constraint comes up with parameters that are a probability, like $p$ in a Binomial distribution.
+
+In this case, it's common to use a logistic transformation:
+
+$\theta = \frac{1}{1 + exp(-\text{input})}$
+
+```{r, fig.height = 2}
+logistic <- function(x) {1/(1 + exp(-1 * x))}
+
+ggplot(data = data.frame(x = c(-10, 10)), mapping = aes(x = x)) +
+  stat_function(fun = logistic) +
+  xlab("input") +
+  ylab(expression(theta))
+```

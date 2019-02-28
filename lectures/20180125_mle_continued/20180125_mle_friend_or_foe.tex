@@ -1,0 +1,198 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={20180123 - Friend or Foe},
+            pdfauthor={Evan L. Ray, adapted from Allan Rossman and Beth Chance},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+  \title{20180123 - Friend or Foe}
+  \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+  \author{Evan L. Ray, adapted from Allan Rossman and Beth Chance}
+  \preauthor{\centering\large\emph}
+  \postauthor{\par}
+  \predate{\centering\large\emph}
+  \postdate{\par}
+  \date{Janary 25, 2018}
+
+
+\begin{document}
+\maketitle
+
+\subsection{Introduction}\label{introduction}
+
+Do children who are less than a year old recognize the difference
+between nice, friendly behavior as opposed to mean, unhelpful behavior?
+Do they make choices based on such behavior? In a study reported in the
+November 2007 issue of Nature, researchers investigated whether infants
+take into account an individual's actions towards others in evaluating
+that individual as appealing or aversive (Hamlin, Wynn, and Bloom,
+2007).
+
+In one component of the study, sixteen 10-month-old infants were shown a
+``climber'' character (a piece of wood with ``google'' eyes glued onto
+it) that could not make it up a hill in two tries. Then they were
+alternately shown two scenarios for the climber's next try, one where
+the climber was pushed to the top of the hill by another character
+(``friend'') and one where the climber was pushed back down the hill by
+another character (``foe''). The infant was alternately shown these two
+scenarios several times. Then the child was presented with both pieces
+of wood (representing the friend and the foe) and asked to pick one to
+play with. Videos of this study are available at websites for the UBC
+Center for Infant Cognition Lab
+(\url{http://cic.psych.ubc.ca/example-stimuli/}) and the Yale Infant
+Cognition Center (\url{https://campuspress.yale.edu/infantlab/}).
+
+The ``climber'' character was a yellow triangle; helper and hinderer
+were a red square and a blue circle. Which of the square and the circle
+was the helper and which was the hinderer was determined randomly for
+each baby. Also randomized were which event (helping or hindering) they
+observed first and the positions of helper and hinderer when presented
+to the infants (on left or right).
+
+Let the random variable \(X\) denote the number of babies (out of the
+total of 16) who preferred the helpful toy.
+
+\paragraph{1. What statistical model would be appropriate for the
+distribution of the number of babies who preferred the helpful
+toy?}\label{what-statistical-model-would-be-appropriate-for-the-distribution-of-the-number-of-babies-who-preferred-the-helpful-toy}
+
+\vspace{0.5cm}
+
+\(X\) \(\sim \,\)
+
+\paragraph{2. The researchers are interested in the underlying
+proportion of 10-month-old infants who express a preference for the
+helpful character. How does this relate to the statistical model you
+wrote down in part
+1?}\label{the-researchers-are-interested-in-the-underlying-proportion-of-10-month-old-infants-who-express-a-preference-for-the-helpful-character.-how-does-this-relate-to-the-statistical-model-you-wrote-down-in-part-1}
+
+\newpage
+
+\paragraph{\texorpdfstring{3. Write down the probability mass function
+for \(X\), based on the model you specified in part
+1.}{3. Write down the probability mass function for X, based on the model you specified in part 1.}}\label{write-down-the-probability-mass-function-for-x-based-on-the-model-you-specified-in-part-1.}
+
+\vspace{3cm}
+
+\paragraph{\texorpdfstring{4. When they conducted this experiment, the
+researchers observed a particular value, \(x\), for the number of babies
+in the sample who selected the helpful toy. (I'll tell you what \(x\)
+was in a minute, but for now let's stick with using symbols.) Write down
+the likelihood function \(\mathcal{L}(p | x)\) for the unknown model
+parameter \(p\), conditional on the observed data
+\(x\).}{4. When they conducted this experiment, the researchers observed a particular value, x, for the number of babies in the sample who selected the helpful toy. (I'll tell you what x was in a minute, but for now let's stick with using symbols.) Write down the likelihood function \textbackslash{}mathcal\{L\}(p \textbar{} x) for the unknown model parameter p, conditional on the observed data x.}}\label{when-they-conducted-this-experiment-the-researchers-observed-a-particular-value-x-for-the-number-of-babies-in-the-sample-who-selected-the-helpful-toy.-ill-tell-you-what-x-was-in-a-minute-but-for-now-lets-stick-with-using-symbols.-write-down-the-likelihood-function-mathcallp-x-for-the-unknown-model-parameter-p-conditional-on-the-observed-data-x.}
+
+\vspace{4cm}
+
+\paragraph{\texorpdfstring{5. This problem is one example where it will
+be easier to work with the log-likelihood instead of the likelihood.
+Write down the log-likelihood function
+\(L(p | x)\).}{5. This problem is one example where it will be easier to work with the log-likelihood instead of the likelihood. Write down the log-likelihood function L(p \textbar{} x).}}\label{this-problem-is-one-example-where-it-will-be-easier-to-work-with-the-log-likelihood-instead-of-the-likelihood.-write-down-the-log-likelihood-function-lp-x.}
+
+\newpage
+
+\paragraph{\texorpdfstring{6. Prove that the maximum likelihood
+estimator of \(p\) is the sample proportion,
+\(\hat{p}_{MLE} = \frac{x}{n}\).}{6. Prove that the maximum likelihood estimator of p is the sample proportion, \textbackslash{}hat\{p\}\_\{MLE\} = \textbackslash{}frac\{x\}\{n\}.}}\label{prove-that-the-maximum-likelihood-estimator-of-p-is-the-sample-proportion-hatp_mle-fracxn.}
+
+Your life will be easier if you do this by working with the
+log-likelihood function. Your proof has two steps.
+
+\subparagraph{(a) Find a critical
+point.}\label{a-find-a-critical-point.}
+
+We know that the maximum of the (log-)likelihood function must occur at
+a critical point, where \(\frac{d}{d \, p} L(p | x) = 0\). Calculate the
+derivative of the log-likelihood function with respect to \(p\), set the
+result equal to \(0\), and solve for the critical point.
+
+\vspace{8cm}
+
+\subparagraph{(b) Verify that the critical point is at a maximum of the
+likelihood
+function.}\label{b-verify-that-the-critical-point-is-at-a-maximum-of-the-likelihood-function.}
+
+Recall that the critical point you found in part (a) is a local maximum
+if the second derivative of the log-likelihood function evaluated at
+that critical point is negative, and is guaranteed to be a global
+maximum if the second derivative is negative everywhere. Verify that
+this condition holds.
+
+\newpage
+
+\paragraph{\texorpdfstring{7. The researchers found that \(x=14\) of the
+16 infants in the study selected the nice toy. Find the maximum
+likelihood estimate of
+\(p\).}{7. The researchers found that x=14 of the 16 infants in the study selected the nice toy. Find the maximum likelihood estimate of p.}}\label{the-researchers-found-that-x14-of-the-16-infants-in-the-study-selected-the-nice-toy.-find-the-maximum-likelihood-estimate-of-p.}
+
+
+\end{document}

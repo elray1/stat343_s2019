@@ -1,0 +1,161 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={20180125 - Subjective Probability Intervals},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+  \title{20180125 - Subjective Probability Intervals}
+  \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+  \author{}
+  \preauthor{}\postauthor{}
+  \date{}
+  \predate{}\postdate{}
+
+
+\begin{document}
+\maketitle
+
+For each of the following numeric quantities, write down two intervals:
+
+\begin{itemize}
+\tightlist
+\item
+  a 50\% interval: you think there is a 50\% probability that the
+  quantity lies in this interval
+\item
+  a 90\% interval: you think there is a 90\% probability that the
+  quantity lies in this interval
+\end{itemize}
+
+The person with the best calibrated intervals wins (for example, if 5 of
+your 50\% intervals and 9 of your 90\% intervals contain the truth,
+you're doing great).
+
+\paragraph{1. In years, how old was the oldest woman to parachute from a
+plane? (as of
+2013)}\label{in-years-how-old-was-the-oldest-woman-to-parachute-from-a-plane-as-of-2013}
+
+100
+
+\paragraph{2. In feet, how tall is Godzilla in the original Japanese
+movie? (In case you don't think in feet, there are about 3.28 feet in 1
+meter)}\label{in-feet-how-tall-is-godzilla-in-the-original-japanese-movie-in-case-you-dont-think-in-feet-there-are-about-3.28-feet-in-1-meter}
+
+164
+
+\paragraph{3. In what year was the very first email
+sent?}\label{in-what-year-was-the-very-first-email-sent}
+
+1971
+
+\paragraph{4. What percent of American adults volunteered at least once
+in the past year? (as of
+2011)}\label{what-percent-of-american-adults-volunteered-at-least-once-in-the-past-year-as-of-2011}
+
+26.3\%
+
+\paragraph{5. In hours, what is the record for covering 23 miles on a
+pogo
+stick?}\label{in-hours-what-is-the-record-for-covering-23-miles-on-a-pogo-stick}
+
+12.45
+
+\paragraph{6. What percent of American adults average more than 8 hours
+of sleep per
+night?}\label{what-percent-of-american-adults-average-more-than-8-hours-of-sleep-per-night}
+
+28\%
+
+\paragraph{7. How many people could be seated in the ancient Roman
+Colosseum?}\label{how-many-people-could-be-seated-in-the-ancient-roman-colosseum}
+
+49,000
+
+\paragraph{8. The Hercules beetle can carry an object that is how many
+tims its own
+weight?}\label{the-hercules-beetle-can-carry-an-object-that-is-how-many-tims-its-own-weight}
+
+850
+
+\paragraph{9. In what year did a woman first orbit the
+Earth?}\label{in-what-year-did-a-woman-first-orbit-the-earth}
+
+1963
+
+\paragraph{10. What percent of Americans wash their hands after using a
+public
+restroom?}\label{what-percent-of-americans-wash-their-hands-after-using-a-public-restroom}
+
+85\%
+
+
+\end{document}

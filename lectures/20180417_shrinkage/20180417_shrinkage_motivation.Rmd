@@ -1,0 +1,82 @@
+---
+title: "Stat 343: Motivation"
+output: pdf_document
+header-includes:
+   - \usepackage{booktabs}
+---
+
+Our goal for this week is to develop Bayesian approaches to analyze the following data sets, both drawn from Gelman et al. (2004).
+
+# Data Set 1: Educational Testing Experiments
+
+This description is quoted from Gelman et al.:
+
+> A study was performed for the Educational testing Service to analyze the effects of special coaching programs on test scores.  Separate randomized experiments were performed to estimate the effects of coaching programs for the SAT-V (verbal test) in each of eight high schools. ... The SAT examinations are designed to be resistant to short-term efforts directed specifically toward improving performance on the test; instead they are designed to reflect knowledge acquired and abilities developed over many years of education.  Nevertheless, each of the eight schools in this study considered its short-term coaching program to be very successful at increasing SAT scores.  Also, there was no prior reason to believe that any of the eight programs was more effective than any other or that some were more similar in effect to each other than to any other.
+
+> The results of the experiments are summarized in [the table below].  All students in the experiments had already taken the PSAT preliminar SAT), and allowance was made for differences in the PSAT-M (mathematics) and PSAT-V test scores between coached and uncoached students.  In particular, in each school the estimated coaching effect and its standard error were obtained by an analysis of covriance adjustment (that is, a linear regression was perfored of SAT-V on treatment group, using PSAT-M and PSAT-V as control variables) appropriate for a completely randomized experiment.   A separate regression was estimated for each school.  ... [T]he estimated coaching effects, which we label $y_j$, ... are obtained by independent experiments and have approximately normal sampling distriutions with sampling variances that are known, for all practical purposes, because the sample sizes in all of the eight experiments were relatively large, over thirty students in each school.
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{p{0.20\textwidth} p{0.20\textwidth} p{0.2\textwidth}}
+\toprule
+School & Estimated Treatment Effect, $y_j$ & Standard error of effect estimate, $\sigma_j$ \\
+\midrule
+A & 28 & 15 \\
+B & 8 & 10 \\
+C & -3 & 16 \\
+D & 7 & 11 \\
+E & -1 & 9 \\
+F & 1 & 11 \\
+G & 18 & 10 \\
+H & 12 & 18 \\
+\bottomrule
+\end{tabular}
+\label{table:mr}
+\end{table}
+
+How can we best estimate the following?
+
+ 1. The effectiveness of each school's SAT coaching program
+ 
+ 2. The overall average effectiveness of SAT coaching programs
+
+\newpage
+
+# Data Set 2: Meta-Analysis of Benefits of Beta-Blockers in Treating Heart Attack Patients
+
+Again, this example comes from Gelman et al., who describe the study as follows:
+
+> Meta-analysis is an increasingly popular and important process of summarizing and integrating the findings of research studies in a particular area.  ... The data in our medical example are displayed in [the table below], which summarize mortality after myocardial infarction in 22 clinicial trials, each cosisting of two groups of heart attack patients randoly allocated to receive or not receive beta-blockers (a family of drugs that affect te central nervous system and can relax the heart muscles).  Mortality varies from 3% to 21% across the tudies, most of which show a modest, though not 'statistically significant,' benefit from the use of beta-blockers.  The aim of a meta-analysis is to provide a combined analysis of the stsudies that indicates the overall strength of the evidence for a beneficial effect of the treatment under study.  Before proceeding to a formal meta-analysis, it is important to apply rigorous criteria in determining which studies are included.
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{p{0.20\textwidth} p{0.15\textwidth} p{0.2\textwidth}}
+\toprule
+Study, $j$ & Deaths/Total, Control & Deaths/Total, Treated \\
+\midrule
+1 & 3/39 & 3/38 \\
+2 & 14/116 & 7/114 \\
+3 & 11/93 & 5/69 \\
+4 & 127/1520 & 102/1533 \\
+5 & 27/365 & 28/355 \\
+6 & 6/52 & 4/59 \\
+7 & 152/939 & 98/945 \\
+8 & 48/471 & 60/632 \\
+9 & 37/282 & 25/278 \\
+10 & 188/1921 & 138/1916 \\
+11 & 52/583 & 64/873 \\
+12 & 47/266 & 45/263 \\
+13 & 16/293 & 9/291 \\
+14 & 45/883 & 57/858 \\
+15 & 31/147 & 25/154 \\
+16 & 38/213 & 33/207 \\
+17 & 12/122 & 28/251 \\
+18 & 6/154 & 8/151 \\
+19 & 3/134 & 6/174 \\
+20 & 40/218 & 32/209 \\
+21 & 43/364 & 27/391 \\
+22 & 39/674 & 22/680 \\
+\bottomrule
+\end{tabular}
+\label{table:mr}
+\end{table}

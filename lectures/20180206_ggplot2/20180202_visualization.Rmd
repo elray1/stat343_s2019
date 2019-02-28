@@ -1,0 +1,282 @@
+---
+title: "Data Visualization with ggplot2"
+author: "Evan L. Ray"
+date: "February 02, 2018"
+output: ioslides_presentation
+---
+
+<style>
+  .col2 {
+    columns: 2 200px;         /* number of columns and width in pixels*/
+    -webkit-columns: 2 200px; /* chrome, safari */
+    -moz-columns: 2 200px;    /* firefox */
+  }
+  .col3 {
+    columns: 3 100px;
+    -webkit-columns: 3 100px;
+    -moz-columns: 3 100px;
+  }
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Warm Up (with a neighbor)
+
+Here are the first few rows of a data set with information about participants in a randomized controlled trial designed to evaluate a substance abuse treatment program.  What are the observational units and variables?  Are the variables categorical or quantitative?
+
+```{r preprocess_HELPrct, echo=FALSE, warning=FALSE, message=FALSE}
+library(mosaicData)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+HELPrct <- HELPrct %>%
+  select(
+    age,
+    homeless,
+    substance,
+    cesd,
+    mcs
+  ) %>%
+  rename(
+  dep_score = cesd,
+    mental_score = mcs)
+```
+
+```{r head_HELPrct, echo = TRUE}
+head(HELPrct)
+```
+
+## 5 Main Plots (for this class)
+
+<div class="col2">
+1. Bar: Categorical
+```{r, fig.height = 1.3, fig.width = 3.5, echo = FALSE}
+ggplot(data = HELPrct, mapping = aes(x = substance)) +
+  geom_bar()
+```
+
+2. Histogram: Quantitative
+```{r, fig.height = 1.3, fig.width = 3.5, message=FALSE, echo = FALSE}
+ggplot(data = HELPrct, mapping = aes(x = dep_score)) +
+  geom_histogram()
+```
+
+3. Density: Quantitative
+```{r, fig.height = 1.3, fig.width = 3.5, echo = FALSE}
+ggplot(data = HELPrct, mapping = aes(x = dep_score)) +
+  geom_density()
+```
+
+4. Boxplot: 1 Quantitative, 1 Categorical
+```{r, fig.height = 1.3, fig.width = 3.5, echo = FALSE}
+ggplot(data = HELPrct, mapping = aes(x = substance, y = dep_score)) +
+  geom_boxplot()
+```
+
+5. Scatterplot: 2 Quantitative
+```{r, fig.height = 1.3, fig.width = 3.5, echo = FALSE}
+ggplot(data = HELPrct, mapping = aes(x = age, y = dep_score)) +
+  geom_point()
+```
+
+Also: color
+</div>
+
+## The Grammar of Graphics
+
+A statistical graphic is a `mapping` of `data` variables
+to `aes()`thetic attributes of `geom_`etric objects
+
+```{r, echo = TRUE, eval = FALSE}
+ggplot(data = <data_frame>,
+    mapping = aes(<attribute1> = <variable1>, <attribute2> = <variable2>),
+  ) +
+  geom_<geometry type>()
+```
+
+```{r, echo = TRUE, fig.height = 1.5}
+ggplot(data = HELPrct,
+    mapping = aes(x = dep_score, y = mental_score),
+  ) +
+  geom_point()
+```
+
+## What are the `geom_`etric objects?
+
+<div class="col2">
+1. `geom_bar`
+```{r, fig.height = 1.3, fig.width = 3.5, echo = FALSE}
+ggplot(data = HELPrct, mapping = aes(x = substance)) +
+  geom_bar()
+```
+
+2. `geom_histogram`
+```{r, fig.height = 1.3, fig.width = 3.5, message=FALSE, echo = FALSE}
+ggplot(data = HELPrct, mapping = aes(x = dep_score)) +
+  geom_histogram()
+```
+
+3. `geom_density`
+```{r, fig.height = 1.3, fig.width = 3.5, echo = FALSE}
+ggplot(data = HELPrct, mapping = aes(x = dep_score)) +
+  geom_density()
+```
+
+4. `geom_boxplot`
+```{r, fig.height = 1.3, fig.width = 3.5, echo = FALSE}
+ggplot(data = HELPrct, mapping = aes(x = substance, y = dep_score)) +
+  geom_boxplot()
+```
+
+5. `geom_point`
+```{r, fig.height = 1.3, fig.width = 3.5, echo = FALSE}
+ggplot(data = HELPrct, mapping = aes(x = age, y = dep_score)) +
+  geom_point()
+```
+
+
+## What are the `aes`thetic properties?
+
+1. `x` for horizontal axis (applicable for all geometry types)
+2. `y` for vertical axis (applicable for plot types that have a variable on the vertical axis: boxplot and scatter plot)
+3. `fill` (for fill color in geometric objects that have an internal area) or `color` (for color of objects that don't have an internal area)
+
+```{r, echo = TRUE, fig.height = 1.5}
+ggplot(data = HELPrct,
+    mapping = aes(x = dep_score, y = mental_score, color = substance),
+  ) +
+  geom_point()
+```
+
+
+## 1 Categorical Variable: Bar Plot
+```{r, echo = TRUE, fig.width=8, fig.height = 4}
+ggplot(data = HELPrct,
+    mapping = aes(x = homeless)
+  ) +
+  geom_bar()
+```
+
+## 2 Categorical Variables: Bar Plot
+```{r, echo = TRUE, fig.width=8, fig.height=4}
+ggplot(data = HELPrct,
+    mapping = aes(x = homeless, fill = substance)
+  ) +
+  geom_bar()
+```
+
+## 2 Categorical Variables: Bar Plot
+```{r, echo = TRUE, fig.width=8, fig.height=4}
+ggplot(data = HELPrct,
+    mapping = aes(x = homeless, fill = substance)
+  ) +
+  geom_bar(position = position_dodge())
+```
+
+## 1 Quantitative Variable: Histograms
+```{r, echo = TRUE, fig.width=8, fig.height=3}
+ggplot(data = HELPrct,
+    mapping = aes(x = dep_score),
+  ) +
+  geom_histogram()
+```
+
+## 1 Quantitative Variable: Histograms
+```{r, echo = TRUE, fig.width=8, fig.height=3}
+ggplot(data = HELPrct,
+    mapping = aes(x = dep_score),
+  ) +
+  geom_histogram(binwidth = 4)
+```
+
+## 1 Quantitative Variable: Density Plots
+```{r, echo = TRUE, fig.width=8, fig.height=3}
+ggplot(data = HELPrct,
+    mapping = aes(x = dep_score),
+  ) +
+  geom_density()
+```
+
+## 2 Quantitative Variables: Scatter Plots
+```{r, echo = TRUE, fig.width=8, fig.height=3}
+ggplot(data = HELPrct,
+    mapping = aes(x = dep_score, y = mental_score)
+  ) +
+  geom_point()
+```
+
+## 2 Quantitative Variables: Scatter Plots
+```{r, echo = TRUE, fig.width=8, fig.height=3}
+ggplot(data = HELPrct,
+    mapping = aes(x = dep_score, y = mental_score, color = substance)
+  ) +
+  geom_point()
+```
+
+
+## 1 Quantitative, 1 Categorical: Box Plots
+```{r, echo = TRUE, fig.width=8, fig.height=3}
+ggplot(data = HELPrct,
+    mapping = aes(x = substance, y = dep_score)
+  ) +
+  geom_boxplot()
+```
+
+## 1 Quantitative, 1 Categorical: Density
+```{r, echo = TRUE, fig.width=8, fig.height=3}
+ggplot(data = HELPrct,
+    mapping = aes(x = dep_score, color = substance)
+  ) +
+  geom_density()
+```
+
+## Summary
+
+| Variables      | Plot Type    | Geometry       | Aesthetics |
+|----------------|--------------|----------------|-------------------|
+| 1 Categorical  | Bar Plot     | geom_bar       | x |
+| 1 Quantitative | Histogram    | geom_histogram | x |
+| 1 Quantitative | Density      | geom_density   | x |
+| 2 Categorical  | Bar Plot     | geom_bar       | x, fill |
+| 2 Quantitative | Scatter Plot | geom_point     | x, y |
+| 1 Categorical and 1 Quantitative | Box Plot | geom_boxplot | x (categorical), y (quantitative) |
+| 1 Categorical and 1 Quantitative | Density Plot | geom_density | x (quantitative), color (categorical) |
+
+## Common Error 1
+
+No `+` after call to `ggplot()`:
+
+```{r, echo = TRUE, fig.width=8, fig.height=1.5}
+ggplot(data = HELPrct,
+    mapping = aes(x = dep_score, y = mental_score)
+  )
+  geom_point()
+```
+
+## Common Error 2
+
+`%>%` instead of `+` after call to `ggplot()`:
+
+```{r, echo = TRUE, eval = FALSE}
+ggplot(data = HELPrct,
+    mapping = aes(x = dep_score, y = mental_score)
+  ) %>%
+  geom_point()
+```
+
+**Error: Mapping must be created by `aes()` or `aes_()`**
+
+## Common Error 3
+
+Forgot `data = `:
+
+```{r, echo = TRUE, fig.width=8, fig.height=1, eval = FALSE}
+ggplot(mapping = aes(x = dep_score, y = mental_score)) +
+  geom_point()
+```
+
+**Error in FUN(X[[i]], ...) : object 'dep_score' not found**
+

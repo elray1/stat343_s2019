@@ -1,0 +1,153 @@
+---
+title: 'Stat 343: Intro to Stan'
+output:
+  pdf_document:
+    fig_height: 2.7
+    fig_width: 6.5
+geometry: margin=2cm
+header-includes:
+   - \usepackage{multicol}
+---
+
+
+```{r, include=FALSE}
+require(readr)
+require(tidyr)
+require(dplyr)
+require(ggplot2)
+require(knitr)
+require(mosaic)
+
+options(digits=4)
+```
+
+# Cosmological Microwave Background (CMB) Again
+
+The code below reads in the data and makes an initial plot:
+
+```{r, message=FALSE, warning=FALSE}
+library(tidyverse)
+
+cmb <- read_csv("http://www.evanlray.com/stat343_s2018/data/bayesian_core/CMBdata.txt",
+    col_names = FALSE)
+names(cmb) <- "temp_difference"
+
+ggplot(data = cmb, mapping = aes(x = temp_difference)) +
+  geom_histogram(center = 0.005, binwidth = 0.01, mapping = aes(y = ..density..))
+```
+
+
+#### Model
+
+Let $X_1, \ldots, X_n$ denote the $n = 640000$ temperature differences.  We model these as independent, with each
+
+$X_i \sim \text{Normal}(\mu, \sigma^2)$
+
+This model has two parameters: $\mu$ and $\sigma^2$.  We will use the following prior distributions for these parameters:
+
+An non-informative prior for $\mu$ (large variance):
+
+$\mu \sim \text{Normal}(0, 1000^2)$
+
+A non-informative prior for $\sigma$ (large variance):
+
+$\sigma \sim \text{Gamma}(1, 0.01)$
+
+# Estimation Code
+
+We will use Stan to perform estimation.  Stan is a complete programming language of its own, specific to performing Bayesian inference for statistical models.  To do estimation with Stan and R, you will have code in two separate files:
+
+1. An Stan file with code that specifies the data, parameters, and model.
+2. An R script or notebook file with code that preprocesses the data, calls Stan to do MCMC sampling, and then works with the output from Stan.
+
+Those files are described below:
+
+## normal.stan
+
+Here is the content of the file normal.stan:
+
+```{r, eval = FALSE}
+data {
+  int<lower=0> n; // number of observations
+  real x[n]; // data: an array of length n where each entry is a real number
+}
+
+parameters {
+  real mu;
+  real<lower=0> sigma;
+}
+
+model {
+  mu ~ normal(0, 1000); // prior for mu: normal with a very large variance; non-informative
+  sigma ~ gamma(1, 0.01); // prior for sigma: gamma with shape = 1 and rate = 0.01; non-informative
+  x ~ normal(mu, sigma); // data model: each element of x follows a normal(mu, sigma) distribution
+}
+```
+
+The `data` block in the Stan file describes fixed, known quantities that will be passed in to Stan.  In this case, we have said that we will tell Stan what our sample size is (`n`) and give it a vector of length `n` with observed data values `x`.
+
+The `parameters` block defines parameters to estimate; in this case, the mean `mu` and standard deviation `sigma` of the normal distribution.
+
+The `model` block defines our prior distributions and data model.
+
+Stan takes these ingredients and creates a program in C++ that will perform Bayesian estimation for this model using a MCMC approach called Hamiltonian Monte Carlo.
+
+## R code to interface with Stan
+
+Here's a walk through of R code that can be used to interface with the Stan program defined above.
+
+#### Load the data
+
+```{r}
+library(tidyverse)
+
+cmb <- read_csv("http://www.evanlray.com/stat343_s2018/data/bayesian_core/CMBdata.txt",
+  col_names = FALSE)
+names(cmb) <- "temp_difference"
+```
+
+#### Call Stan to do the estimation
+
+```{r fit_stan, cache = TRUE}
+library(rstan)
+rstan_options(auto_write = TRUE)
+
+fit <- stan(
+  file = "normal.stan",
+  data = list(n = nrow(cmb), x = cmb$temp_difference),
+  iter = 1000,
+  chains = 1)
+```
+
+ * R's interface with Stan is provided by a package called `rstan`
+ * A major part of the run time when calling Stan comes from creating and compiling the C++ program to do estimation.  The command `rstan_options(auto_write = TRUE)` ensures that this is done only the first time you call Stan.
+ * The `stan` function does estimation.  Here we have used 4 arguments:
+    * `file`: the stan file with the model definition, created above.
+    * `data`: a named list with one entry for each variable declared in the `data` block of the stan file.
+    * `iter`: how many iterations to perform (how many samples to draw from the posterior in each MCMC chain).
+    * `chains`: how many MCMC chains to run; here, just 1.
+
+#### View the results
+
+The `rstan` package comes with some pretty useful default functions to display and summarize the samples from the posterior distribution:
+
+```{r}
+print(fit)
+plot(fit)
+pairs(fit, pars = c("mu", "sigma", "lp__"))
+```
+
+We can also extract the parameter samples and compute summaries like posterior means and credible intervals by hand. The extract function returns a named list with a component for each parameter defined in the stan model file.
+
+```{r}
+param_samples <- rstan::extract(fit)
+
+mu_samples <- param_samples$mu
+sigma_samples <- param_samples$sigma
+
+mean(mu_samples)
+mean(sigma_samples)
+
+quantile(mu_samples, probs = c(0.025, 0.975))
+quantile(sigma_samples, probs = c(0.025, 0.975))
+```

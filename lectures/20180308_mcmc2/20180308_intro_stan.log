@@ -1,0 +1,2370 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdftex 2017.12.9)  8 MAR 2018 12:32
+entering extended mode
+**C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/2
+0180308_mcmc2/20180308_intro_stan.md
+
+(C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/20
+180308_mcmc2/20180308_intro_stan.md
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:4: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:9: Undefined control sequence
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:11: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:15: You can't use `macro parameter character
+ #' in vertical mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:23: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:26: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (18.43689pt too wide) in paragraph at lines 23--26
+[]\tenrm cmb <- read$[]\teni sv\tenrm ("\teni http \tenrm : \teni ==www:evanlra
+y:com=stat\tenrm 343[]2018\teni =data=bayesian[]ore=CMBdata:txt\tenrm "\teni ; 
+col[]ames \tenrm =|
+
+\hbox(7.5+2.5)x469.75499, glue set - 1.0
+.\hbox(0.0+0.0)x20.0
+.\tenrm c
+.\tenrm m
+.\kern-0.27779
+.\tenrm b
+.etc.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:27: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:30: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:34: You can't use `macro parameter character
+ #' in vertical mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:34: You can't use `macro parameter character
+ #' in vertical mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:34: You can't use `macro parameter character
+ #' in vertical mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:34: You can't use `macro parameter character
+ #' in vertical mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:38: Undefined control sequence
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:44: Undefined control sequence
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:48: Undefined control sequence
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:50: You can't use `macro parameter character
+ #' in vertical mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:59: You can't use `macro parameter character
+ #' in vertical mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:59: You can't use `macro parameter character
+ #' in vertical mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:90: You can't use `macro parameter character
+ #' in vertical mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:90: You can't use `macro parameter character
+ #' in vertical mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:94: You can't use `macro parameter character
+ #' in vertical mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:94: You can't use `macro parameter character
+ #' in vertical mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:94: You can't use `macro parameter character
+ #' in vertical mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:94: You can't use `macro parameter character
+ #' in vertical mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:100: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:103: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (18.43689pt too wide) in paragraph at lines 100--103
+[]\tenrm cmb <- read$[]\teni sv\tenrm ("\teni http \tenrm : \teni ==www:evanlra
+y:com=stat\tenrm 343[]2018\teni =data=bayesian[]ore=CMBdata:txt\tenrm "\teni ; 
+col[]ames \tenrm =|
+
+\hbox(7.5+2.5)x469.75499, glue set - 1.0
+.\hbox(0.0+0.0)x20.0
+.\tenrm c
+.\tenrm m
+.\kern-0.27779
+.\tenrm b
+.etc.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:105: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:105: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:106: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:106: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:107: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:107: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:107: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:108: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:108: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:110: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:112: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:114: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:115: You can't use `macro parameter characte
+r #' in vertical mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:115: You can't use `macro parameter characte
+r #' in vertical mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:115: You can't use `macro parameter characte
+r #' in vertical mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:115: You can't use `macro parameter characte
+r #' in vertical mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+ [1{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:123: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:123: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:127: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:127: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:131: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:131: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:135: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:135: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:139: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:139: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:140: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:140: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:141: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:141: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:142: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:142: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:142: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:144: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:146: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:146: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:147: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:147: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:151: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:151: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:152: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:152: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:153: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:153: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:157: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:158: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:165: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (15.36555pt too wide) in paragraph at lines 159--165
+[]\tenrm fit <- stan( file = "nor-mal.stan", data = list(n = nrow(cmb), x = cmb
+$\teni temp[]ifference\tenrm )\teni ; iter \tenrm = 1000\teni ; chains \tenrm =
+|
+
+\hbox(7.5+2.5)x469.75499, glue set - 1.0
+.\hbox(0.0+0.0)x20.0
+.\tenrm  (ligature fi)
+.\tenrm t
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\tenrm <
+.etc.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:167: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:167: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:168: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:168: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:169: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:169: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:170: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:170: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:170: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:171: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:171: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:172: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:172: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:173: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:173: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:174: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:174: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:175: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:175: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:176: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:176: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:177: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:177: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:177: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:178: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:178: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:179: Missing { inserted
+A left brace was mandatory here, so I've put one in.
+You might want to delete and/or insert some corrections
+so that I will find a matching right brace soon.
+(If you're confused by all this, try typing `I}' now.)
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:179: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:179: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:180: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:180: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:181: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:181: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:182: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:182: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:183: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:183: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:184: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:184: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:185: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:185: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:186: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:186: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:187: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:187: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:188: Missing { inserted
+A left brace was mandatory here, so I've put one in.
+You might want to delete and/or insert some corrections
+so that I will find a matching right brace soon.
+(If you're confused by all this, try typing `I}' now.)
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:188: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:188: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:189: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:189: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:190: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:190: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:191: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:191: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:192: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:192: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:193: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:193: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:194: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:194: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:195: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:195: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:196: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:196: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:197: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:197: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:198: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:198: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:199: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:199: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:200: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:200: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:201: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:201: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:202: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:202: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:203: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:203: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:204: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:204: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:205: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:205: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:206: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:206: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:207: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:207: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:208: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:208: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:209: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:209: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:210: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:210: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:211: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:211: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:213: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:213: Missing } inserted
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:213: Missing } inserted
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:213: Missing } inserted
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+
+Overfull \hbox (7.41267pt too wide) in paragraph at lines 166--213
+[]\tenrm ```  In file in-cluded from C:/Users/eray/Documents/R/win-library/3.4/
+BH/include/boost/config.hpp:39:0,|
+
+\hbox(7.5+2.5)x469.75499, glue set - 1.0
+.\hbox(0.0+0.0)x20.0
+.\tenrm \ (ligature ``)
+.\tenrm `
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.etc.
+
+
+Overfull \hbox (135.38524pt too wide) in paragraph at lines 166--213
+\tenrm from C:/Users/eray/Documents/R/win-library/3.4/BH/include/boost/math/too
+ls/config.hpp:13,  from C:/Users/eray/Documents/R/win-|
+
+\hbox(7.5+2.5)x469.75499, glue set - 1.0
+.\tenrm f
+.\tenrm r
+.\tenrm o
+.\tenrm m
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.etc.
+
+
+Overfull \hbox (56.06284pt too wide) in paragraph at lines 166--213
+\tenrm library/3.4/StanHeaders/include/stan/math/rev/core/gevv$[]\teni vv[]ari:
+hpp \tenrm : 5\teni ; fromC \tenrm : \teni =Users=eray=Documents=R=win \tensy  
+|
+
+\hbox(7.5+2.5)x469.75499, glue set - 1.0
+.\tenrm l
+.\tenrm i
+.\tenrm b
+.\tenrm r
+.\tenrm a
+.etc.
+
+
+Overfull \hbox (15.13168pt too wide) in paragraph at lines 166--213
+\teni library=\tenrm 3\teni :\tenrm 4\teni =StanHeaders=include=stan=math=rev=c
+ore:hpp \tenrm : 12\teni ; fromC \tenrm : \teni =Users=eray=Documents=R=win \te
+nsy  |
+
+\hbox(7.5+2.5)x469.75499, glue set - 1.0
+.\teni l
+.\kern0.19678
+.\teni i
+.\teni b
+.\teni r
+.etc.
+
+
+Overfull \hbox (9.18839pt too wide) in paragraph at lines 166--213
+\teni library=\tenrm 3\teni :\tenrm 4\teni =StanHeaders=include=stan=math=rev=m
+at:hpp \tenrm : 4\teni ; fromC \tenrm : \teni =Users=eray=Documents=R=win \tens
+y  |
+
+\hbox(7.5+2.5)x469.75499, glue set - 1.0
+.\teni l
+.\kern0.19678
+.\teni i
+.\teni b
+.\teni r
+.etc.
+
+
+Overfull \hbox (278.14403pt too wide) in paragraph at lines 166--213
+\teni library=\tenrm 3\teni :\tenrm 4\teni =StanHeaders=include=stan=math:hpp \
+tenrm : 4\teni ; fromC \tenrm : \teni =Users=eray=Documents=R=win \tensy   \ten
+i library=\tenrm 3\teni :\tenrm 4\teni =StanHeaders=include=src=stan=model=mode
+l[]eader:hpp \tenrm :|
+
+\hbox(7.5+2.5)x469.75499, glue set - 1.0
+.\teni l
+.\kern0.19678
+.\teni i
+.\teni b
+.\teni r
+.etc.
+
+
+Overfull \hbox (107.90692pt too wide) in paragraph at lines 166--213
+\tenrm 4\teni ; fromfile\tenrm 43184\teni cea\tenrm 1953\teni :cpp \tenrm : 8 :
+ \teni C \tenrm : \teni =Users=eray=Documents=R=win \tensy   \teni library=\ten
+rm 3\teni :\tenrm 4\teni =BH=include=boost=config=compiler=gcc:hpp \tenrm :|
+
+\hbox(7.5+2.5)x469.75499, glue set - 1.0
+.\tenrm 4
+.\teni ;
+.\glue(\thinmuskip) 1.66663
+.\teni f
+.\kern1.0764
+.etc.
+
+
+Overfull \hbox (4670.3682pt too wide) in paragraph at lines 166--213
+\tenrm 186 : 0 : \teni warning \tenrm : "\teni BOOST[]O[]XX\tenrm 11[]\teni VAL
+UE[]EFERENCES\tenrm "\teni redefineddefineBOOST[]O[]XX\tenrm 11[]\teni VALUE[]E
+FERENCES[]$ |
+
+\hbox(11.44226+1.94444)x469.75499
+.\tenrm 1
+.\tenrm 8
+.\tenrm 6
+.\glue(\thickmuskip) 2.77771 plus 2.77771
+.\tenrm :
+.etc.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:215: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:221: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (210.83313pt too wide) in paragraph at lines 214--221
+\tenrm `rstan$[]\teni ptions\tenrm (\teni auto[]rite \tenrm = \teni TRUE\tenrm 
+)`\teni ensuresthatthisisdoneonlythefirsttimeyoucallStan: \tensy  \teni The\te
+nrm `\teni stan\tenrm `\teni functiondoesestimation:Herewehaveused\tenrm 4\teni
+ arguments \tenrm :|
+
+\hbox(7.5+2.5)x469.75499, glue set - 1.0
+.\tenrm `
+.\tenrm r
+.\tenrm s
+.\tenrm t
+.\tenrm a
+.etc.
+
+
+Overfull \hbox (186.50499pt too wide) in paragraph at lines 214--221
+\tensy \tenrm `\teni file\tenrm ` : \teni thestanfilewiththemodeldefinition; c
+reatedabove: \tensy  \tenrm `\teni data\tenrm ` : \teni anamedlistwithoneentry
+foreachvariabledeclaredinthe\tenrm `\teni data\tenrm `\teni blockofthestanfile:
+ \tensy |
+
+\hbox(6.94444+1.94444)x469.75499, glue set - 1.0
+.\tensy 
+.\tenrm `
+.\teni f
+.\kern1.0764
+.\teni i
+.etc.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:222: You can't use `macro parameter characte
+r #' in vertical mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:222: You can't use `macro parameter characte
+r #' in vertical mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:222: You can't use `macro parameter characte
+r #' in vertical mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:222: You can't use `macro parameter characte
+r #' in vertical mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:232: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:232: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:233: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:233: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:234: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:234: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:235: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:235: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:236: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:236: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:236: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:237: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:237: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:238: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:238: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:239: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:239: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:239: Missing { inserted
+A left brace was mandatory here, so I've put one in.
+You might want to delete and/or insert some corrections
+so that I will find a matching right brace soon.
+(If you're confused by all this, try typing `I}' now.)
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:240: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:240: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:241: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:241: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:242: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:242: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:243: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:243: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:243: Missing { inserted
+A left brace was mandatory here, so I've put one in.
+You might want to delete and/or insert some corrections
+so that I will find a matching right brace soon.
+(If you're confused by all this, try typing `I}' now.)
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:244: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:244: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:245: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:245: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:246: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:246: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:247: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:247: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:248: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:248: You can't use `macro parameter characte
+r #' in math mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:250: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:250: Missing } inserted
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:250: Missing } inserted
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+
+Overfull \hbox (18.35728pt too wide) in paragraph at lines 231--250
+\tenrm warmup draws per chain=500, to-tal post-warmup draws=500.   mean se$[]\t
+eni eansd\tenrm 2\teni :\tenrm 5\teni mu\tenrm 1\teni :\tenrm 300\teni e \tensy
+   \tenrm 010\teni :\tenrm 000\teni :\tenrm 001\teni :\tenrm 300\teni e \tensy 
+ |
+
+\hbox(6.94444+1.94444)x469.75499, glue set - 1.0
+.\tenrm w
+.\kern-0.27779
+.\tenrm a
+.\tenrm r
+.\tenrm m
+.etc.
+
+
+Overfull \hbox (649.4456pt too wide) in paragraph at lines 231--250
+\tenrm 02\teni lp[]$ |
+
+\hbox(6.94444+4.33888)x469.75499
+.\tenrm 0
+.\tenrm 2
+.\teni l
+.\kern0.19678
+.\teni p
+.etc.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:256: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:256: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:256: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:258: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:260: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:260: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:260: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:262: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:266: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:266: Missing { inserted
+A left brace was mandatory here, so I've put one in.
+You might want to delete and/or insert some corrections
+so that I will find a matching right brace soon.
+(If you're confused by all this, try typing `I}' now.)
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:268: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:268: Missing } inserted
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:275: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:276: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:277: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:278: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:280: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:282: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:284: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:284: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:288: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:290: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:292: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:292: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:296: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:298: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:300: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:300: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:301: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:301: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:305: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:307: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+ [2]
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:309: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:309: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:310: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+C:/Users/eray/Documents/teaching/2018-spring-stat343/stat343_s2018/lectures/201
+80308_mcmc2/20180308_intro_stan.md:310: You can't use `macro parameter characte
+r #' in horizontal mode
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+)
+! Emergency stop
+*** (job aborted, no legal \end found)
+
+!  ==> Fatal error occurred, no output PDF file produced!

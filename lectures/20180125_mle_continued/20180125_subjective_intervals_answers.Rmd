@@ -1,0 +1,57 @@
+---
+title: "20180125 - Subjective Probability Intervals"
+output:
+  pdf_document:
+    keep_tex: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+For each of the following numeric quantities, write down two intervals:
+
+ * a 50% interval: you think there is a 50% probability that the quantity lies in this interval
+ * a 90% interval: you think there is a 90% probability that the quantity lies in this interval
+
+The person with the best calibrated intervals wins (for example, if 5 of your 50% intervals and 9 of your 90\% intervals contain the truth, you're doing great).
+
+#### 1. In years, how old was the oldest woman to parachute from a plane?  (as of 2013)
+
+100
+
+#### 2. In feet, how tall is Godzilla in the original Japanese movie?  (In case you don't think in feet, there are about 3.28 feet in 1 meter)
+
+164
+
+#### 3. In what year was the very first email sent?
+
+1971
+
+#### 4. What percent of American adults volunteered at least once in the past year? (as of 2011)
+
+26.3\%
+
+#### 5. In hours, what is the record for covering 23 miles on a pogo stick?
+
+12.45
+
+#### 6. What percent of American adults average more than 8 hours of sleep per night?
+
+28\%
+
+#### 7. How many people could be seated in the ancient Roman Colosseum?
+
+49,000
+
+#### 8. The Hercules beetle can carry an object that is how many tims its own weight?
+
+850
+
+#### 9. In what year did a woman first orbit the Earth?
+
+1963
+
+#### 10. What percent of Americans wash their hands after using a public restroom?
+
+85\%

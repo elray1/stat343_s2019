@@ -1,0 +1,82 @@
+---
+title: "Example of Maximum Likelihood and Bayesian Inference"
+author: "Evan L. Ray"
+date: "February 9, 2018"
+output: pdf_document
+---
+
+# Example: Body Temperatures
+
+* It's generally believed that the average body temperature is 98.6 degrees Farenheit (37 degrees Celsius).
+* Let's investigate with measurements of the temperatures of 130 adults.
+
+#### Load libraries
+
+```{r setup, message = FALSE, warning = FALSE}
+require(ggplot2)
+require(dplyr)
+```
+
+
+#### Read in data set
+
+```{r}
+bodytemp = read.table('http://www.amstat.org/publications/jse/datasets/normtemp.dat.txt')
+head(bodytemp)
+```
+
+#### Set variable `names`
+
+```{r}
+names(bodytemp) <- c('temp','sex','hr')
+head(bodytemp)
+```
+
+#### Set `sex` to a categorical variable (treated as a variable with 2 levels in this data set)
+
+```{r}
+bodytemp <- bodytemp %>%
+  mutate(
+    sex = factor(sex, levels = c("Male","Female"))
+  )
+```
+
+#### Make a plot
+
+```{r, fig.height=2}
+ggplot(data = bodytemp, mapping = aes(x = temp)) +
+  geom_density()
+```
+
+
+#### Sample Statistics, 3 ways
+
+Approach 1:
+
+```{r}
+mean(bodytemp$temp)
+sd(bodytemp$temp)
+```
+
+\vspace{0.5cm}
+
+Approach 2:
+
+```{r}
+summarize(bodytemp,
+  mean_temp = mean(temp),
+  sd_temp = sd(temp)
+)
+```
+
+\vspace{0.5cm}
+
+Approach 3:
+
+```{r}
+bodytemp %>% summarize(
+  mean_temp = mean(temp),
+  sd_temp = sd(temp)
+)
+```
+

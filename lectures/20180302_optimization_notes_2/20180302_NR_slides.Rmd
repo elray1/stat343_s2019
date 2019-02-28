@@ -1,0 +1,488 @@
+---
+title: "Newton Raphson for Optimization, Attempt 3"
+author: "Evan L. Ray"
+date: "March 2, 2018"
+output: ioslides_presentation
+---
+
+<style>
+  .col2 {
+    columns: 2 200px;         /* number of columns and width in pixels*/
+    -webkit-columns: 2 200px; /* chrome, safari */
+    -moz-columns: 2 200px;    /* firefox */
+  }
+  .col3 {
+    columns: 3 100px;
+    -webkit-columns: 3 100px;
+    -moz-columns: 3 100px;
+  }
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+require(ggplot2)
+require(dplyr)
+require(tidyr)
+require(readr)
+```
+
+## Exponential Model Example
+
+Model: $X_1, \ldots, X_n \sim \text{Exp}(\lambda)$
+
+Example: $X_i$ is a waiting time in minutes for individual $i$ who goes to the emergency room.  $\lambda$ is the number of patients they see per minute, on average.
+
+$$
+\begin{align*}
+f(x_i | \lambda) &= \lambda e^{-\lambda x_i} \\
+L(\lambda | x_1, \ldots, x_n) &= \, \cdots \, = n \log(\lambda) - \lambda \sum_{i = 1}^n x_i \\
+\frac{d}{d \lambda} L(\lambda | x_1, \ldots, x_n) &= \frac{n}{\lambda} - \sum_{i = 1}^n x_i \\
+\frac{d^2}{d \lambda^2} L(\lambda | x_1, \ldots, x_n) &= \frac{-n}{\lambda^2}
+\end{align*}
+$$
+
+## Log-likelihood function, maximum likelihood estimate
+
+```{r, echo = FALSE, warning=FALSE, fig.height = 3, fig.width=8.5, message=FALSE}
+set.seed(1)
+
+sample_size <- 10
+
+x_obs <- rexp(sample_size, rate = 2)
+
+loglik_fn <- function(x, x_obs) {
+    temp <- sum(dexp(x = x_obs, rate = x, log = TRUE))
+    return(temp)
+}
+
+d_loglik_fn <- function(x, x_obs) {
+    lambda <- x
+    n <- length(x_obs)
+    return(n / lambda - sum(x_obs))
+}
+
+d2_loglik_fn <- function(x, x_obs) {
+    lambda <- x
+    n <- length(x_obs)
+    return(-n / lambda^2)
+}
+
+ll_v <- Vectorize(loglik_fn, vectorize.args = "x")
+
+d_ll_v <- Vectorize(d_loglik_fn, vectorize.args = "x")
+
+quadratic_approx_ll <- function(x, lambda_i, x_obs) {
+  loglik_fn(x = lambda_i, x_obs = x_obs) +
+    d_loglik_fn(x = lambda_i, x_obs = x_obs) * (x - lambda_i) +
+    0.5 * d2_loglik_fn(x = lambda_i, x_obs = x_obs) * (x - lambda_i)^2
+}
+
+x_grid <- seq(from = 0, to = 5, length = 1001)
+plot_df <- data.frame(
+  x = x_grid,
+  log_likelihood = ll_v(x = x_grid, x_obs = x_obs)
+) %>%
+  gather("Curve", "y", 2)
+
+ggplot() +
+  geom_line(data = plot_df, mapping = aes(x = x, y = y, color = Curve), size = 1) +
+  geom_vline(xintercept = 1 / mean(x_obs[1:10]), color = "purple", size = 1) +
+  xlim(c(0, 5)) +
+  ylim(c(-50, 1.5)) +
+  coord_cartesian(xlim = c(0, 5), expand = FALSE) +
+  scale_x_continuous(breaks = c(0:5),
+    labels = c(0:5)) +
+  scale_color_manual(values = c("red")) +
+  xlab(expression(lambda)) +
+  ylab("log-likelihood") +
+  theme_gray(base_size = 12)
+```
+
+The purple line is at the MLE.
+
+...But what if we couldn't solve for the MLE directly?
+
+## Taylor Series Approximation to $L$
+
+Pick a value $\lambda_0$.  The second-order Taylor Series approximation to $L(\lambda | x_1, \ldots, x_n)$ around $\lambda_0$ is
+
+$$
+\begin{align*}
+P_2(\lambda) &= L(\lambda_0 | x_1, \ldots, x_n) + \frac{d}{d\lambda} L(\lambda_0 | x_1, \ldots, x_n)(\lambda -\lambda_0) \\
+&\qquad + \frac{1}{2} \frac{d^2}{d\lambda^2} L(\lambda_0 | x_1, \ldots, x_n)(\lambda -\lambda_0)^2 \\
+\end{align*}
+$$
+
+The maximum of $P_2(\lambda)$ is at $\lambda_{1} = \lambda_0 - \frac{\frac{d}{d\lambda} L(\lambda_0 | x_1, \ldots, x_n)}{\frac{d^2}{d\lambda^2} L(\lambda_0 | x_1, \ldots, x_n)}$
+
+Now repeat, but centering the Taylor Series approximation at $\lambda_1$.
+
+## Pick $\lambda_0$
+
+```{r, echo = FALSE, warning=FALSE, fig.height = 3, fig.width=8.5, message=FALSE}
+set.seed(1)
+
+sample_size <- 10
+
+x_obs <- rexp(sample_size, rate = 2)
+
+loglik_fn <- function(x, x_obs) {
+    temp <- sum(dexp(x = x_obs, rate = x, log = TRUE))
+    return(temp)
+}
+
+d_loglik_fn <- function(x, x_obs) {
+    lambda <- x
+    n <- length(x_obs)
+    return(n / lambda - sum(x_obs))
+}
+
+d2_loglik_fn <- function(x, x_obs) {
+    lambda <- x
+    n <- length(x_obs)
+    return(-n / lambda^2)
+}
+
+ll_v <- Vectorize(loglik_fn, vectorize.args = "x")
+
+d_ll_v <- Vectorize(d_loglik_fn, vectorize.args = "x")
+
+lambda_i <- 0.1
+
+lambda_i_plus_1 <- lambda_i - d_loglik_fn(x = lambda_i, x_obs = x_obs) / d2_loglik_fn(x = lambda_i, x_obs = x_obs)
+
+lambda_vals <- c(lambda_i)
+
+quadratic_approx_ll <- function(x, lambda_i, x_obs) {
+  loglik_fn(x = lambda_i, x_obs = x_obs) +
+    d_loglik_fn(x = lambda_i, x_obs = x_obs) * (x - lambda_i) +
+    0.5 * d2_loglik_fn(x = lambda_i, x_obs = x_obs) * (x - lambda_i)^2
+}
+
+x_grid <- seq(from = 0, to = 5, length = 1001)
+plot_df <- data.frame(
+  x = x_grid,
+  log_likelihood = ll_v(x = x_grid, x_obs = x_obs)
+) %>%
+  gather("Curve", "y", 2)
+
+ggplot() +
+  geom_line(data = plot_df, mapping = aes(x = x, y = y, color = Curve), size = 1) +
+  geom_vline(xintercept = 1 / mean(x_obs[1:10]), color = "purple", size = 1) +
+  geom_vline(xintercept = lambda_i, size = 1) +
+  xlim(c(0, 5)) +
+  ylim(c(-50, 1.5)) +
+  coord_cartesian(xlim = c(0, 5), expand = FALSE) +
+  scale_x_continuous(breaks = c(0:5, lambda_vals),
+    labels = c(0:5, expression(lambda[0]))) +
+  scale_color_manual(values = c("red")) +
+  xlab(expression(lambda)) +
+  ylab("log-likelihood") +
+  theme_gray(base_size = 12)
+```
+
+$$\lambda_0 = 0.1$$
+
+
+## Approximate $L$ around $\lambda_0$, get $\lambda_1$
+
+```{r, echo = FALSE, warning=FALSE, fig.height = 3, fig.width=8.5, message=FALSE}
+set.seed(1)
+
+sample_size <- 10
+
+x_obs <- rexp(sample_size, rate = 2)
+
+loglik_fn <- function(x, x_obs) {
+    temp <- sum(dexp(x = x_obs, rate = x, log = TRUE))
+    return(temp)
+}
+
+d_loglik_fn <- function(x, x_obs) {
+    lambda <- x
+    n <- length(x_obs)
+    return(n / lambda - sum(x_obs))
+}
+
+d2_loglik_fn <- function(x, x_obs) {
+    lambda <- x
+    n <- length(x_obs)
+    return(-n / lambda^2)
+}
+
+ll_v <- Vectorize(loglik_fn, vectorize.args = "x")
+
+d_ll_v <- Vectorize(d_loglik_fn, vectorize.args = "x")
+
+lambda_i <- 0.1
+
+lambda_i_plus_1 <- lambda_i - d_loglik_fn(x = lambda_i, x_obs = x_obs) / d2_loglik_fn(x = lambda_i, x_obs = x_obs)
+
+lambda_vals <- c(lambda_i, lambda_i_plus_1)
+
+quadratic_approx_ll <- function(x, lambda_i, x_obs) {
+  loglik_fn(x = lambda_i, x_obs = x_obs) +
+    d_loglik_fn(x = lambda_i, x_obs = x_obs) * (x - lambda_i) +
+    0.5 * d2_loglik_fn(x = lambda_i, x_obs = x_obs) * (x - lambda_i)^2
+}
+
+x_grid <- seq(from = 0, to = 5, length = 1001)
+plot_df <- data.frame(
+  x = x_grid,
+  log_likelihood = ll_v(x = x_grid, x_obs = x_obs),
+  Taylor_approx = quadratic_approx_ll(x = x_grid, lambda_i = lambda_i, x_obs = x_obs)
+) %>%
+  gather("Curve", "y", 2:3)
+
+ggplot() +
+  geom_line(data = plot_df, mapping = aes(x = x, y = y, color = Curve), size = 1) +
+  geom_vline(xintercept = 1 / mean(x_obs[1:10]), color = "purple", size = 1) +
+  geom_vline(xintercept = lambda_i, size = 1) +
+  geom_vline(xintercept = lambda_i_plus_1, color = "cornflowerblue", linetype = 1, size = 1) +
+  xlim(c(0, 5)) +
+  ylim(c(-50, 1.5)) +
+  coord_cartesian(xlim = c(0, 5), expand = FALSE) +
+  scale_x_continuous(breaks = c(0:5, lambda_vals),
+    labels = c(0:5, expression(lambda[0]), expression(lambda[1]))) +
+  scale_color_manual(values = c("red", "cornflowerblue")) +
+  xlab(expression(lambda)) +
+  ylab("log-likelihood") +
+  theme_gray(base_size = 12)
+```
+
+$$\lambda_0 = 0.1 \text{,    } \lambda_1 = \lambda_0 - \frac{\frac{d}{d\lambda} L(\lambda_0 | x_1, \ldots, x_n)}{\frac{d^2}{d\lambda^2} L(\lambda_0 | x_1, \ldots, x_n)} = 0.196$$
+
+
+
+## Approximate $L$ around $\lambda_1$, get $\lambda_2$
+
+```{r, echo = FALSE, warning=FALSE, fig.height = 3, fig.width=8.5, message=FALSE}
+lambda_i <- lambda_i_plus_1
+
+lambda_i_plus_1 <- lambda_i - d_loglik_fn(x = lambda_i, x_obs = x_obs) / d2_loglik_fn(x = lambda_i, x_obs = x_obs)
+
+lambda_vals <- c(lambda_vals, lambda_i_plus_1)
+
+quadratic_approx_ll <- function(x, lambda_i, x_obs) {
+  loglik_fn(x = lambda_i, x_obs = x_obs) +
+    d_loglik_fn(x = lambda_i, x_obs = x_obs) * (x - lambda_i) +
+    0.5 * d2_loglik_fn(x = lambda_i, x_obs = x_obs) * (x - lambda_i)^2
+}
+
+x_grid <- seq(from = 0, to = 5, length = 1001)
+plot_df <- data.frame(
+  x = x_grid,
+  log_likelihood = ll_v(x = x_grid, x_obs = x_obs),
+  Taylor_approx = quadratic_approx_ll(x = x_grid, lambda_i = lambda_i, x_obs = x_obs)
+) %>%
+  gather("Curve", "y", 2:3)
+
+ggplot() +
+  geom_line(data = plot_df, mapping = aes(x = x, y = y, color = Curve), size = 1) +
+  geom_vline(xintercept = 1 / mean(x_obs[1:10]), color = "purple", size = 1) +
+  geom_vline(xintercept = lambda_vals[1], size = 1) +
+  geom_vline(xintercept = lambda_vals[2], size = 1) +
+  geom_vline(xintercept = lambda_i_plus_1, color = "cornflowerblue", linetype = 1, size = 1) +
+  xlim(c(0, 5)) +
+  ylim(c(-50, 1.5)) +
+  coord_cartesian(xlim = c(0, 5), expand = FALSE) +
+  scale_x_continuous(breaks = c(0:5, lambda_vals),
+    labels = c(0:5, expression(lambda[0]), expression(lambda[1]), expression(lambda[2]))) +
+  scale_color_manual(values = c("red", "cornflowerblue")) +
+  xlab(expression(lambda)) +
+  ylab("log-likelihood") +
+  theme_gray(base_size = 12)
+```
+
+$$\lambda_0 = 0.1, \, \lambda_1 = 0.196,$$
+$$\lambda_2 = \lambda_1 - \frac{\frac{d}{d\lambda} L(\lambda_1 | x_1, \ldots, x_n)}{\frac{d^2}{d\lambda^2} L(\lambda_1 | x_1, \ldots, x_n)} = 0.375$$
+
+## Approximate $L$ around $\lambda_2$, get $\lambda_3$
+
+```{r, echo = FALSE, warning=FALSE, fig.height = 3, fig.width=8.5, message=FALSE}
+lambda_i <- lambda_i_plus_1
+
+lambda_i_plus_1 <- lambda_i - d_loglik_fn(x = lambda_i, x_obs = x_obs) / d2_loglik_fn(x = lambda_i, x_obs = x_obs)
+
+lambda_vals <- c(lambda_vals, lambda_i_plus_1)
+
+quadratic_approx_ll <- function(x, lambda_i, x_obs) {
+  loglik_fn(x = lambda_i, x_obs = x_obs) +
+    d_loglik_fn(x = lambda_i, x_obs = x_obs) * (x - lambda_i) +
+    0.5 * d2_loglik_fn(x = lambda_i, x_obs = x_obs) * (x - lambda_i)^2
+}
+
+x_grid <- seq(from = 0, to = 5, length = 1001)
+plot_df <- data.frame(
+  x = x_grid,
+  log_likelihood = ll_v(x = x_grid, x_obs = x_obs),
+  Taylor_approx = quadratic_approx_ll(x = x_grid, lambda_i = lambda_i, x_obs = x_obs)
+) %>%
+  gather("Curve", "y", 2:3)
+
+ggplot() +
+  geom_line(data = plot_df, mapping = aes(x = x, y = y, color = Curve), size = 1) +
+  geom_vline(xintercept = 1 / mean(x_obs[1:10]), color = "purple", size = 1) +
+  geom_vline(xintercept = lambda_vals[1], size = 1) +
+  geom_vline(xintercept = lambda_vals[2], size = 1) +
+  geom_vline(xintercept = lambda_vals[3], size = 1) +
+  geom_vline(xintercept = lambda_i_plus_1, color = "cornflowerblue", linetype = 1, size = 1) +
+  xlim(c(0, 5)) +
+  ylim(c(-50, 1.5)) +
+  coord_cartesian(xlim = c(0, 5), expand = FALSE) +
+  scale_x_continuous(breaks = c(0:5, lambda_vals),
+    labels = c(0:5, expression(lambda[0]), expression(lambda[1]), expression(lambda[2]), expression(lambda[3]))) +
+  scale_color_manual(values = c("red", "cornflowerblue")) +
+  xlab(expression(lambda)) +
+  ylab("log-likelihood") +
+  theme_gray(base_size = 12)
+```
+
+$$\lambda_0 = 0.1, \, \lambda_1 = 0.196, \lambda_2 = 0.375$$
+$$\lambda_3 = \lambda_2 - \frac{\frac{d}{d\lambda} L(\lambda_2 | x_1, \ldots, x_n)}{\frac{d^2}{d\lambda^2} L(\lambda_2 | x_1, \ldots, x_n)} = 0.691$$
+
+
+
+
+
+## Approximate $L$ around $\lambda_3$, get $\lambda_4$
+
+```{r, echo = FALSE, warning=FALSE, fig.height = 3, fig.width=8.5, message=FALSE}
+lambda_i <- lambda_i_plus_1
+
+lambda_i_plus_1 <- lambda_i - d_loglik_fn(x = lambda_i, x_obs = x_obs) / d2_loglik_fn(x = lambda_i, x_obs = x_obs)
+
+lambda_vals <- c(lambda_vals, lambda_i_plus_1)
+
+quadratic_approx_ll <- function(x, lambda_i, x_obs) {
+  loglik_fn(x = lambda_i, x_obs = x_obs) +
+    d_loglik_fn(x = lambda_i, x_obs = x_obs) * (x - lambda_i) +
+    0.5 * d2_loglik_fn(x = lambda_i, x_obs = x_obs) * (x - lambda_i)^2
+}
+
+x_grid <- seq(from = 0, to = 5, length = 1001)
+plot_df <- data.frame(
+  x = x_grid,
+  log_likelihood = ll_v(x = x_grid, x_obs = x_obs),
+  Taylor_approx = quadratic_approx_ll(x = x_grid, lambda_i = lambda_i, x_obs = x_obs)
+) %>%
+  gather("Curve", "y", 2:3)
+
+ggplot() +
+  geom_line(data = plot_df, mapping = aes(x = x, y = y, color = Curve), size = 1) +
+  geom_vline(xintercept = 1 / mean(x_obs[1:10]), color = "purple", size = 1) +
+  geom_vline(xintercept = lambda_vals[1], size = 1) +
+  geom_vline(xintercept = lambda_vals[2], size = 1) +
+  geom_vline(xintercept = lambda_vals[3], size = 1) +
+  geom_vline(xintercept = lambda_vals[4], size = 1) +
+  geom_vline(xintercept = lambda_i_plus_1, color = "cornflowerblue", linetype = 1, size = 1) +
+  xlim(c(0, 5)) +
+  ylim(c(-50, 1.5)) +
+  coord_cartesian(xlim = c(0, 5), expand = FALSE) +
+  scale_x_continuous(breaks = c(0:5, lambda_vals),
+    labels = c(0:5, expression(lambda[0]), expression(lambda[1]), expression(lambda[2]), expression(lambda[3]), expression(lambda[4]))) +
+  scale_color_manual(values = c("red", "cornflowerblue")) +
+  xlab(expression(lambda)) +
+  ylab("log-likelihood") +
+  theme_gray(base_size = 12)
+```
+
+$$\lambda_0 = 0.1, \, \lambda_1 = 0.196, \lambda_2 = 0.375, \lambda_3 = 0.691$$
+$$\lambda_4 = \lambda_3 - \frac{\frac{d}{d\lambda} L(\lambda_3 | x_1, \ldots, x_n)}{\frac{d^2}{d\lambda^2} L(\lambda_3 | x_1, \ldots, x_n)} = 1.181$$
+
+
+
+
+## Approximate $L$ around $\lambda_4$, get $\lambda_5$
+
+```{r, echo = FALSE, warning=FALSE, fig.height = 3, fig.width=8.5, message=FALSE}
+lambda_i <- lambda_i_plus_1
+
+lambda_i_plus_1 <- lambda_i - d_loglik_fn(x = lambda_i, x_obs = x_obs) / d2_loglik_fn(x = lambda_i, x_obs = x_obs)
+
+lambda_vals <- c(lambda_vals, lambda_i_plus_1)
+
+quadratic_approx_ll <- function(x, lambda_i, x_obs) {
+  loglik_fn(x = lambda_i, x_obs = x_obs) +
+    d_loglik_fn(x = lambda_i, x_obs = x_obs) * (x - lambda_i) +
+    0.5 * d2_loglik_fn(x = lambda_i, x_obs = x_obs) * (x - lambda_i)^2
+}
+
+x_grid <- seq(from = 0, to = 5, length = 1001)
+plot_df <- data.frame(
+  x = x_grid,
+  log_likelihood = ll_v(x = x_grid, x_obs = x_obs),
+  Taylor_approx = quadratic_approx_ll(x = x_grid, lambda_i = lambda_i, x_obs = x_obs)
+) %>%
+  gather("Curve", "y", 2:3)
+
+ggplot() +
+  geom_line(data = plot_df, mapping = aes(x = x, y = y, color = Curve), size = 1) +
+  geom_vline(xintercept = 1 / mean(x_obs[1:10]), color = "purple", size = 1) +
+  geom_vline(xintercept = lambda_vals[1], size = 1) +
+  geom_vline(xintercept = lambda_vals[2], size = 1) +
+  geom_vline(xintercept = lambda_vals[3], size = 1) +
+  geom_vline(xintercept = lambda_vals[4], size = 1) +
+  geom_vline(xintercept = lambda_vals[5], size = 1) +
+  geom_vline(xintercept = lambda_i_plus_1, color = "cornflowerblue", linetype = 1, size = 1) +
+  xlim(c(0, 5)) +
+  ylim(c(-50, 1.5)) +
+  coord_cartesian(xlim = c(0, 5), expand = FALSE) +
+  scale_x_continuous(breaks = c(0:5, lambda_vals),
+    labels = c(0:5, expression(lambda[0]), expression(lambda[1]), expression(lambda[2]), expression(lambda[3]), expression(lambda[4]), expression(lambda[5]))) +
+  scale_color_manual(values = c("red", "cornflowerblue")) +
+  xlab(expression(lambda)) +
+  ylab("log-likelihood") +
+  theme_gray(base_size = 12)
+```
+
+$$\lambda_0 = 0.1, \, \lambda_1 = 0.196, \lambda_2 = 0.375, \lambda_3 = 0.691, \lambda_4 = 1.181$$
+$$\lambda_5 = \lambda_4 - \frac{\frac{d}{d\lambda} L(\lambda_4 | x_1, \ldots, x_n)}{\frac{d^2}{d\lambda^2} L(\lambda_4 | x_1, \ldots, x_n)} = 1.775$$
+
+
+## Approximate $L$ around $\lambda_5$, get $\lambda_6$
+
+```{r, echo = FALSE, warning=FALSE, fig.height = 3, fig.width=8.5, message=FALSE}
+lambda_i <- lambda_i_plus_1
+
+lambda_i_plus_1 <- lambda_i - d_loglik_fn(x = lambda_i, x_obs = x_obs) / d2_loglik_fn(x = lambda_i, x_obs = x_obs)
+
+lambda_vals <- c(lambda_vals, lambda_i_plus_1)
+
+quadratic_approx_ll <- function(x, lambda_i, x_obs) {
+  loglik_fn(x = lambda_i, x_obs = x_obs) +
+    d_loglik_fn(x = lambda_i, x_obs = x_obs) * (x - lambda_i) +
+    0.5 * d2_loglik_fn(x = lambda_i, x_obs = x_obs) * (x - lambda_i)^2
+}
+
+x_grid <- seq(from = 0, to = 5, length = 1001)
+plot_df <- data.frame(
+  x = x_grid,
+  log_likelihood = ll_v(x = x_grid, x_obs = x_obs),
+  Taylor_approx = quadratic_approx_ll(x = x_grid, lambda_i = lambda_i, x_obs = x_obs)
+) %>%
+  gather("Curve", "y", 2:3)
+
+ggplot() +
+  geom_line(data = plot_df, mapping = aes(x = x, y = y, color = Curve), size = 1) +
+  geom_vline(xintercept = 1 / mean(x_obs[1:10]), color = "purple", size = 1) +
+  geom_vline(xintercept = lambda_vals[1], size = 1) +
+  geom_vline(xintercept = lambda_vals[2], size = 1) +
+  geom_vline(xintercept = lambda_vals[3], size = 1) +
+  geom_vline(xintercept = lambda_vals[4], size = 1) +
+  geom_vline(xintercept = lambda_vals[5], size = 1) +
+  geom_vline(xintercept = lambda_vals[6], size = 1) +
+  geom_vline(xintercept = lambda_i_plus_1, color = "cornflowerblue", linetype = 1, size = 1) +
+  xlim(c(0, 5)) +
+  ylim(c(-50, 1.5)) +
+  coord_cartesian(xlim = c(0, 5), expand = FALSE) +
+  scale_x_continuous(breaks = c(0:5, lambda_vals),
+    labels = c(0:5, expression(lambda[0]), expression(lambda[1]), expression(lambda[2]), expression(lambda[3]), expression(lambda[4]), expression(lambda[5]), expression(lambda[6]))) +
+  scale_color_manual(values = c("red", "cornflowerblue")) +
+  xlab(expression(lambda)) +
+  ylab("log-likelihood") +
+  theme_gray(base_size = 12)
+```
+
+$$\lambda_0 = 0.1, \, \lambda_1 = 0.196, \lambda_2 = 0.375, \lambda_3 = 0.691, \lambda_4 = 1.181$$
+$$\lambda_5 = 1.775, \, \lambda_6 = \lambda_5 - \frac{\frac{d}{d\lambda} L(\lambda_5 | x_1, \ldots, x_n)}{\frac{d^2}{d\lambda^2} L(\lambda_5 | x_1, \ldots, x_n)} = 2.223$$

@@ -1,0 +1,133 @@
+---
+title: "Stat 343: Common Discrete Distributions"
+output:
+  pdf_document:
+    fig_height: 2.8
+    fig_width: 6
+  html_document:
+    fig_height: 3
+    fig_width: 5
+  word_document:
+    fig_height: 3
+    fig_width: 5
+header-includes:
+  - \usepackage{booktabs}
+---
+
+
+# Bernoulli$(p)$
+
+$X$ = the result of a single experiment with one of two outcomes ("success", coded as $1$, or "failure", coded as $0$), where the probability of success is $p$.
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{rl}
+\toprule
+parameters & $p$ = probability of success \\
+p.f. & $f(x | p) = p^x(1-p)^{(1-x)}$ \\
+Mean & $p$ \\
+Variance & $p(1-p)$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+# Binomial$(n, p)$
+
+$X$ = the total number of successes in $n$ independent and identically distributed Bernoulli trials, each with probability of success $p$.
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{rl}
+\toprule
+parameters & $n$ = number of trials, $p$ = probability of success \\
+p.f. & $f(x | n, p) = {n \choose x} p^x(1-p)^{(n-x)}$ \\
+Mean & $np$ \\
+Variance & $np(1-p)$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+# Uniform$(a, b)$
+
+$X$ = an integer between $a$ and $b$ (inclusive), where each integer from $a$ to $b$ is equally likely.
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{rl}
+\toprule
+parameters & $a$ = lower endpoint, $b$ = upper endpoint \\
+p.f. & $f(x | a, b) = \frac{1}{b - a + 1}$ \\
+Mean & $\frac{a + b}{2}$ \\
+Variance & $\frac{(b - a)(b - a + 2)}{12}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+# Geometric$(p)$
+
+$X$ = the number of failures that occur before the first success in a sequence of independent and identically distributed Bernoulli trials.
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{rl}
+\toprule
+parameters & $p$ = probability of success on each trial \\
+p.f. & $f(x | p) = p(1-p)^x$ \\
+Mean & $\frac{1-p}{p}$ \\
+Variance & $\frac{1-p}{p^2}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+# Negative Binomial$(r, p)$
+
+$X$ =  the number of failures which occur in a sequence of independent and identically distributed Bernoulli trials before $r$ successes occur.
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{rl}
+\toprule
+parameters & $r$ = target number of successes, $p$ = probability of success on each trial \\
+p.f. & $f(x | r, p) = {r + x - 1 \choose x} p^r(1-p)^x$ \\
+Mean & $\frac{r(1-p)}{p}$ \\
+Variance & $\frac{r(1-p)}{p^2}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+# Hypergeometric$(A, B, n)$
+
+$X$ = the number of successes in $n$ draws (without replacement) from a finite population that contains exactly $A$ successes and $B$ failures.
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{rl}
+\toprule
+parameters & $A$ = number of successes in the population, $B$ = number of failures in the population, \\
+ & $n$ = sample size \\
+p.f. & $f(x | A, B, n) = \frac{{A \choose x}{B \choose n - x}}{{A + B \choose n}}$ \\
+Mean & $\frac{nA}{A + B}$ \\
+Variance & $\frac{nAB}{(A + B)^2} \frac{A + B - n}{A + B - 1}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Note that for $R$ functions $dhyper$, $phyper$, $qhyper$, and $rhyper$, the arguments are $m = A$, $n = B$, and $k = n$.
+
+# Poisson$(\lambda)$
+
+$X$ = the number of events occurring in a fixed interval of time or space if these events occur with a known constant rate and independently of the time since the last event.
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{rl}
+\toprule
+parameters & $\lambda$ = rate parameter \\
+p.f. & $f(x | \lambda) = e^{-\lambda} \frac{\lambda^x}{x!}$ \\
+Mean & $\lambda$ \\
+Variance & $\lambda$ \\
+\bottomrule
+\end{tabular}
+\end{table}

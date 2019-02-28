@@ -1,0 +1,124 @@
+---
+title: "Bootstrap Confidence Intervals"
+subtitle: "Part 1b - Bootstrap Percentile Confidence Intervals"
+output: pdf_document
+---
+
+# Gestation Times
+
+We have data that contains a record of every baby born in December 1998 in the United States. For each baby, we have recordings of several different variables - for today, let's focus on the baby's gestation time in weeks (how many weeks pregnant the mother was when she gave birth).
+
+Since we have data for (almost) every baby born in the United States in December 1998, we are in the rare situation where we have data for a full population!  Let's use this to study what's going on with the bootstrap.
+
+Suppose we are interested in the mean gestation time in the population of births in December 1998, and pretend that we just had data from a sample of size $50$.
+
+\newpage
+
+```{r, cache = TRUE, echo = FALSE, fig.height = 2, warning=FALSE, message = FALSE}
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(mosaic)
+
+
+babies <- read_csv("https://mhc-stat140-2017.github.io/data/misc/babies1998/babies_dec_1998.csv")
+babies <- filter(babies, !is.na(gestation))
+
+set.seed(256)
+
+#dim(babies)
+babies_sample <- babies %>% sample_n(50)
+
+pop_mean <- mean(babies$gestation)
+samp_mean <- mean(babies_sample$gestation)
+
+pop_mean
+samp_mean
+
+ggplot(data = babies, mapping = aes(x = gestation)) +
+  geom_histogram(mapping = aes(y = ..density..)) +
+  geom_vline(mapping = aes(xintercept = pop_mean), color = "red") +
+  xlim(c(15, 50)) +
+  ggtitle("Population: 330717 babies")
+```
+
+
+```{r, cache = TRUE, echo = FALSE, fig.height = 2}
+ggplot(data = babies_sample, mapping = aes(x = gestation)) +
+  geom_histogram(binwidth = 1, mapping = aes(y = ..density..)) +
+  geom_vline(mapping = aes(xintercept = samp_mean), color = "cornflowerblue") +
+  xlim(c(15, 50)) +
+  ggtitle("Sample of 50 babies")
+```
+
+```{r, message = FALSE, warning=FALSE, echo = FALSE, cache = TRUE, fig.height=2}
+# the dplyr package contains the sample_n function,
+# which we use below to draw the bootstrap samples
+library(dplyr)
+
+# how many bootstrap samples to take, and storage space for the results
+num_samples <- 10^3
+estimates <- data.frame(
+  estimate = rep(NA, num_samples)
+)
+
+# draw many samples from the observed data and calculate mean of each simulated sample
+for(i in seq_len(num_samples)) {
+  ## Draw a bootstrap sample of size n with replacement from the observed data
+  sampled_obs <- babies %>%
+    sample_n(size = 50, replace = FALSE)
+  
+  ## Calculate mean of bootstrap sample
+  estimates$estimate[i] <- mean(sampled_obs$gestation)
+}
+
+ggplot(data = estimates, mapping = aes(x = estimate)) +
+  geom_histogram(binwidth = 0.1, mapping = aes(y = ..density..)) +
+  geom_vline(mapping = aes(xintercept = pop_mean), color = "red") +
+  geom_vline(mapping = aes(xintercept = samp_mean), color = "cornflowerblue") +
+  xlim(c(15, 50)) +
+  ggtitle("Sample means for 1000 samples of 50 babies from population")
+
+# find 2.5th percentile and 97.5th percentile; endpoints of a 95% Bootstrap Percentile Interval
+#quantile(bootstrap_estimates$estimate, prob = c(0.025, 0.975))
+```
+
+
+```{r, message = FALSE, warning=FALSE, echo = FALSE, cache = FALSE}
+# the dplyr package contains the sample_n function,
+# which we use below to draw the bootstrap samples
+library(dplyr)
+
+# how many bootstrap samples to take, and storage space for the results
+num_bootstrap_samples <- 10^3
+bootstrap_estimates <- data.frame(
+  estimate = rep(NA, num_bootstrap_samples)
+)
+
+# draw many samples from the observed data and calculate mean of each simulated sample
+for(i in seq_len(num_bootstrap_samples)) {
+  ## Draw a bootstrap sample of size n with replacement from the observed data
+  bootstrap_resampled_obs <- babies_sample %>%
+    sample_n(size = 50, replace = TRUE)
+  
+  ## Calculate mean of bootstrap sample
+  bootstrap_estimates$estimate[i] <- mean(bootstrap_resampled_obs$gestation)
+}
+
+# find 2.5th percentile and 97.5th percentile; endpoints of a 95% Bootstrap Percentile Interval
+#quantile(bootstrap_estimates$estimate, prob = c(0.025, 0.975))
+```
+
+
+```{r, echo = FALSE, fig.height = 2, cache = FALSE}
+library(ggplot2)
+ggplot(data = bootstrap_estimates, mapping = aes(x = estimate)) +
+  geom_histogram(binwidth = 0.1, mapping = aes(y = ..density..)) +
+  geom_vline(mapping = aes(xintercept = pop_mean), color = "red") +
+  geom_vline(mapping = aes(xintercept = samp_mean), color = "cornflowerblue") +
+  stat_function(fun = dnorm, args = list(mean = mean(babies_sample$gestation), sd = sd(babies_sample$gestation) / sqrt(50)), color = "purple") +
+  geom_vline(mapping = aes(xintercept = mean(babies_sample$gestation) - 1.96*sd(babies_sample$gestation) / sqrt(50)), color = "purple") +
+  geom_vline(mapping = aes(xintercept = mean(babies_sample$gestation) + 1.96*sd(babies_sample$gestation) / sqrt(50)), color = "purple") +
+  xlim(c(15, 50)) +
+  ggtitle("Sample means for 1000 samples of 50 babies from sample (with replacement)")
+```

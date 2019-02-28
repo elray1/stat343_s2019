@@ -1,0 +1,44 @@
+library(rgl)
+library(mvtnorm)
+library(plyr)
+library(dplyr)
+
+X1 <- unexpanded_X <- seq(from = -3, to = 3, length = 101)
+X2 <- unexpanded_Y <- seq(from = -3, to = 3, length = 101)
+plot_df <- as.data.frame(expand.grid(X = unexpanded_X, Y = unexpanded_Y))
+plot_df$joint_density <- dmvnorm(plot_df, sigma = matrix(c(1, 0.5, 0.5, 1), nrow = 2, ncol = 2))
+
+color_n <- 1000 # number of colors used
+
+joint_density_lim <- range(plot_df$joint_density)
+joint_density_range <- joint_density_lim[2] - joint_density_lim[1]
+joint_density_colorlut <- rev(rainbow(1000, start = 0, end = 4/6)) # height color lookup table
+joint_density_col <- joint_density_colorlut[ floor(color_n * (plot_df$joint_density - joint_density_lim[1])/joint_density_range) + 1 ]
+
+junk <- open3d()
+z_max <- joint_density_lim[2]
+plot3d(X1, X2, xlim=c(-3, 3), ylim=c(-3, 3), zlim=c(0, z_max), zlab="f(x_1, x_2)", mouseMode = "zAxis", type = "s")
+
+surface3d(X1, X2, plot_df$joint_density, alpha = 0.3, col = joint_density_col)
+
+rgl.viewpoint(userMatrix = matrix(c(0.921660840511322, 0.0465770699083805, -0.385190784931183, 0, -0.387880355119705, 0.0862834379076958, -0.917662262916565, 0, -0.00950636342167854, 0.995181322097778, 0.0975903198122978, 0, 0, 0, 0, 1), nrow = 4))
+
+
+#slice_at_z_eq_0.1 <- plot_df[abs(plot_df$joint_density - 0.1) < 0.001, 1:3]
+#names(slice_at_z_eq_0.1) <- c("x", "y", "z")
+#slice_x_range <- range(slice_at_z_eq_0.1$x)
+#lines3d(slice_at_z_eq_0.1 %>% arrange(x, y))
+
+#snapshot3d("/media/evan/data/Evan/photos/normal_cond_dist_view1.bmp")
+
+rgl.postscript("~/teaching/2018-spring-stat343/stat343_s2018/lectures/20180417_shrinkage/mvn_5.pdf","pdf")
+
+rgl.viewpoint(userMatrix = matrix(c(0.921660840511322, 0.0465770699083805, -0.385190784931183, 0, -0.387880355119705, 0.0862834379076958, -0.917662262916565, 0, -0.00950636342167854, 0.995181322097778, 0.0975903198122978, 0, 0, 0, 0, 1), nrow = 4))
+
+
+junk <- open3d()
+plot3d(ellipse3d(x = matrix(c(1, .3, .6, .3, 2, 1.1, .6, 1.1, 3), nrow = 3), scale = rep(1, 3), centre = c(0, 0, 0), t = 3), type = "wire", col = "blue", alpha = 0.2, add = TRUE)
+plot3d(ellipse3d(x = matrix(c(1, .3, .6, .3, 2, 1.1, .6, 1.1, 3), nrow = 3), scale = rep(1, 3), centre = c(0, 0, 0), t = 2), type = "wire", col = "yellow", alpha = 0.2, add = TRUE)
+plot3d(ellipse3d(x = matrix(c(1, .3, .6, .3, 2, 1.1, .6, 1.1, 3), nrow = 3), scale = rep(1, 3), centre = c(0, 0, 0), t = 1), type = "wire", col = "red", alpha = 0.2, add = TRUE)
+decorate3d()
+rgl.viewpoint(userMatrix = matrix(c(0.921660840511322, 0.0465770699083805, -0.385190784931183, 0, -0.387880355119705, 0.0862834379076958, -0.917662262916565, 0, -0.00950636342167854, 0.995181322097778, 0.0975903198122978, 0, 0, 0, 0, 1), nrow = 4))
