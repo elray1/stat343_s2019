@@ -1,0 +1,132 @@
+---
+title: "dplyr::mutate and dplyr::summarize"
+output:
+  pdf_document:
+    keep_tex: true
+header-includes:
+   - \usepackage{booktabs}
+geometry: margin=1.5cm
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
+```
+
+```{r, echo = FALSE}
+iris_short <- iris[1:5, ]
+```
+
+### Running example
+
+So that we have a running example to work with, here are the first 5 rows of the `iris` data set that comes with R:
+
+```{r}
+iris_short
+```
+
+### Logical Operations on Vectors
+
+We can compare vectors to each other using:
+
+ * `<` less than
+ * `<=` less than or equal to
+ * `==` equal to
+ * `>=` greater than or equal to
+ * `>` greater than
+ * `!=` not equal to
+
+```{r}
+iris_short$Sepal.Length > iris_short$Sepal.Width
+iris_short$Sepal.Length >= 5.0
+iris_short$Sepal.Length != 5.0
+```
+
+We can combine multiple conditions using:
+
+ * `&` is TRUE if both conditions are TRUE
+ * `|` is TRUE if either (or both) condition is TRUE
+
+```{r}
+iris_short$Sepal.Length > 4.6 & iris_short$Sepal.Length < 5.0
+iris_short$Sepal.Length <= 4.6 | iris_short$Sepal.Length >= 5.0
+```
+
+When you perform arithmetic operations on a logical vector, `TRUE` is converted to 1 and `FALSE` is converted to 0:
+
+```{r}
+sum(iris_short$Sepal.Length <= 4.6 | iris_short$Sepal.Length >= 5.0)
+mean(iris_short$Sepal.Length <= 4.6 | iris_short$Sepal.Length >= 5.0)
+```
+
+#### Defining a data frame
+
+The format of the `mutate` and `summarize` commands is less confusing if we have the way to create a data frame firmly in mind:
+
+```{r}
+example_df <- data.frame(
+  a = c("v", "w", "x", "y", "z"),
+  b = 10 * sqrt(1:5)
+)
+
+example_df
+```
+
+#### `dplyr` package
+
+The `mutate` and `summarize` functions are provided by the `dplyr` package.
+
+```{r}
+library(dplyr)
+```
+
+#### `mutate`: add a new variable or modify an existing variable in a data frame
+
+ * First argument: name of data frame to modify
+ * Remaining arguments: variables and how to compute them.  Refer to variables in the data frame directly.
+
+```{r}
+mutate(iris_short,
+  a = c("v", "w", "x", "y", "z"),
+  b = 10 * sqrt(1:5),
+  sepal_sum = Sepal.Length + Sepal.Width
+)
+```
+
+ * The original data frame is not changed, a copy is made
+ * The pipe `%>%` calls the function on the right using the expresson on the left as the first argument
+
+```{r}
+iris_updated <- iris_short %>% mutate(
+  a = c("v", "w", "x", "y", "z"),
+  b = 10 * sqrt(1:5),
+  sepal_sum = Sepal.Length + Sepal.Width
+)
+
+iris_updated
+
+iris_short
+```
+
+#### `summarize`: compute length-1 summaries of a data frame
+
+```{r}
+mean(iris_short$Sepal.Length)
+sd(iris_short$Sepal.Length)
+
+iris_short %>%
+  summarize(
+    mean_sepal_length = mean(Sepal.Length),
+    sd_sepal_length = sd(Sepal.Length)
+  )
+```
+
+ * Longer-length summaries result in errors:
+
+```{r, error = TRUE}
+quantile(iris_short$Sepal.Length)
+
+iris_short %>%
+  summarize(
+    quantiles_sepal_length = quantile(Sepal.Length)
+  )
+```

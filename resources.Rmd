@@ -11,3 +11,5 @@ title: "Resources"
     * [Summary of some R commands, focusing on the dplyr package (pdf)](resources/R/r_overview.pdf)
     * [ggplot2 cheatsheet (pdf)](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)
     * [Overview of ggplot2](resources/R/ggplot2_overview.pdf)
+ * Readings
+    * Discussion of [MCMC for Bayesian Inference](resources/readings/lavine_bayes_mcmc.pdf), Chapter 6 of An Introduction to Statistical Thought by Michael Lavine
