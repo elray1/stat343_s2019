@@ -122,3 +122,10 @@ Here, $B(\mathbf{\alpha})$ is a complicated function of $\mathbf{\alpha}$ that's
 
 To simplify this a little, assume that you have a single observation $\mathbf{x} = (x_1, x_2, \ldots, x_k)$ from the multinomial model.
 
+
+
+## Problem III: Bayes Intuition
+
+Write a couple of paragraphs explaining what a prior distribution is, what a posterior distribution is, and how Bayes' rule gets us from one to the other.  You can include formulas, but you should also have some written sentences describing what's happening in the formulas.  Your first paragraph should explain these ideas in a general setting, and your second paragraph should illustrate them in the context of a specific example such as estimating the proportion of M&Ms that are blue based on a sample of $n$ M&Ms (you can pick a different example if you prefer).
+
+This problem will be graded by Evan, and you will have an opportunity to submit a revision to your answer for up to full credit after receiving feedback.
