@@ -1,0 +1,240 @@
+---
+title: "Large-Sample Normal Approximation to the Posterior"
+output:
+  pdf_document:
+    keep_tex: yes
+header-includes:
+  - \usepackage{multicol}
+geometry: margin=0.6in
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(readr)
+library(ggplot2)
+library(gridExtra)
+```
+
+\def\simiid{\stackrel{{\mbox{\text{\tiny i.i.d.}}}}{\sim}}
+
+# Poisson Model
+
+ * Observe $X_1, \ldots, X_n$; $X_i$ is the number of seedlings in quadrat number $i$.
+ * Data Model: $X_i | \Lambda = \lambda \simiid \text{Poisson}(\lambda)$
+ * Suppose we use a Gamma prior for $\Lambda$
+    * Example: $\Lambda \sim \text{Gamma}(1, 0.01)$ is fairly non-informative
+ * Decomposing the log-posterior pdf into contributions from prior and likelihood
+
+$\log\{f_{\Theta | X_1, \ldots, X_n}\} = \log\{ c \cdot f_{\Theta}(\theta) \cdot \prod_{i=1}^n f_{X_i|\Theta}(x_i | \theta) \} = \log(c) + \log\{f_{\Theta}(\theta)\} + \sum_{i=1}^n \log\{ f_{X_i|\Theta}(x_i | \theta) \}$
+
+## Simulation: $\lambda = 10$
+
+#### n = 1
+
+```{r, message=FALSE, warning=FALSE, echo = FALSE}
+set.seed(93365)
+
+plot_xmax <- 25
+
+n <- 1
+x_sim <- data.frame(x = rpois(n = n, lambda = 10))
+```
+
+```{r, message=FALSE, warning=FALSE, echo = FALSE, fig.height = 6}
+p_prior <- ggplot(data = data.frame(x = c(0, plot_xmax)), mapping = aes(x = x)) +
+  stat_function(fun = dgamma, args = list(shape = 1, rate = 0.01, log = TRUE), n = 1001) +
+  ggtitle(expression(paste(log, "{", f(theta), "}")))
+
+calc_ind_lik <- function(lambda, x) {
+  result <- seq_along(lambda)
+  for(j in seq_along(lambda)) {
+    result[j] <- sum(dpois(x = x, lambda = lambda[j], log = TRUE))
+  }
+  return(result)
+}
+
+calc_post_plus_lik <- function(lambda, x) {
+  dgamma(lambda, shape = 1, rate = 0.01, log = TRUE) +
+    calc_ind_lik(lambda, x)
+}
+
+p_ind_lik <- ggplot(data = data.frame(x = c(0, plot_xmax)), mapping = aes(x = x)) +
+  ggtitle(expression(paste(log, "{f(", x[i], "|", theta, ")}")))
+for(i in seq_len(n)) {
+  p_ind_lik <- p_ind_lik +
+    stat_function(fun = calc_ind_lik, args = list(x = x_sim$x[i]), n = 1001)
+}
+
+p_combined_lik <- ggplot(data = data.frame(x = c(0, plot_xmax)), mapping = aes(x = x)) +
+  stat_function(fun = calc_ind_lik, args = list(x = x_sim$x), n = 1001) +
+  ggtitle(expression(paste(log, "{f(", x[1], ", ..., ", x[n], "|", theta,")}")))
+
+p_post <- ggplot(data = data.frame(x = c(0, plot_xmax)), mapping = aes(x = x)) +
+  stat_function(fun = calc_post_plus_lik, args = list(x = x_sim$x), n = 1001) +
+  ggtitle(expression(paste(log, "{f(", theta, "|", x[1], ", ..., ", x[n], ")}")))
+
+grid.arrange(p_prior, p_ind_lik, p_combined_lik, p_post, ncol = 1)
+```
+
+\newpage
+
+#### n = 10
+
+```{r, message=FALSE, warning=FALSE, echo = FALSE}
+set.seed(93365)
+
+n <- 10
+x_sim <- data.frame(x = rpois(n = n, lambda = 10))
+```
+
+```{r, message=FALSE, warning=FALSE, echo = FALSE, fig.height = 9.5}
+p_prior <- ggplot(data = data.frame(x = c(0, plot_xmax)), mapping = aes(x = x)) +
+  stat_function(fun = dgamma, args = list(shape = 1, rate = 0.01, log = TRUE), n = 1001) +
+  ggtitle(expression(paste(log, "{", f(theta), "}")))
+
+calc_ind_lik <- function(lambda, x) {
+  result <- seq_along(lambda)
+  for(j in seq_along(lambda)) {
+    result[j] <- sum(dpois(x = x, lambda = lambda[j], log = TRUE))
+  }
+  return(result)
+}
+
+calc_post_plus_lik <- function(lambda, x) {
+  dgamma(lambda, shape = 1, rate = 0.01, log = TRUE) +
+    calc_ind_lik(lambda, x)
+}
+
+p_ind_lik <- ggplot(data = data.frame(x = c(0, plot_xmax)), mapping = aes(x = x)) +
+  ggtitle(expression(paste(log, "{f(", x[i], "|", theta, ")}")))
+for(i in seq_len(n)) {
+  p_ind_lik <- p_ind_lik +
+    stat_function(fun = calc_ind_lik, args = list(x = x_sim$x[i]), n = 1001)
+}
+
+p_combined_lik <- ggplot(data = data.frame(x = c(0, plot_xmax)), mapping = aes(x = x)) +
+  stat_function(fun = calc_ind_lik, args = list(x = x_sim$x), n = 1001) +
+  ggtitle(expression(paste(log, "{f(", x[1], ", ..., ", x[n], "|", theta,")}")))
+
+p_post <- ggplot(data = data.frame(x = c(0, plot_xmax)), mapping = aes(x = x)) +
+  stat_function(fun = calc_post_plus_lik, args = list(x = x_sim$x), n = 1001) +
+  ggtitle(expression(paste(log, "{f(", theta, "|", x[1], ", ..., ", x[n], ")}")))
+
+p_post_zoom <- ggplot(data = data.frame(x = c(8.3, 11.0)), mapping = aes(x = x)) +
+  stat_function(fun = calc_post_plus_lik, args = list(x = x_sim$x), n = 1001) +
+  ggtitle(expression(paste(log, "{f(", theta, "|", x[1], ", ..., ", x[n], ")}, zoomed in to [8.3, 11.0], width 2.7")))
+
+grid.arrange(p_prior, p_ind_lik, p_combined_lik, p_post, p_post_zoom, ncol = 1)
+```
+\newpage
+
+#### n = 100
+
+```{r, message=FALSE, warning=FALSE, echo = FALSE}
+set.seed(93365)
+
+n <- 100
+x_sim <- data.frame(x = rpois(n = n, lambda = 10))
+```
+
+```{r, message=FALSE, warning=FALSE, echo = FALSE, fig.height = 9.5}
+p_prior <- ggplot(data = data.frame(x = c(0, plot_xmax)), mapping = aes(x = x)) +
+  stat_function(fun = dgamma, args = list(shape = 1, rate = 0.01, log = TRUE), n = 1001) +
+  ggtitle(expression(paste(log, "{", f(theta), "}")))
+
+calc_ind_lik <- function(lambda, x) {
+  result <- seq_along(lambda)
+  for(j in seq_along(lambda)) {
+    result[j] <- sum(dpois(x = x, lambda = lambda[j], log = TRUE))
+  }
+  return(result)
+}
+
+calc_post_plus_lik <- function(lambda, x) {
+  dgamma(lambda, shape = 1, rate = 0.01, log = TRUE) +
+    calc_ind_lik(lambda, x)
+}
+
+p_ind_lik <- ggplot(data = data.frame(x = c(0, plot_xmax)), mapping = aes(x = x)) +
+  ggtitle(expression(paste(log, "{f(", x[i], "|", theta, ")}")))
+for(i in seq_len(n)) {
+  p_ind_lik <- p_ind_lik +
+    stat_function(fun = calc_ind_lik, args = list(x = x_sim$x[i]), n = 1001)
+}
+
+p_combined_lik <- ggplot(data = data.frame(x = c(0, plot_xmax)), mapping = aes(x = x)) +
+  stat_function(fun = calc_ind_lik, args = list(x = x_sim$x), n = 1001) +
+  ggtitle(expression(paste(log, "{f(", x[1], ", ..., ", x[n], "|", theta,")}")))
+
+p_post <- ggplot(data = data.frame(x = c(0, plot_xmax)), mapping = aes(x = x)) +
+  stat_function(fun = calc_post_plus_lik, args = list(x = x_sim$x), n = 1001) +
+  ggtitle(expression(paste(log, "{f(", theta, "|", x[1], ", ..., ", x[n], ")}")))
+
+p_post_zoom <- ggplot(data = data.frame(x = c(9.4, 10.25)), mapping = aes(x = x)) +
+  stat_function(fun = calc_post_plus_lik, args = list(x = x_sim$x), n = 1001) +
+  ggtitle(expression(paste(log, "{f(", theta, "|", x[1], ", ..., ", x[n], ")}, zoomed in to [9.4, 10.25], width 0.85")))
+
+grid.arrange(p_prior, p_ind_lik, p_combined_lik, p_post, p_post_zoom, ncol = 1)
+```
+
+
+
+\newpage
+
+#### n = 1000
+
+```{r, message=FALSE, warning=FALSE, echo = FALSE}
+set.seed(93365)
+
+n <- 1000
+x_sim <- data.frame(x = rpois(n = n, lambda = 10))
+```
+
+```{r, message=FALSE, warning=FALSE, echo = FALSE, fig.height = 9.5}
+p_prior <- ggplot(data = data.frame(x = c(0, plot_xmax)), mapping = aes(x = x)) +
+  stat_function(fun = dgamma, args = list(shape = 1, rate = 0.01, log = TRUE), n = 1001) +
+  ggtitle(expression(paste(log, "{", f(theta), "}")))
+
+calc_ind_lik <- function(lambda, x) {
+  result <- seq_along(lambda)
+  for(j in seq_along(lambda)) {
+    result[j] <- sum(dpois(x = x, lambda = lambda[j], log = TRUE))
+  }
+  return(result)
+}
+
+calc_post_plus_lik <- function(lambda, x) {
+  dgamma(lambda, shape = 1, rate = 0.01, log = TRUE) +
+    calc_ind_lik(lambda, x)
+}
+
+p_ind_lik <- ggplot(data = data.frame(x = c(0, plot_xmax)), mapping = aes(x = x)) +
+  ggtitle(expression(paste(log, "{f(", x[i], "|", theta, ")}")))
+for(i in seq_len(n)) {
+  p_ind_lik <- p_ind_lik +
+    stat_function(fun = calc_ind_lik, args = list(x = x_sim$x[i]), n = 1001)
+}
+
+p_combined_lik <- ggplot(data = data.frame(x = c(0, plot_xmax)), mapping = aes(x = x)) +
+  stat_function(fun = calc_ind_lik, args = list(x = x_sim$x), n = 1001) +
+  ggtitle(expression(paste(log, "{f(", x[1], ", ..., ", x[n], "|", theta,")}")))
+
+p_post <- ggplot(data = data.frame(x = c(0, plot_xmax)), mapping = aes(x = x)) +
+  stat_function(fun = calc_post_plus_lik, args = list(x = x_sim$x), n = 1001) +
+  ggtitle(expression(paste(log, "{f(", theta, "|", x[1], ", ..., ", x[n], ")}")))
+
+p_post_zoom <- ggplot(data = data.frame(x = c(9.95, 10.25)), mapping = aes(x = x)) +
+  stat_function(fun = calc_post_plus_lik, args = list(x = x_sim$x), n = 1001) +
+  ggtitle(expression(paste(log, "{f(", theta, "|", x[1], ", ..., ", x[n], ")}, zoomed in to [9.95, 10.25], width 0.3")))
+
+grid.arrange(p_prior, p_ind_lik, p_combined_lik, p_post, p_post_zoom, ncol = 1)
+```
+
+
+
+
+
+
+
+

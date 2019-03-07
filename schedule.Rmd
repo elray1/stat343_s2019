@@ -216,9 +216,7 @@ make_week_box("week6", TRUE, "Week 6: Feb 25 -- Mar 1",
 
 #### Fri, Mar 1
  * **In Class**, we will work on:
-    * MCMC for Bayesian inference.
-        * Reading 1: the discussion of the law of large numbers and its application for numerical integration, discussed in Section 5.2 of Rice.
-        * Reading 2 (optional?): I've posted a chapter from Introduction to Statistical Thought by Michael Lavine.  This goes into more depth than we will, but it's the most readable less-than-book-length introduction to this topic at an undergraduate level that I have found.  It is linked to from the resources page: http://www.evanlray.com/stat343_s2019/resources.html
+    * Set up for MCMC: Limits of conjugate priors for handling normal distributions.  Notes: [pdf](materials/20190301_mcmc/bayes_normal_notes.pdf)
 "
   )
 ```
@@ -229,13 +227,25 @@ make_week_box("week7", TRUE, "Week 7: Mar 4 -- 8",
 
 #### Mon, Mar 4
  * **In Class**, we will work on:
-    * MCMC for Bayesian inference using Stan
+    * Justification of numerical integration using the law of large numbers.  Lecture notes: [pdf](materials/20190301_mcmc/numerical_integration_notes.pdf)
+    * MCMC for Bayesian inference using Stan.
+        * Handout: [pdf](materials/20190301_mcmc/20190225_bayes_MCMC_Metropolis.pdf)
+        * Lab 9 posted on GitHub
+    * MCMC for Bayesian inference.
+        * Reading 1: the discussion of the law of large numbers and its application for numerical integration, discussed in Section 5.2 of Rice.
+        * Reading 2 (optional?): I've posted a chapter from Introduction to Statistical Thought by Michael Lavine.  This goes into more depth than we will, but it's the most readable less-than-book-length introduction to this topic at an undergraduate level that I have found.  It is linked to from the resources page: http://www.evanlray.com/stat343_s2019/resources.html
 
 #### Wed, Mar 6
  * **In Class**, we will work on:
+    * Large-sample normal approximation to the posterior distribution.
+        * Motivating examples from previous classes: [pdf](materials/20190306_normal_approx_posterior/20190306_normal_approx_posterior.pdf)
+        * Proof step 1: For large n, the prior's effect on the posterior is irrelevant in comparison to the likelihood.  Motivating (??) pictures: [pdf](materials/20190306_normal_approx_posterior/20190306_log_posterior_contributions.pdf)
+        * Proof step 2: Second order Taylor series approximation to log-likelihood.  Lecture notes: [pdf](materials/20190306_normal_approx_posterior/lecture_notes.pdf)
 
 #### Fri, Mar 8
  * **In Class**, we will work on:
+    * Wrap up of lab 9; solutions are posted on GitHub
+    * Examples of large-sample normal approximations to the posterior
 "
   )
 ```

@@ -1,0 +1,137 @@
+---
+title: "Large-Sample Normal Approximation to the Posterior"
+output:
+  pdf_document:
+    keep_tex: yes
+header-includes:
+  - \usepackage{multicol}
+geometry: margin=0.6in
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(readr)
+library(ggplot2)
+```
+
+\def\simiid{\stackrel{{\mbox{\text{\tiny i.i.d.}}}}{\sim}}
+
+## Basic Result (rough statement)
+
+For large sample size, the posterior distribution is approximately $\Theta | X_1, \ldots, X_n \sim \text{Normal}(\hat{\theta}^{MLE}, \cdots)$
+
+#### Binomial Model: M&M's (Lab 7b)
+
+ * As a class, we had x = 138 blue M&Ms in a sample of size n = 541.
+ * Data Model: $X | \Theta = \theta \sim \text{Binomial}(541, \theta)$
+ * Suppose we use a noninformative prior of $\Theta \sim \text{Beta}(1, 1)$
+ * The exact posterior is $\Theta | X = 138 \sim \text{Beta}(1 + 138, 1 + 541 - 138)$
+ * The MLE is 138/541
+
+```{r, fig.height = 1.8}
+ggplot(data = data.frame(theta = c(0, 1)), mapping = aes(x = theta)) +
+  stat_function(fun = dbeta,
+    args = list(shape1 = 1 + 138, shape2 = 1 + 541 - 138),
+    n = 1001) +
+  geom_vline(xintercept = 138/541, color = "orange", linetype = 2) +
+  theme_bw()
+```
+
+#### Geometric Model: Bird Hops (Lab 8)
+
+```{r, warning = FALSE, message = FALSE, fig.height = 2, echo = FALSE}
+bird_hops <- read_csv("http://www.evanlray.com/data/rice/Chapter%208/hops.csv") %>%
+  transmute(
+    num_hops = num_hops - 1
+  )
+```
+
+ * Observe $X_1, \ldots, X_n$; $X_i$ is the number of hops taken before bird takes off
+ * Data Model: $X_i | \Theta = \theta \simiid \text{Geometric}(\theta)$
+ * Suppose we use a noninformative prior of $\Theta \sim \text{Beta}(1, 1)$
+ * The exact posterior is $\Theta | X_1 = x_1, \ldots, X_n = x_n \sim \text{Beta}(1 + n, 1 + \sum_{i = 1}^n x_i)$
+ * The MLE is $\frac{1}{1 + \bar{X}}$
+
+```{r, fig.height = 1.7}
+ggplot(data = data.frame(theta = c(0, 1)), mapping = aes(x = theta)) +
+  stat_function(fun = dbeta,
+    args = list(shape1 = 1 + nrow(bird_hops), shape2 = 1 + sum(bird_hops$num_hops)),
+    n = 1001) +
+  geom_vline(xintercept = 1/(1 + mean(bird_hops$num_hops)), color = "orange") +
+  theme_bw()
+```
+
+#### Poisson Model: Seedlings (Lab 8)
+
+ * Observe $X_1, \ldots, X_n$; $X_i$ is the number of seedlings in quadrat number $i$.
+ * Data Model: $X_i | \Lambda = \lambda \simiid \text{Poisson}(\lambda)$
+ * Suppose we use a noninformative prior of $\Lambda \sim \text{Gamma}(1, 0.01)$
+ * The exact posterior is $\Lambda | X_1 = x_1, \ldots, X_n = x_n \sim \text{Gamma}(1 + \sum_{i = 1}^{n} x_i, 0.01 + n)$
+ * The MLE is $\bar{X}$
+
+```{r, message=FALSE, warning=FALSE, echo = FALSE}
+library(tidyverse)
+
+seedlings <- read_table("http://www.evanlray.com/data/lavine_intro_stat_thought/seedlings.txt") %>%
+  select(quadrat = Block,
+    old_1991 = `91`,
+    old_1992 = `92-t`,
+    old_1993 = `93-t`,
+    old_1994 = `94-t`,
+    old_1995 = `95-t`,
+    old_1996 = `96-t`,
+    old_1997 = `97-t`,
+    new_1992 = `92-1`,
+    new_1993 = `93-1`,
+    new_1994 = `94-1`,
+    new_1995 = `95-1`,
+    new_1996 = `96-1`,
+    new_1997 = `97-1`
+  )
+```
+
+```{r, fig.height=1.7}
+ggplot(data = data.frame(theta = c(0, 2)), mapping = aes(x = theta)) +
+  stat_function(fun = dgamma,
+    args = list(shape = 1 + sum(seedlings$new_1993), rate = 0.01 + nrow(seedlings)), n = 1001) +
+  geom_vline(xintercept = mean(seedlings$new_1993), color = "orange") +
+  theme_bw()
+```
+
+#### Normal Model: Cosmic Microwave Background Radiation (Lecture, March 4th)
+
+ * Observe $X_1, \ldots, X_n$, where $X_i$ is the temperature difference in pixel $i$.
+ * Data Model: $X_i \simiid \text{Normal}(\mu, \sigma^2)$
+ * We approximated the posterior distributions of $\mu$ and $\sigma$ by drawing samples using MCMC.
+ * The MLEs are $\hat{\mu}^{MLE} = \bar{X}$ and $\hat{\sigma^2} = \frac{1}{n}\sum_{i=1}^n(X_i - \bar{X})^n$
+
+```{r, message=FALSE, warning=FALSE, fig.height = 3, echo = FALSE}
+library(tidyverse)
+
+cmb <- read_csv("http://www.evanlray.com/data/bayesian_core/CMBdata.txt",
+    col_names = FALSE)
+names(cmb) <- "temp_difference"
+```
+
+
+```{r, echo = FALSE, message=FALSE}
+sample_size <- 10000
+burn_in <- 100
+theta_posterior_sample <- readRDS("theta_posterior_sample.rds")
+theta_posterior_sample <- theta_posterior_sample[-seq_len(burn_in), ]
+```
+
+```{r, fig.height = 1.7}
+ggplot() +
+  geom_density(data = theta_posterior_sample, mapping = aes(x = mu)) +
+  geom_vline(xintercept = mean(cmb$temp_difference), color = "orange") +
+  theme_bw()
+```
+
+```{r, fig.height = 1.7}
+ggplot() +
+  geom_density(data = theta_posterior_sample, mapping = aes(x = sigma_sq)) +
+  geom_vline(xintercept = mean((cmb$temp_difference - mean(cmb$temp_difference))^2), color = "orange") +
+  theme_bw()
+```
