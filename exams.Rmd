@@ -7,7 +7,7 @@ Review materials and solutions to quizzes and exams will be posted here.
 +-------+--------------------------------------------+-----------+----------------------------------------------------------+
 | Type  | Description/Review Materials               | Date      | Solutions                                                |
 +=======+============================================+===========+==========================================================+
-|Midterm|Topics and sample questions (longer than    | 2019-03-22|                                                          |
-|       |the exam will be):                          |           |                                                          |
+|Midterm|Topics and sample questions (longer than    | 2019-03-22|Solutions to example problems:                            |
+|       |the exam will be):                          |           | [pdf](exams/midterm_1/midterm_1_review_sol.pdf)          |
 |       |[pdf](exams/midterm_1/midterm_1_review.pdf) |           |                                                          |
 +-------+--------------------------------------------+-----------+----------------------------------------------------------+
