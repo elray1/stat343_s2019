@@ -174,7 +174,7 @@ make_week_box("week4", FALSE, "Week 4: Feb 11 -- 15",
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week5", TRUE, "Week 5: Feb 18 -- 22",
+make_week_box("week5", FALSE, "Week 5: Feb 18 -- 22",
 "
 
 #### Mon, Feb 18
@@ -203,7 +203,7 @@ qbeta(c(0.05, 0.95), shape1 = a, shape2 = b)
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week6", TRUE, "Week 6: Feb 25 -- Mar 1",
+make_week_box("week6", FALSE, "Week 6: Feb 25 -- Mar 1",
 "
 
 #### Mon, Feb 25
@@ -222,7 +222,7 @@ make_week_box("week6", TRUE, "Week 6: Feb 25 -- Mar 1",
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week7", TRUE, "Week 7: Mar 4 -- 8",
+make_week_box("week7", FALSE, "Week 7: Mar 4 -- 8",
 "
 
 #### Mon, Mar 4
@@ -246,6 +246,8 @@ make_week_box("week7", TRUE, "Week 7: Mar 4 -- 8",
  * **In Class**, we will work on:
     * Wrap up of lab 9; solutions are posted on GitHub
     * Examples of large-sample normal approximations to the posterior
+        * Binomial examples/motivation: [pdf](materials/20190308_normal_approx_posterior_examples/binomial_approx_posterior.pdf)
+        * Large sample CI example (see lab 10): [pdf](materials/20190308_normal_approx_posterior_examples/20180308_large_sample_ci.pdf)
 "
   )
 ```
@@ -259,14 +261,18 @@ make_week_box("week8", FALSE, "Week 8: Mar 11 -- 15",
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week9", FALSE, "Week 9: Mar 18 -- 22",
+make_week_box("week9", TRUE, "Week 9: Mar 18 -- 22",
 "
 
 #### Mon, Mar 18
- * **In Class**, we will work on:
+ * **In Class**, we will work on: ideas from Section 8.5.3, borrowed the idea of the likelihood ratio from Section 9.1.
+    * Exact confidence intervals, based on exact form of sampling distribution of a statistic. Lecture notes: [pdf](materials/20190318_large_sample_information/lecture_notes.pdf)
+    * Develop some intuition for Fisher information: [pdf](materials/20190318_large_sample_information/20180318_large_sample_information.pdf)
 
 #### Wed, Mar 20
  * **In Class**, we will work on:
+    * Large-sample normal approximation to the sampling distribution of the MLE.
+    * Confidence intervals based on large-sample normal approximations?
 
 #### Fri, Mar 22
  * **In Class**, we will work on:

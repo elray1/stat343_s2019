@@ -1,0 +1,174 @@
+---
+title: "Motivation for information"
+output: pdf_document
+geometry: margin=0.6in
+---
+
+\def\simiid{\stackrel{{\mbox{\text{\tiny i.i.d.}}}}{\sim}}
+
+# Seedlings (Poisson Model)
+
+ * Observe $X_1, \ldots, X_n$; $X_i$ is the number of seedlings in quadrat number $i$.
+ * Data Model: $X_i | \Lambda = \lambda \simiid \text{Poisson}(\lambda)$
+ * We have seen that the maximum likelihood estimate is $\hat{\lambda}^{MLE} = \frac{1}{n}\sum_{i=1}^n X_i$
+
+### Results from 2 different samples
+
+ * Our full sample had $n = 60$ quadrats.  I have selected two different subsets of these observations.
+ * For both subsets I have chosen, $\hat{\lambda}^{MLE}$ is the same:
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+library(tidyverse)
+
+seedlings <- read_table("http://www.evanlray.com/data/lavine_intro_stat_thought/seedlings.txt") %>%
+  select(quadrat = Block,
+    old_1991 = `91`,
+    old_1992 = `92-t`,
+    old_1993 = `93-t`,
+    old_1994 = `94-t`,
+    old_1995 = `95-t`,
+    old_1996 = `96-t`,
+    old_1997 = `97-t`,
+    new_1992 = `92-1`,
+    new_1993 = `93-1`,
+    new_1994 = `94-1`,
+    new_1995 = `95-1`,
+    new_1996 = `96-1`,
+    new_1997 = `97-1`
+  )
+
+subset_1_inds <- 1:56
+subset_2_inds <- c(1:3, 54)
+```
+
+```{r}
+mean(seedlings$new_1993[subset_1_inds])
+mean(seedlings$new_1993[subset_2_inds])
+```
+
+ * Here are the likelihood and log-likelihood functions based on the two different subsets, with orange lines at the MLE:
+
+```{r, fig.height=3, echo = FALSE, warning = FALSE}
+calc_loglik <- function(lambda, observed_counts) {
+  result <- vector("numeric", length(lambda))
+  for(i in seq_along(lambda)) {
+    result[i] <- sum(dpois(observed_counts, lambda = lambda[i], log = TRUE))
+  }
+  
+  return(result)
+}
+
+lambda_grid <- seq(from = 0.01, to = 4.0, length = 1000)
+
+to_plot <- bind_rows(
+  data.frame(
+    lambda = lambda_grid,
+    log_likelihood = calc_loglik(lambda_grid, seedlings$new_1993[subset_1_inds]),
+    subset = "Subset 1"
+  ),
+  data.frame(
+    lambda = lambda_grid,
+    log_likelihood = calc_loglik(lambda_grid, seedlings$new_1993[subset_2_inds]),
+    subset = "Subset 2"
+  )
+) %>%
+  mutate(
+    likelihood = exp(log_likelihood)
+  )
+
+ggplot(data = to_plot, mapping = aes(x = lambda, y = likelihood)) +
+  geom_line() +
+  geom_vline(xintercept = 0.75, color = "orange") +
+  facet_wrap( ~ subset, scales = "free_y") +
+  theme_bw() +
+  ggtitle("Likelihood Functions (different vertical scales)")
+```
+
+```{r, fig.height=3, echo = FALSE, warning = FALSE}
+ggplot(data = to_plot, mapping = aes(x = lambda, y = log_likelihood)) +
+  geom_line() +
+  geom_vline(xintercept = 0.75, color = "orange") +
+  facet_wrap( ~ subset) +
+  theme_bw() +
+  ggtitle("Log-likelihood Functions (same vertical scale)")
+```
+\newpage
+
+Some questions to consider:
+
+#### 1. Likelihood Ratios
+
+The likelihood function measures the probability of the observed data, as a function of $\lambda$:
+
+$$\mathcal{L}(\lambda | x_1, \ldots, x_n) = \text{Probability of observed data, if the parameter is $\lambda$}$$
+
+Let's consider the *ratio* of the likelihood function at the MLE to the likelihood function at $\lambda = 2$.
+
+```{r, echo = FALSE, eval = FALSE}
+calc_loglik(0.75, seedlings$new_1993[subset_1_inds]) %>% exp()
+calc_loglik(2, seedlings$new_1993[subset_1_inds]) %>% exp()
+(calc_loglik(0.75, seedlings$new_1993[subset_1_inds]) - calc_loglik(2, seedlings$new_1993[subset_1_inds])) %>%
+  exp()
+```
+
+For subset 1, this ratio is $\frac{\mathcal{L}(0.75 | x_1, \ldots, x_{n_1})}{\mathcal{L}(2 | x_1, \ldots, x_{n_1})} \approx \frac{3.630748e-31}{1.122197e-43} \approx 3.24 \times 10^{12}$
+
+```{r, echo = FALSE, eval = FALSE}
+calc_loglik(0.75, seedlings$new_1993[subset_2_inds]) %>% exp()
+calc_loglik(2, seedlings$new_1993[subset_2_inds]) %>% exp()
+(calc_loglik(0.75, seedlings$new_1993[subset_2_inds]) - calc_loglik(2, seedlings$new_1993[subset_2_inds])) %>%
+  exp()
+```
+
+For subset 2, this ratio is $\frac{\mathcal{L}(0.75 | x_1, \ldots, x_{n_2})}{\mathcal{L}(2 | x_1, \ldots, x_{n_2})} \approx \frac{0.0035}{0.0004} \approx 7.826$
+
+**Based on a comparison of likelihood ratios, which data set provides more evidence that $\lambda = 0.75$ is better than $\lambda = 2$?  Why?**
+
+\vspace{5cm}
+
+#### 2. Differences in Log-likelihoods
+
+Taking the log of the likelihood ratio and using properties of logs, we have:
+
+\begin{align*}
+\log\left\{\frac{\mathcal{L}(\hat{\lambda}^{MLE} | x_1, \ldots, x_{n})}{\mathcal{L}(\lambda^{alternative} | x_1, \ldots, x_{n})}\right\} &= \log\left\{\mathcal{L}(\hat{\lambda}^{MLE} | x_1, \ldots, x_{n})\right\} - \log\left\{\mathcal{L}(\lambda^{alternative} | x_1, \ldots, x_{n})\right\} \\
+&= \ell(\hat{\lambda}^{MLE} | x_1, \ldots, x_{n}) - \ell(\lambda^{alternative} | x_1, \ldots, x_{n})
+\end{align*}
+
+So a comparison similar to the above can be done by looking at *differences* in the value of the log-likelihood function.
+
+```{r, echo = FALSE, eval = FALSE}
+calc_loglik(0.75, seedlings$new_1993[subset_1_inds])
+calc_loglik(2, seedlings$new_1993[subset_1_inds])
+calc_loglik(0.75, seedlings$new_1993[subset_1_inds]) - calc_loglik(2, seedlings$new_1993[subset_1_inds])
+```
+
+For subset 1, this difference is $\ell(0.75 | x_1, \ldots, x_{n_1}) - \ell(2 | x_1, \ldots, x_{n_1}) \approx -70.09 - (-98.90) = 28.81$
+
+```{r, echo = FALSE, eval = FALSE}
+calc_loglik(0.75, seedlings$new_1993[subset_2_inds])
+calc_loglik(2, seedlings$new_1993[subset_2_inds])
+(calc_loglik(0.75, seedlings$new_1993[subset_2_inds]) - calc_loglik(2, seedlings$new_1993[subset_2_inds]))
+```
+
+For subset 2, this difference is $\ell(0.75 | x_1, \ldots, x_{n_2}) - \ell(2 | x_1, \ldots, x_{n_2}) \approx -5.65 - (-7.71) = 2.06$
+
+**Based on a comparison of differences in log-likelihoods, which data set provides more evidence that $\lambda = 0.75$ is better than $\lambda = 2$?  Why?**
+
+\newpage
+
+#### 3. Looking at the plots of the log-likelihood functions, which subset provides more information about the value of $\lambda$, in the sense that it restricts the range of feasible values for $\lambda$ to a smaller set?  Why?
+
+(Can you come up with a graphical rule based on the plots of the log-likelihood functions for determining which data set gives more information about $\lambda$?)
+
+\vspace{4cm}
+
+#### 4. Looking at the plots of the log-likelihood functions, can you come up with a quantitative summary of the log-likelihood function that captures which data set gives more information about $\lambda$?
+
+\vspace{4cm}
+
+#### 5. One of these subsets had a sample size of 4, and the other had a sample size of 56.  Which is which? 
+
+
+
+

@@ -270,7 +270,7 @@ $X = (X_1, X_2, \ldots, X_k)$ = the vector of counts for how many observations f
 \begin{tabular}{rl}
 \toprule
 parameters & $n$: number of trials, $p = (p_1, p_2, \ldots, p_k)$: vector of probabilities for each category \\
-p.f. & $f(x | \lambda) = \frac{n!}{x_1! x_2! \cdots x_k!} p_1^{x_1}p_2^{x_2} \cdots p_k^{x_k}$ \\
+p.f. & $f(x | p) = \frac{n!}{x_1! x_2! \cdots x_k!} p_1^{x_1}p_2^{x_2} \cdots p_k^{x_k}$ \\
 Mean & $E(X_i) = n p_i$ \\
 Variance & $Var(X_i) = n p_i(1 - p_i)$ \\
 R functions & {\tt dmultinom(..., size = n, prob = p), rmultinom} \\
