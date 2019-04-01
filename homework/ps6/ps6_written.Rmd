@@ -1,0 +1,122 @@
+---
+title: "Problem Set 6: Written Part"
+author: "Your Name Goes Here"
+output:
+  pdf_document:
+    keep_tex: true
+header-includes:
+   - \usepackage{booktabs}
+geometry: margin=1.5cm
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+\def\simiid{\stackrel{{\mbox{\text{\tiny i.i.d.}}}}{\sim}}
+
+# Details
+
+### Due Date
+
+This assignment is due at 4:00 PM on Friday, April 5.
+
+### How to Write Up
+
+The written part of this assignment can be either typeset using latex or hand written.
+
+### Grading
+
+5% of your grade on this assignment is for turning in something legible.  This means it should be organized, and any Rmd files should knit to pdf without issue.
+
+An additional 20% of your grade is for completion.  A quick pass will be made to ensure that you've made a reasonable attempt at all problems.
+
+Across both the written part and the R part, in the range of 1 to 3 problems will be graded more carefully for correctness.  In grading these problems, an emphasis will be placed on full explanations of your thought process.  You don't need to write more than a few sentences for any given problem, but you should write complete sentences!  Understanding and explaining the reasons behind what you are doing is at least as important as solving the problems correctly.
+
+Solutions to all problems will be provided.
+
+### Collaboration
+
+You are allowed to work with others on this assignment, but you must complete and submit your own write up.  You should not copy large blocks of code or written text from another student.
+
+### Sources
+
+You may refer to our text, Wikipedia, and other online sources.  All sources you refer to must be cited in the space I have provided at the end of this problem set.  Any direct quotes from other sources must be in quotation marks and specifically cited at the point of the quotation.  Direct quotes should be used sparingly.
+
+## Problem I: 
+
+Handout comparing MSE of the MLE and Bayesian posterior mean estimators in the M&M's example; distributed in class on March 29.
+
+## Problem II:
+
+One of the problems on the midterm asked you to explore estimation for the Exponential distribution.  We'll revisit that model here, and obtain interval estimates from the Bayesian framework and by maximum likelihood.  We will use a different parameterization of the exponential than we used on the midterm, so don't worry if it seems like your results aren't matching up. *You will need to do the written part before you can do some parts of the R part for this question*.
+
+The following R code reads in remission times in months for 128 bladder cancer patients and makes an initial plot of the data.  These data were reported in Lee ET, Wang JW (2003) Statistical methods for survival data analysis.
+
+```{r}
+library(readr)
+library(ggplot2)
+
+cancer_remissions <- read_csv("http://www.evanlray.com/data/misc/bladder_cancer/bladder_cancer.csv")
+
+ggplot(data = cancer_remissions, mapping = aes(x = remission_time)) +
+  geom_histogram(mapping = aes(y = ..density..), binwidth = 4, boundary = 0)
+```
+
+#### Set up and foundational facts
+
+Let's use an exponential model for these data: $X_1, \ldots, X_n \sim \text{Exp}(\lambda)$, where the $X_i$ are independent.
+
+Here are some facts about the exponential distribution (please use this parameterization of the exponential distribution for this problem):
+
+If $X \sim Exp(\lambda)$ then the density function is given by $f(x | \lambda) = \lambda e^{-\lambda x}$
+
+The mean and variance are given by $E(X) = \frac{1}{\lambda}$ and $Var(X) = \frac{1}{\lambda^2}$.
+
+Based on a sample $x_1, \ldots, x_n$, the log-likelihood function is:
+\begin{align*}
+L(\lambda | x_1, \ldots, x_n) = n \log(\lambda) - \lambda \sum_{i = 1}^n x_i
+\end{align*}
+
+The first derivative of the log-likelihood function is:
+\begin{align*}
+\frac{d}{d \lambda} L(\lambda | x_1, \ldots, x_n) = \frac{n}{\lambda} - \sum_{i = 1}^n x_i
+\end{align*}
+
+The second derivative of the log-likelihood function is:
+\begin{align*}
+\frac{d^2}{d \lambda^2} L(\lambda | x_1, \ldots, x_n) = - \frac{n}{\lambda^2}
+\end{align*}
+
+The maximum likelihood estimator can be shown to be: $\hat{\lambda}_{MLE} = 1 / \bar{X}$.
+
+It is also possible to conduct a Bayesian analysis using a prior for $\lambda$ that is Gamma($\alpha$, $\beta$), which has pdf $f_{\Lambda}(\lambda | \alpha, \beta) = \frac{\beta^\alpha}{\Gamma(\alpha)} \lambda^{\alpha - 1} e^{-\beta \lambda}$.  This is a conjugate prior, and the posterior distribution is $\lambda | x_1, \ldots, x_n, \alpha, \beta \sim \text{Gamma}(\alpha + n, \beta + \sum_{i = 1}^n x_i)$.
+
+#### Overview
+
+So far, we have at our disposal 5 (!) different approaches for obtaining an interval estimate for the unknown model parameter $\lambda$ of the Exponential model:
+
+1. A frequentist confidence interval based on an exact distribution for a relevant statistic;
+2. A frequentist confidence interval based on a large-sample normal approximation to the sampling distribution of the maximum likelihood estimator.
+3. A Bayesian credible interval based on quantiles of the exact Gamma posterior distribution.
+4. A Bayesian credible interval based on a large-sample normal approximation to the posterior distribution.
+5. A Bayesian credible interval based on a MCMC sample drawn from the exact posterior distribution.
+
+We will also develop two bootstrap confidence interval methods, but those are not featured on this problem set.  We will explore bootstrap interval estimation for the parameter $\lambda$, and compare with the approaches developed here, on the next problem set.
+
+#### 1. Exact confidence interval
+
+It can be shown that $2 n \lambda \bar{X} \sim \chi^2_{2n}$, where $\chi^2_{2n}$ denotes a Chi-squared distribution with $2n$ degrees of freedom.  Use this fact to derive an expression for an exact $(1 - \alpha) 100\%$ confidence interval for $\lambda$ in terms of the quantiles $\chi^2_{2n}(\frac{\alpha}{2})$ and $\chi^2_{2n}(1 - \frac{\alpha}{2})$.
+
+#### 2. Large-sample approximate confidence interval
+
+Find an expression for a frequentist confidence interval for $\lambda$ based on a large-sample normal approximation to the sampling distribution of the maximum likelihood estimator.
+
+#### 3. No work to do for the exact Bayesian credible interval in the written part
+
+#### 4. Large-sample approximate credible interval
+
+Find an expression for a Bayesian credible interval for $\lambda$ based on a large-sample normal approximation to the posterior distribution of $\Lambda$.
+
+#### 5. No work to do for the MCMC-based Bayesian credible interval in the written part
