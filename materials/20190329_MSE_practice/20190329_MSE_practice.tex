@@ -1,0 +1,209 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Bayesian Inference, Shrinkage Estimators, and MSE},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Bayesian Inference, Shrinkage Estimators, and MSE}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{}
+    \preauthor{}\postauthor{}
+    \date{}
+    \predate{}\postdate{}
+  
+\usepackage{booktabs}
+
+\begin{document}
+\maketitle
+
+\def\simiid{\stackrel{{\mbox{\text{\tiny i.i.d.}}}}{\sim}}
+
+\section{M\&M's Example: Bias, Variance, Efficiency, and MSE of maximum
+likelihood estimator and Bayesian posterior
+mean}\label{mms-example-bias-variance-efficiency-and-mse-of-maximum-likelihood-estimator-and-bayesian-posterior-mean}
+
+\subsection{Set Up}\label{set-up}
+
+\paragraph{Problem Reminder}\label{problem-reminder}
+
+In lab 7, we estimated the proportion of M\&M's that are blue,
+\(\theta\), based on a sample of \(n\) M\&M's. We defined the random
+variable \(X\), which was the count of how many M\&M's were blue in that
+sample. Our model was \(X \simiid \text{Binomial}(n, \theta)\).
+
+We have developed two approaches to inference for \(\theta\):
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  The maximum likelihood estimator \(\hat{\theta}_{MLE} = \frac{X}{n}\)
+\item
+  A Bayesian approach with conjugate prior distribution given by
+  \(\Theta \sim Beta(a, b)\). The posterior distribution is given by
+  \(\Theta | n, x \sim Beta(a + x, b + n - x)\). From this posterior
+  distribution, we can obtain point estimates, with the most common
+  choice being the posterior mean, which can be written as follows:
+\end{enumerate}
+
+\[\hat{\theta}^{Bayes} = \frac{a + x}{(a + x) + (b + n - x)} = \cdots = (1 - w) \frac{a}{a + b} + w\frac{x}{n},\]
+where \(w = \frac{n}{n + a + b}\).
+
+By considering what the posterior mean would be across different
+samples, we can view the posterior mean as specifying an estimator,
+
+\[\hat{\theta}^{Bayes} = (1 - w) \frac{a}{a + b} + w\frac{X}{n}.\]
+
+In the previous lab, we considered three different prior specifications
+for \(\Theta\) with different level of informativeness, and we saw that
+for a large sample size it didn't matter which prior we used; the
+resulting estimates were essentially the same as each other and as the
+maximum likelihood estimate.
+
+Let's now look more closely at how the Bayesian and Frequentist methods
+compare for smaller sample sizes. For concreteness, let's work with the
+intermediate of our three prior specifications,
+\(\Theta \sim \text{Beta}(2, 8)\). Let's also imagine that our sample
+size is fixed at 10.
+
+In this case, \(w = \frac{n}{n + a + b} = \frac{10}{10 + 2 + 8} = 0.5\),
+and the Bayesian estimator is
+
+\[\hat{\theta}^{Bayes} = (1 - w) \frac{a}{a + b} + w\frac{X}{n} = 0.5 \frac{2}{10} + 0.5\frac{X}{10}\]
+
+\subsection{\texorpdfstring{Properties of
+\(\hat{\theta}_{MLE}\)}{Properties of \textbackslash{}hat\{\textbackslash{}theta\}\_\{MLE\}}}\label{properties-of-hattheta_mle}
+
+\paragraph{\texorpdfstring{Find the bias of
+\(\hat{\theta}_{MLE}\)}{Find the bias of \textbackslash{}hat\{\textbackslash{}theta\}\_\{MLE\}}}\label{find-the-bias-of-hattheta_mle}
+
+\vspace{3cm}
+
+\paragraph{\texorpdfstring{Find the variance of \(\hat{\theta}_{MLE}\)
+in terms of
+\(\theta\)}{Find the variance of \textbackslash{}hat\{\textbackslash{}theta\}\_\{MLE\} in terms of \textbackslash{}theta}}\label{find-the-variance-of-hattheta_mle-in-terms-of-theta}
+
+\vspace{3cm}
+
+\paragraph{\texorpdfstring{Find an expression for the MSE of
+\(\hat{\theta}_{MLE}\) in terms of
+\(\theta\)}{Find an expression for the MSE of \textbackslash{}hat\{\textbackslash{}theta\}\_\{MLE\} in terms of \textbackslash{}theta}}\label{find-an-expression-for-the-mse-of-hattheta_mle-in-terms-of-theta}
+
+\vspace{3cm}
+
+\paragraph{\texorpdfstring{Find the Fisher information about \(\theta\)
+from a sample of size
+\(n\).}{Find the Fisher information about \textbackslash{}theta from a sample of size n.}}\label{find-the-fisher-information-about-theta-from-a-sample-of-size-n.}
+
+You may use the fact that
+\[\frac{d^2}{d \theta^2} \ell(\theta|x) = \frac{-x}{\theta^2} + \frac{-(n - x)}{(1 - \theta)^2}\]
+
+\vspace{3cm}
+
+\paragraph{\texorpdfstring{Is \(\hat{\theta}_{MLE}\) an efficient
+estimator of
+\(\theta\)?}{Is \textbackslash{}hat\{\textbackslash{}theta\}\_\{MLE\} an efficient estimator of \textbackslash{}theta?}}\label{is-hattheta_mle-an-efficient-estimator-of-theta}
+
+\vspace{3cm}
+
+\paragraph{\texorpdfstring{Suppose \(\tilde{\theta}\) is an unbiased
+estimator of \(\theta\). Is it possible that
+\(Var(\tilde{\theta}) < Var(\hat{\theta}_{MLE})\)?}{Suppose \textbackslash{}tilde\{\textbackslash{}theta\} is an unbiased estimator of \textbackslash{}theta. Is it possible that Var(\textbackslash{}tilde\{\textbackslash{}theta\}) \textless{} Var(\textbackslash{}hat\{\textbackslash{}theta\}\_\{MLE\})?}}\label{suppose-tildetheta-is-an-unbiased-estimator-of-theta.-is-it-possible-that-vartildetheta-varhattheta_mle}
+
+\newpage
+
+\subsection{\texorpdfstring{Properties of
+\(\hat{\theta}^{Bayes}\)}{Properties of \textbackslash{}hat\{\textbackslash{}theta\}\^{}\{Bayes\}}}\label{properties-of-hatthetabayes}
+
+\paragraph{\texorpdfstring{Find the bias of \(\hat{\theta}_{Bayes}\) in
+terms of \(\theta\). For what value of \(\theta\) is
+\(\hat{\theta}_{Bayes}\) unbiased? How does that relate to the prior
+distribution?}{Find the bias of \textbackslash{}hat\{\textbackslash{}theta\}\_\{Bayes\} in terms of \textbackslash{}theta. For what value of \textbackslash{}theta is \textbackslash{}hat\{\textbackslash{}theta\}\_\{Bayes\} unbiased? How does that relate to the prior distribution?}}\label{find-the-bias-of-hattheta_bayes-in-terms-of-theta.-for-what-value-of-theta-is-hattheta_bayes-unbiased-how-does-that-relate-to-the-prior-distribution}
+
+\vspace{3cm}
+
+\paragraph{\texorpdfstring{Find the variance of \(\hat{\theta}_{Bayes}\)
+in terms of
+\(\theta\)}{Find the variance of \textbackslash{}hat\{\textbackslash{}theta\}\_\{Bayes\} in terms of \textbackslash{}theta}}\label{find-the-variance-of-hattheta_bayes-in-terms-of-theta}
+
+\vspace{3cm}
+
+\paragraph{\texorpdfstring{Find an expression for the MSE of
+\(\hat{\theta}_{Bayes}\) in terms of
+\(\theta\)}{Find an expression for the MSE of \textbackslash{}hat\{\textbackslash{}theta\}\_\{Bayes\} in terms of \textbackslash{}theta}}\label{find-an-expression-for-the-mse-of-hattheta_bayes-in-terms-of-theta}
+
+\vspace{3cm}
+
+The last part of this lab is on GitHub, Lab 13.
+
+
+\end{document}

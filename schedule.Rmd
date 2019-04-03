@@ -261,7 +261,7 @@ make_week_box("week8", FALSE, "Week 8: Mar 11 -- 15",
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week9", TRUE, "Week 9: Mar 18 -- 22",
+make_week_box("week9", FALSE, "Week 9: Mar 18 -- 22",
 "
 
 #### Mon, Mar 18
@@ -271,8 +271,9 @@ make_week_box("week9", TRUE, "Week 9: Mar 18 -- 22",
 
 #### Wed, Mar 20
  * **In Class**, we will work on:
-    * Large-sample normal approximation to the sampling distribution of the MLE.
-    * Confidence intervals based on large-sample normal approximations?
+    * Finish intuition handout from last class
+    * Lots of lecture about Fisher Information and Observed Fisher Information, large-sample normal approximations to the sampling distribution of the MLE in terms of information; confidence intervals from the large sample normal approximation; Poisson example.  Lecture notes: [pdf](materials/20190320_large_sample_ci/lecture_notes.pdf)
+    * Handout to go with Poisson example: [pdf](materials/20190320_large_sample_ci/20180320_poisson_large_sample_ci.pdf)
 
 #### Fri, Mar 22
  * **In Class**, we will work on:
@@ -285,30 +286,43 @@ make_week_box("week9", TRUE, "Week 9: Mar 18 -- 22",
 make_week_box("week10", FALSE, "Week 10: Mar 25 -- 29",
 "
 
-#### Mon, Mar 15
+#### Mon, Mar 25
  * **In Class**, we will work on:
+    * Practice with large sample approximations to sampling distribution of the MLE: [pdf](materials/20190325_large_sample_practice/20190325_pareto_mle_sampling.pdf)
+    * Start Lab 12
 
 #### Wed, Mar 27
  * **In Class**, we will work on:
+    * Some large-sample results about maximum likelihood estimators.  Consistency, Cramer-Rao Lower Bound, efficiency, shrinkage estimators.  Lecture notes: [pdf](materials/20190327_large_sample_results/lecture_notes_consistency_CRLB_shrinkage.pdf)
+    * Finish Lab 12, Start Lab 11
 
 #### Fri, Mar 29
  * **In Class**, we will work on:
+    * Shrinkage estimators.  No lecture notes, but we talked about how the posterior mean for the mean of a normal distribution and the parameter theta for a binomial distribution can both be viewed as an appropriately weighted average of the prior mean and the data mean.
+    * Finish old labs
+    * Start an example about practice with MSE, which will be due for homework: [pdf](materials/20190329_MSE_practice/20190329_MSE_practice.pdf)
+    * Start Lab 13, which will be due for homework.
 "
   )
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week11", FALSE, "Week 11: Apr 1 -- 5",
+make_week_box("week11", TRUE, "Week 11: Apr 1 -- 5",
 "
 
 #### Mon, Apr 1
  * **In Class**, we will work on:
+    * Bootstrap estimation of a sampling distribution.  Handout: [pdf](materials/20190401_bootstrap/20180401_bootstrap.pdf)
+    * Lab 14
 
 #### Tue, Apr 3
  * **In Class**, we will work on:
+    * Bootstrap confidence intervals.  Handout (NOTE: the version I distributed in class wasn't quite right on the last page.  Corrected version here.): [pdf](materials/20190403_bootstrap_CIs/20180403_bootstrap_CIs.pdf)
+    * Lab 15
 
 #### Fri, Apr 5
  * **In Class**, we will work on:
+    * Start on hypothesis testing; Chapter 9
 "
   )
 ```

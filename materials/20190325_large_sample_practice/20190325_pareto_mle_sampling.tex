@@ -1,0 +1,162 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Large-sample approximate sampling distribution of the MLE: Pareto Distribution},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Large-sample approximate sampling distribution of the MLE: Pareto
+Distribution}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{}
+    \preauthor{}\postauthor{}
+    \date{}
+    \predate{}\postdate{}
+  
+\usepackage{booktabs}
+
+\begin{document}
+\maketitle
+
+\def\simiid{\stackrel{{\mbox{\text{\tiny i.i.d.}}}}{\sim}}
+
+\section{Stat 343 Lab: Sampling Distribution of the
+MLE}\label{stat-343-lab-sampling-distribution-of-the-mle}
+
+The Pareto distribution is often used to model the distribution of
+variables with long right tail; for example, one recent article used the
+Pareto distribution (and several other candidate models) to model the
+distribution of carbon dioxide emissions by countries around the world
+(Akhundjanov, S. B., Devadoss, S., \& Luckstead, J. (2017). Size
+distribution of national CO2 emissions. Energy Economics, 66182-193).
+
+The Pareto distribution has two parameters, \(x_0 > 0\) and
+\(\alpha > 0\). If \(X \sim \text{Pareto}(x_0, \alpha)\), then \(X\) is
+a continuous random variable. Its probability density function (pdf) is:
+
+\(f(x | x_0, \alpha) = \frac{\alpha x_0^\alpha}{x^{\alpha + 1}}\mathbb{I}_{[x_0, \infty)}(x) = \begin{cases} \frac{\alpha x_0^\alpha}{x^{\alpha + 1}} \text{ if $x \geq x_0$} \\ 0 \text{ otherwise} \end{cases}\)
+
+The mean of \(X\) is \(E(X) = \frac{\alpha x_0}{\alpha - 1}\) if
+\(\alpha > 1\), and infinity otherwise.
+
+Let's fix \(x_0 = 1\) and think about how we might estimate the
+parameter \(\alpha\).
+
+\subsection{Strategy 1: Method of
+Moments}\label{strategy-1-method-of-moments}
+
+One approach to estimation that we have skipped over so far is the
+method of moments. The method of moments works by setting the first few
+moments of a distribution equal to the corresponding moments of a data
+set, and solving for any unknown parameters. In this case, that means
+setting the sample mean equal to the mean of the Pareto distribution and
+solving for \(\alpha\). Go ahead and do that to find an estimator of
+\(\alpha\), \(\hat{\alpha}^{MOM}\). It will be a function of the sample
+mean \(\bar{X}\).
+
+\newpage
+
+\subsection{Strategy 2: Maximum
+Likelihood}\label{strategy-2-maximum-likelihood}
+
+I'll let you skip a few steps (but on the other hand, here is a chance
+to get some practice if the mechanics of these steps are not yet
+comfortable).
+
+The log-likelihood for a Pareto distribution is given by
+
+\(\ell(\alpha | x_1, \ldots, x_n, x_0) = n \log(\alpha) + n \alpha \log(x_0) - (\alpha + 1) \sum_{i = 1}^n \log(x_i)\).
+
+The first derivative of the log-likelihood is
+
+\(\frac{d}{d\alpha} \ell(\alpha | x_1, \ldots, x_n, x_0) = \frac{n}{\alpha} + n \log(x_0) - \sum_{i = 1}^n \log(x_i)\).
+
+The second derivative of the log-likelihood is
+
+\(\frac{d^2}{d\alpha^2} \ell(\alpha | x_1, \ldots, x_n, x_0) = \frac{-n}{\alpha^2}\).
+
+Note that when \(x_0 = 1\), \(\log(x_0) = 0\).
+
+\textbf{Find the maximum likelihood estimator}
+
+\vspace{6cm}
+
+\subsection{\texorpdfstring{Asymptotic Distribution of the MLE, assuming
+\(\alpha^{true} = 1.1\)}{Asymptotic Distribution of the MLE, assuming \textbackslash{}alpha\^{}\{true\} = 1.1}}\label{asymptotic-distribution-of-the-mle-assuming-alphatrue-1.1}
+
+Find a normal approximation to the sampling distribution of
+\(\hat{\alpha}^{MLE}\). This will depend on the sample size \(n\). Is
+there any difference between the observed Fisher information and the
+Fisher information in this case?
+
+
+\end{document}

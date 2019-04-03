@@ -1,0 +1,68 @@
+---
+title: "Large-sample confidence interval example"
+output: pdf_document
+geometry: margin=0.6in
+---
+
+\def\simiid{\stackrel{{\mbox{\text{\tiny i.i.d.}}}}{\sim}}
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+library(tidyverse)
+
+seedlings <- read_table("http://www.evanlray.com/data/lavine_intro_stat_thought/seedlings.txt") %>%
+  select(quadrat = Block,
+    old_1991 = `91`,
+    old_1992 = `92-t`,
+    old_1993 = `93-t`,
+    old_1994 = `94-t`,
+    old_1995 = `95-t`,
+    old_1996 = `96-t`,
+    old_1997 = `97-t`,
+    new_1992 = `92-1`,
+    new_1993 = `93-1`,
+    new_1994 = `94-1`,
+    new_1995 = `95-1`,
+    new_1996 = `96-1`,
+    new_1997 = `97-1`
+  )
+
+subset_1_inds <- 1:56
+subset_2_inds <- c(1:3, 54)
+```
+
+# Seedlings (Poisson Model)
+
+ * Observe $X_1, \ldots, X_n$; $X_i$ is the number of seedlings in quadrat number $i$.
+ * Data Model: $X_i | \Lambda = \lambda \simiid \text{Poisson}(\lambda)$
+ * We have seen that the maximum likelihood estimate is $\hat{\lambda}^{MLE} = \frac{1}{n}\sum_{i=1}^n X_i$
+ * A large-sample approximate confidence interval is $[\bar{X} - z(1 - \frac{\alpha}{2})  \sqrt{\frac{\bar{X}}{n}}, \bar{X} - z(\frac{\alpha}{2}) \sqrt{\frac{\bar{X}}{n}}]$
+
+Here are the results for a 95% CI:
+
+```{r}
+x_bar <- mean(seedlings$new_1993)
+x_bar
+n <- nrow(seedlings)
+
+ci_lower <- x_bar - qnorm(0.975) * sqrt(x_bar / n)
+ci_lower
+
+ci_upper <- x_bar - qnorm(0.025) * sqrt(x_bar / n)
+ci_upper
+```
+
+Compare to our data:
+
+```{r, fig.height=3, echo = TRUE, warning = FALSE}
+x_grid <- 0:5
+pmfs <- bind_rows(
+  data.frame(x = x_grid, pmf = dpois(x_grid, lambda = x_bar), param = "MLE"),
+  data.frame(x = x_grid, pmf = dpois(x_grid, lambda = ci_lower), param = "CI Lower"),
+  data.frame(x = x_grid, pmf = dpois(x_grid, lambda = ci_upper), param = "CI Upper")
+)
+
+ggplot() +
+  geom_bar(data = seedlings, mapping = aes(x = new_1993, y = ..prop..)) +
+  geom_point(data = pmfs, mapping = aes(x = x, y = pmf, color = param, shape = param)) +
+  theme_bw()
+```

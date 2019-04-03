@@ -1,0 +1,222 @@
+---
+title: "Concepts: $t$-based Inference for One Sample or Paired Samples"
+subtitle: "Statistical Sleuth Sections 2.1, 2.2, 2.5"
+output:
+  pdf_document:
+    fig_height: 2.8
+    fig_width: 6
+  html_document:
+    fig_height: 3
+    fig_width: 5
+  word_document:
+    fig_height: 3
+    fig_width: 5
+header-includes:
+  - \usepackage{booktabs}
+geometry: margin=0.6in
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache = TRUE)
+```
+
+```{r}
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(mosaic)
+
+babies <- read_csv("http://www.evanlray.com/data/misc/babies1998/babies_dec_1998.csv")
+babies <- babies %>%
+  filter(!is.na(gestation))
+
+setwd("materials/20190401_bootstrap/")
+```
+
+```{r}
+pop_mean <- mean(babies$gestation)
+pop_sd <- sd(babies$gestation)
+
+means <- data.frame(
+  Mean_Type = "Population",
+  mean = pop_mean
+)
+
+pdf("babies_pop.pdf", width = 3, height = 2)
+p <- ggplot(data = babies, mapping = aes(x = gestation)) + 
+  geom_histogram(mapping = aes(y = ..density..)) +
+  geom_vline(data = means, mapping = aes(xintercept = mean, color = Mean_Type, linetype = Mean_Type), size = 2) +
+  scale_color_discrete("Mean Type") +
+  scale_linetype("Mean Type") +
+  ggtitle("Population: 330,717 babies\nmean 38.81 weeks")
+print(p)
+dev.off()
+```
+
+```{r}
+n <- 30
+
+set.seed(987)
+for(i in 1:3) {
+  babies_sample <- babies %>%
+    sample_n(size = n)
+
+  sample_mean <- mean(babies_sample$gestation)
+  sample_sd <- sd(babies_sample$gestation)
+  
+  means <- data.frame(
+      Mean_Type = c("Population", "Sample"),
+      mean = c(pop_mean, sample_mean)
+    )
+
+  pdf(paste0("babies_sample", i, ".pdf"), width = 3, height = 2)
+  p <- ggplot(data = babies_sample, mapping = aes(x = gestation)) + 
+    geom_histogram(mapping = aes(y = ..density..)) +
+    geom_vline(data = means, mapping = aes(xintercept = mean, color = Mean_Type, linetype = Mean_Type), size = 2) +
+    scale_color_discrete("Mean Type") +
+    scale_linetype("Mean Type") +
+    ggtitle(paste0("Sample mean: ", format(round(sample_mean, digits = 2), nsmall = 2), " weeks"))
+  print(p)
+  dev.off()
+}
+```
+
+```{r}
+n <- 30
+library(mosaic)
+
+simulation_results <- mosaic::do(10000) * {
+  babies_sample <- sample_n(babies, size = n, replace = FALSE)
+  
+  babies_sample %>%
+    summarize(sample_mean_gestation = mean(gestation))
+}
+
+pdf("babies_sample_means.pdf", width = 3.5, height = 2)
+p <- ggplot(data = simulation_results, mapping = aes(x = sample_mean_gestation)) +
+  geom_histogram(binwidth = 0.1) +
+  geom_vline(mapping = aes(xintercept = mean(babies$gestation)), color = "red") +
+  xlim(c(10, 50)) +
+  ggtitle("Sample Means from B = 10000\nsamples of n = 30")
+print(p)
+dev.off()
+
+pdf("babies_sample_means_zoomed_in.pdf", width = 3.5, height = 2)
+p <- ggplot(data = simulation_results, mapping = aes(x = sample_mean_gestation)) +
+  geom_histogram(binwidth = 0.1) +
+  geom_vline(mapping = aes(xintercept = mean(babies$gestation)), color = "red") +
+  ggtitle("Sample Means from B = 10000\nsamples of n = 30")
+print(p)
+dev.off()
+```
+
+
+### START STUFF FOR BOOTSTRAP
+
+```{r}
+n <- 30
+
+set.seed(411)
+babies_sample <- babies %>%
+  sample_n(size = n)
+
+sample_mean <- mean(babies_sample$gestation)
+abs(sample_mean - pop_mean)
+
+
+pdf(paste0("babies_sample_for_bootstrap.pdf"), width = 3, height = 2)
+p <- ggplot(data = babies_sample, mapping = aes(x = gestation)) + 
+  geom_histogram(mapping = aes(y = ..density..)) +
+  geom_vline(data = means, mapping = aes(xintercept = mean, color = Mean_Type, linetype = Mean_Type), size = 2) +
+  scale_color_discrete("Mean Type") +
+  scale_linetype("Mean Type") +
+  ggtitle(paste0("Sample mean: ", format(round(sample_mean, digits = 2), nsmall = 2), " weeks"))
+print(p)
+dev.off()
+```
+
+```{r}
+set.seed(987)
+for(i in 1:3) {
+  babies_resample <- babies_sample %>%
+    sample_n(size = n, replace = TRUE)
+  
+  resample_mean <- mean(babies_resample$gestation)
+  
+  means <- data.frame(
+      Mean_Type = factor(c("Population", "Sample", "Bootstrap\nResample"), levels = c("Population", "Sample", "Bootstrap\nResample")),
+      mean = c(pop_mean, sample_mean, resample_mean)
+    )
+  
+  pdf(paste0("babies_bootstrap_resample", i, ".pdf"), width = 3, height = 2)
+  p <- ggplot(data = babies_resample, mapping = aes(x = gestation)) + 
+    geom_histogram(mapping = aes(y = ..density..)) +
+    geom_vline(data = means, mapping = aes(xintercept = mean, color = Mean_Type, linetype = Mean_Type), size = 2) +
+    scale_color_discrete("Mean Type") +
+    scale_linetype("Mean Type") +
+    ggtitle(paste0("Bootstrap sample mean: ", format(round(resample_mean, digits = 2), nsmall = 2), " weeks"))
+  print(p)
+  dev.off()
+}
+```
+
+
+
+```{r}
+n <- 30
+
+simulation_results <- mosaic::do(10000) * {
+  babies_resample <- babies_sample %>%
+    sample_n(size = n, replace = TRUE)
+  
+  babies_resample %>%
+    summarize(bs_mean = mean(gestation))
+}
+
+means <- data.frame(
+  Mean_Type = c("Population", "Sample"),
+  mean = c(pop_mean, sample_mean)
+)
+
+pdf("babies_sample_bs.pdf", width = 3, height = 2)
+p <- ggplot(data = simulation_results, mapping = aes(x = bs_mean)) +
+  geom_histogram(mapping = aes(y = ..density..), binwidth = 0.2) +
+  geom_vline(data = means, mapping = aes(xintercept = mean, color = Mean_Type, linetype = Mean_Type), size = 2) +
+  ggtitle("Sample means from 10000\nbootstrap samples")
+print(p)
+dev.off()
+
+pdf("babies_sample_bs_wide.pdf", width = 5, height = 2)
+p <- ggplot(data = simulation_results, mapping = aes(x = bs_mean)) +
+  geom_histogram(mapping = aes(y = ..density..), binwidth = 0.2) +
+  geom_vline(data = means, mapping = aes(xintercept = mean, color = Mean_Type, linetype = Mean_Type), size = 2) +
+  ggtitle("Sample means from 10000\nbootstrap samples")
+print(p)
+dev.off()
+```
+
+```{r}
+n <- 50
+
+simulation_results <- do(100) * {
+  babies_sample <- sample_n(babies, size = n, replace = FALSE)
+  
+  confint(t.test(~ gestation, data = babies_sample))[, c(2, 3)]
+}
+
+simulation_results <- simulation_results %>%
+  mutate(
+    CI_contains_population_mean = ifelse((lower <= pop_mean & upper >= pop_mean), "Yes", "No")
+  )
+
+pdf("babies_sample_ci_coverage.pdf", width = 7.5, height = 2)
+p <- ggplot() + 
+  geom_hline(yintercept = pop_mean) +
+  geom_errorbar(data = simulation_results, mapping = aes(x = .index, ymin = lower, ymax = upper, color = CI_contains_population_mean)) +
+  scale_color_manual("CI contains\npopulation\nmean?", values = c("orange", "cornflowerblue")) +
+  xlab("Sample Number") +
+  ylab("Gestation Time (weeks)")
+print(p)
+dev.off()
+```
+
