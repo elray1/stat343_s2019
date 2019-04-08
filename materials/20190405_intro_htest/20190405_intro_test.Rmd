@@ -1,0 +1,212 @@
+---
+title: "Hypothesis Testing - First Examples"
+output:
+  pdf_document:
+    fig_height: 3
+    fig_width: 5
+documentclass: extarticle
+geometry: margin=0.6in
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, cache = FALSE)
+require(ggplot2)
+require(scales)
+require(dplyr)
+require(tidyr)
+require(readr)
+require(mosaic)
+```
+
+# M&Ms Example
+
+## Part 1: Simple Vs. Composite Hypotheses
+
+#### Sample size $n = 20$, observed $x = 7$ blue M&Ms
+
+ * Our model is $X \sim \text{Binomial}(20, \theta)$
+ * Our hypotheses are: $H_0: \theta = 0.2$ and $H_A: \theta \neq 0.2$
+ * We can use the statistic $W = g(X) = X$ ($g$ is the identity function) to test this hypothesis
+ * If $H_0$ is true, then $X \sim \text{Binomial}(20, 0.2)$
+ * The p-value is $P(X \text{ at least as extreme as } 7)$ given that $X \sim \text{Binomial}(20, 0.2)$
+    * $E(X) = 20 * 0.2 = 4$
+    * $7 - 4 = 3$
+    * $4 - 3 = 1$
+    * $P(X \text{ at least as extreme as } 7 | \theta = 0.2) = P(X \leq 1 \text{ or } X \geq 7 | \theta = 0.2)$
+
+```{r, echo = TRUE}
+pbinom(q = 1, size = 20, prob = 0.2) +
+  pbinom(q = 7, size = 20, prob = 0.2, lower.tail = FALSE)
+```
+
+\vspace{2cm}
+
+```{r, warning=FALSE, echo = FALSE, fig.height=3, fig.width=8}
+Paul_success_probs <- data.frame(
+  num_successes = seq(from = 0, to = 20),
+  pv = 0,
+  probability = dbinom(x = seq(from = 0, to = 20), size = 20, prob = 0.2))
+
+Paul_success_probs$pv[Paul_success_probs$num_successes >= 7] <- 1
+Paul_success_probs$pv[Paul_success_probs$num_successes <= 1] <- 1
+Paul_success_probs$pv <- factor(Paul_success_probs$pv)
+
+ggplot() +
+  geom_col(mapping = aes(x = num_successes, y = probability, fill = pv),
+    data = Paul_success_probs) +
+  xlab("Number of Successes") +
+  scale_fill_manual("Included\nin p-value\ncalculation?", labels = c("No", "Yes"), values = c("black", "red")) +
+  ggtitle("Full distribution") +
+  theme_gray(base_size = 14)
+```
+
+#### Sample size $n = 541$, observed $x = 138$ blue M&Ms
+
+* If $H_0$ is true, then $X \sim \text{Binomial}(541, 0.2)$
+ * The p-value is $P(X \text{ at least as extreme as } 138)$ given that $X \sim \text{Binomial}(541, 0.2)$
+    * $E(X) = 541 * 0.2 = 108.2$
+    * $138 - 108.2 = 29.8$
+    * $108.2 - 29.8 = 78.4$
+    * $P(X \text{ at least as extreme as } 138) = P(X \leq 78 \text{ or } X \geq 138)$
+
+```{r, echo = TRUE}
+pbinom(q = 78, size = 541, prob = 0.2) +
+  pbinom(q = 138, size = 541, prob = 0.2, lower.tail = FALSE)
+```
+
+\vspace{2cm}
+
+## Part 2: Simple Hypotheses
+
+ * I heard a rumor that the proportion of M&Ms that are blue was changed to 25.  Is it true??
+ * Our hypotheses are: $H_0: \theta = 0.2$ and $H_A: \theta = 0.25$
+ * We can use the statistic $W = g(X) = \frac{f_X(X | \theta = 0.2)}{f_X(X | \theta = 0.25)}$  (the **likelihood ratio**)
+
+```{r, fig.height=2.5, echo = FALSE}
+lik <- function(p_vector) {
+  result <- vector("numeric", length(p_vector))
+  
+  for(i in seq_along(p_vector)) {
+    p <- p_vector[i]
+    result[i] <- dbinom(x = 7, size = 20, p)
+  }
+  
+  return(result)
+}
+
+points <- data.frame(
+  p = c(0.2, 0.25),
+  prob_of_data = c(
+    dbinom(x = 7, size = 20, prob = 0.2),
+    dbinom(x = 7, size = 20, prob = 0.25)
+  )
+)
+
+ggplot(data = data.frame(p = c(0, 1)),
+    mapping = aes(x = p)) +
+  stat_function(fun = lik, n = 1001) +
+  geom_point(data = points,
+    mapping = aes(x = p, y = prob_of_data, color = factor(p), shape = factor(p)),
+    size = 3) +
+  scale_shape(expression(theta)) +
+  scale_color_discrete(expression(theta)) +
+  xlab(expression(theta)) +
+  ylab(expression("P(X = 7 |"*theta*")")) +
+  theme_bw() +
+  ggtitle("The Likelihood Function")
+```
+
+```{r, echo = TRUE}
+w_obs <- dbinom(x = 7, size = 20, prob = 0.2)/dbinom(x = 7, size = 20, prob = 0.25)
+w_obs
+```
+
+#### Questions:
+
+#### 1. Is a small likelihood ratio or a large likelihood ratio stronger evidence against the null hypothesis?
+
+\vspace{3cm}
+
+#### 2. What should count as "at least as extreme" for the purpose of calculating a p-value based on the likelihood ratio, W?
+
+\newpage
+
+ * If $H_0$ is true, then $X \sim \text{Binomial}(20, 0.2)$
+ * The p-value is $P(W \leq w)$ given that $X \sim \text{Binomial}(20, 0.2)$
+
+```{r, echo = TRUE}
+# Manual calculation of the probability distribution of W
+x <- seq(from = 0, to = 20)
+W_X_distn <- data.frame(
+  x = x,
+  probability = dbinom(x, size = 20, prob = 0.2),
+  w = dbinom(x, size = 20, prob = 0.2) / dbinom(x, size = 20, prob = 0.25)
+)
+
+W_X_distn
+
+# Find the p-value
+sum(W_X_distn$probability[W_X_distn$w <= w_obs])
+```
+
+
+ * Note: in this example, using $X$ or $W = g(X) = \frac{f_X(X | \theta = 0.2)}{f_X(X | \theta = 0.25)}$ is *equivalent*
+    * A larger value of $X$ is more consistent with $H_A$ than $H_0$
+    * A smaller value of $W$ is more consistent with $H_0$ than $H_A$
+
+```{r}
+# Find the p-value, if we had used X for our statistic
+sum(W_X_distn$probability[W_X_distn$x >= 7])
+```
+
+\newpage
+
+## Another example
+
+We have 2 batches of paint, one of which is quick-dry; quick-dry paint will dry in an average of 10 minutes, and regular paint in an average of 25 minutes.  The paint is unlabeled, and
+we forgot which was which!  We paint 5 boards from batch 1 and record the drying time.  We believe that the drying times are normally distributed with a standard deviation of 5
+minutes for both paint types.
+
+We have a vague feeling that batch 1 is quick-dry; we will calculate a p-value to see how strong the evidence is that the batch we used is *not* 25 minutes.
+
+$H_0: \theta = 25$
+
+$H_A: \theta = 10$
+
+#### Find the form of the likelihood ratio statistic in terms of $\bar{x}$, simplified as much as possible.  Is a small or large value of $\bar{x}$ evidence against $H_0$?
+
+Note that if $X \sim \text{Normal}(\theta, 5^2)$ then $f_X(x) = \frac{1}{\sqrt{2 \pi}\sigma} \exp\left[-\frac{1}{2} \frac{(x_i - \theta)^2}{\sigma^2} \right]$
+
+
+\newpage
+
+Suppose we observe $\bar{x} = 20$.
+
+If $H_0$ is true, then $\bar{X} \sim \text{Normal}(25, 5^2/5)$
+
+An "extreme" (small) value of W corresponds to a small value of $\bar{X}$.
+
+```{r, echo = TRUE, message=FALSE, cache = TRUE}
+x_grid_1 <- seq(from = 0, to = 20, length = 101)
+
+region_to_shade1 <- data.frame(
+  x = c(0, x_grid_1, 20),
+  y = c(0, dnorm(x_grid_1, mean = 25, sd = sqrt(5), log = FALSE), 0)
+)
+
+ggplot(data = data.frame(x = c(0, 30)), mapping = aes(x = x)) +
+  stat_function(fun = dnorm, args = list(mean = 25, sd = sqrt(5))) +
+  geom_polygon(
+    mapping = aes(x = x, y = y),
+    fill = "cornflowerblue",
+    data = region_to_shade1) +
+  geom_vline(xintercept = 20) +
+  coord_cartesian(xlim = c(0, 30), expand = TRUE) +
+  theme_bw()
+```
+
+p-value:
+
+```{r, echo = TRUE}
+pnorm(20, mean = 25, sd = 5)
+```

@@ -307,7 +307,7 @@ make_week_box("week10", FALSE, "Week 10: Mar 25 -- 29",
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week11", TRUE, "Week 11: Apr 1 -- 5",
+make_week_box("week11", FALSE, "Week 11: Apr 1 -- 5",
 "
 
 #### Mon, Apr 1
@@ -321,21 +321,27 @@ make_week_box("week11", TRUE, "Week 11: Apr 1 -- 5",
     * Lab 15
 
 #### Fri, Apr 5
- * **In Class**, we will work on:
-    * Start on hypothesis testing; Chapter 9
+ * **Class cancelled**
 "
   )
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week12", FALSE, "Week 12: Apr 8 -- 12",
+make_week_box("week12", TRUE, "Week 12: Apr 8 -- 12",
 "
 
 #### Mon, Apr 8
  * **In Class**, we will work on:
+    * Start on hypothesis testing; Chapter 9
+    * Handout: [pdf](materials/20190405_intro_htest/20190405_intro_test.pdf)
+    * Lecture Notes: [pdf](materials/20190405_intro_htest/lecture_notes.pdf)
 
 #### Wed, Apr 10
  * **In Class**, we will work on:
+    * Revisit example of tests about mean of a normal distribution with known variance, simple hypotheses from last class
+    * Some things to avoid in hypothesis testing
+    * Bayesian approach to analysis of normal distributions example
+    * Power, Neyman-Pearson Lemma
 
 #### Fri, Apr 12
  * **In Class**, we will work on:
