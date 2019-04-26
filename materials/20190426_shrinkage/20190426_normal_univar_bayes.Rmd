@@ -1,0 +1,209 @@
+---
+title: "Bias, Variance, and MSE of Maximum Likelihood and Bayesian Estimators of the Mean of a Univariate Normal Distribution"
+output:
+  pdf_document:
+    keep_tex: yes
+---
+
+\def\simiid{\stackrel{{\mbox{\text{\tiny i.i.d.}}}}{\sim}}
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(readr)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+```
+
+## Case 1: Bayesian Estimator has larger bias away from the prior mean, lower variance everywhere, lower MSE near the prior mean
+
+ * $n$ = 10
+ * $\gamma_{prior} = 0$
+ * $\xi_{prior} = 1$
+ * $\xi = 1$
+
+With these settings, the MLE is $\bar{X}$ and the Bayesian estimator is $\frac{10}{11} \bar{X}$
+
+```{r, echo = FALSE}
+n <- 10
+gamma_prior <- 0
+xi_prior <- 1
+xi <- 1
+
+ngrid <- 101
+theta_grid <- seq(from = -5, to = 5, length = ngrid)
+bvm <- data.frame(
+    theta = theta_grid,
+    bias_mle = rep(0, ngrid),
+    var_mle = rep(1/(n * xi), ngrid),
+    bias_bayes = theta_grid * (n * xi)/(n * xi + xi_prior) +
+      gamma_prior * xi_prior / (n * xi + xi_prior) -
+      theta_grid,
+    var_bayes = 1 / (n * xi) * ((n * xi)/(n * xi + xi_prior))^2
+  ) %>%
+  mutate(
+    mse_mle = bias_mle^2 + var_mle,
+    mse_bayes = bias_bayes^2 + var_bayes
+  )
+
+to_plot <- bind_rows(
+  bvm %>% transmute(
+      theta = theta,
+      Bias_squared = bias_mle^2,
+      Var = var_mle,
+      MSE = mse_mle,
+      estimator = "mle"
+    ) %>%
+    gather("measure", "value", Bias_squared, Var, MSE) %>%
+    mutate(
+      measure = factor(measure, levels = c("Bias_squared", "Var", "MSE"))
+    ),
+  bvm %>% transmute(
+      theta = theta,
+      Bias_squared = bias_bayes^2,
+      Var = var_bayes,
+      MSE = mse_bayes,
+      estimator = "bayes"
+    ) %>%
+    gather("measure", "value", Bias_squared, Var, MSE) %>%
+    mutate(
+      measure = factor(measure, levels = c("Bias_squared", "Var", "MSE"))
+    )
+)
+
+ggplot(data = to_plot, mapping = aes(x = theta, y = value, color = estimator)) + 
+  geom_line() +
+  facet_wrap( ~ measure, ncol = 1) +
+  xlab(expression(theta)) +
+  theme_bw()
+```
+
+\newpage
+
+## Case 2: Location where Bayesian Estimator has lower MSE depends on the prior mean.
+
+ * $n = 10$
+ * $\gamma_{prior} = 2.5$
+ * $\xi_{prior} = 1$
+ * $\xi = 1$
+
+With these settings, the MLE is $\bar{X}$ and the Bayesian estimator is $\frac{10}{11} \bar{X} + \frac{1}{11}2.5$
+
+```{r, echo = FALSE}
+n <- 10
+gamma_prior <- 2.5
+xi_prior <- 1
+xi <- 1
+
+ngrid <- 101
+theta_grid <- seq(from = -5, to = 5, length = ngrid)
+bvm <- data.frame(
+    theta = theta_grid,
+    bias_mle = rep(0, ngrid),
+    var_mle = rep(1/(n * xi), ngrid),
+    bias_bayes = theta_grid * (n * xi)/(n * xi + xi_prior) +
+      gamma_prior * xi_prior / (n * xi + xi_prior) -
+      theta_grid,
+    var_bayes = 1 / (n * xi) * ((n * xi)/(n * xi + xi_prior))^2
+  ) %>%
+  mutate(
+    mse_mle = bias_mle^2 + var_mle,
+    mse_bayes = bias_bayes^2 + var_bayes
+  )
+
+to_plot <- bind_rows(
+  bvm %>% transmute(
+      theta = theta,
+      Bias_squared = bias_mle^2,
+      Var = var_mle,
+      MSE = mse_mle,
+      estimator = "mle"
+    ) %>%
+    gather("measure", "value", Bias_squared, Var, MSE) %>%
+    mutate(
+      measure = factor(measure, levels = c("Bias_squared", "Var", "MSE"))
+    ),
+  bvm %>% transmute(
+      theta = theta,
+      Bias_squared = bias_bayes^2,
+      Var = var_bayes,
+      MSE = mse_bayes,
+      estimator = "bayes"
+    ) %>%
+    gather("measure", "value", Bias_squared, Var, MSE) %>%
+    mutate(
+      measure = factor(measure, levels = c("Bias_squared", "Var", "MSE"))
+    )
+)
+
+ggplot(data = to_plot, mapping = aes(x = theta, y = value, color = estimator)) + 
+  geom_line() +
+  facet_wrap( ~ measure, ncol = 1) +
+  xlab(expression(theta)) +
+  theme_bw()
+```
+
+\newpage
+
+## Case 3: Range of values where Bayesian Estimator has lower MSE depends on the relative sizes of $\xi$ and $\xi_{prior}$.
+
+ * $n = 10$
+ * $\gamma_{prior} = 0$
+ * $\xi_{prior} = 0.25$
+ * $\xi = 1$
+
+With these settings, the MLE is $\bar{X}$ and the Bayesian estimator is $\frac{10}{10.25} \bar{X}$
+
+```{r, echo = FALSE}
+n <- 10
+gamma_prior <- 0
+xi_prior <- 0.25
+xi <- 1
+
+ngrid <- 101
+theta_grid <- seq(from = -5, to = 5, length = ngrid)
+bvm <- data.frame(
+    theta = theta_grid,
+    bias_mle = rep(0, ngrid),
+    var_mle = rep(1/(n * xi), ngrid),
+    bias_bayes = theta_grid * (n * xi)/(n * xi + xi_prior) +
+      gamma_prior * xi_prior / (n * xi + xi_prior) -
+      theta_grid,
+    var_bayes = 1 / (n * xi) * ((n * xi)/(n * xi + xi_prior))^2
+  ) %>%
+  mutate(
+    mse_mle = bias_mle^2 + var_mle,
+    mse_bayes = bias_bayes^2 + var_bayes
+  )
+
+to_plot <- bind_rows(
+  bvm %>% transmute(
+      theta = theta,
+      Bias_squared = bias_mle^2,
+      Var = var_mle,
+      MSE = mse_mle,
+      estimator = "mle"
+    ) %>%
+    gather("measure", "value", Bias_squared, Var, MSE) %>%
+    mutate(
+      measure = factor(measure, levels = c("Bias_squared", "Var", "MSE"))
+    ),
+  bvm %>% transmute(
+      theta = theta,
+      Bias_squared = bias_bayes^2,
+      Var = var_bayes,
+      MSE = mse_bayes,
+      estimator = "bayes"
+    ) %>%
+    gather("measure", "value", Bias_squared, Var, MSE) %>%
+    mutate(
+      measure = factor(measure, levels = c("Bias_squared", "Var", "MSE"))
+    )
+)
+
+ggplot(data = to_plot, mapping = aes(x = theta, y = value, color = estimator)) + 
+  geom_line() +
+  facet_wrap( ~ measure, ncol = 1) +
+  xlab(expression(theta)) +
+  theme_bw()
+```

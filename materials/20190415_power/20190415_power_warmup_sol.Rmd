@@ -1,0 +1,190 @@
+---
+title: "Warm Up: Power Functions for Hypothesis Tests"
+output:
+  pdf_document:
+    fig_height: 3
+    fig_width: 5
+documentclass: extarticle
+geometry: margin=0.6in
+---
+
+\def\simiid{\stackrel{{\mbox{\text{\tiny i.i.d.}}}}{\sim}}
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, cache = FALSE)
+require(ggplot2)
+require(scales)
+require(dplyr)
+require(tidyr)
+require(readr)
+require(mosaic)
+```
+
+ * Data Model: $X_1, \ldots, X_5 \simiid \text{Normal}(\theta, 5^2)$.  We saw that the likelihood ratio test is *equivalent* to a test based on $\bar{x}$.
+
+#### 1. Consider a test of the hypotheses $H_0: \theta = 25$ vs. $H_A: \theta = 20$.  Below is a picture showing the pdf $f_{\bar{X}|\theta}(\bar{x} | 20)$ of a $\text{Normal}(20, 5^2/5)$ distribution and the pdf $f_{\bar{X}|\theta}(\bar{x} | 25)$ of a $\text{Normal}(25, 5^2/5)$ distribution, along with a vertical line at $q_5^{null}$, the 5th percentile of the $\text{Normal}(25, 5^2/5)$ distribution.
+
+ * **Shade in the area corresponding to $1 - \beta$, the power of the likelihood ratio test if $H_A$ is correct.**
+ * **Show how you would calculate the power of the test as an integral of either $f_{\bar{X}|\theta}(\bar{x} | 20)$ or $f_{\bar{X}|\theta}(\bar{x} | 25)$**
+
+```{r, echo = FALSE, message=FALSE, cache = TRUE, fig.height = 1.25, fig.width = 7}
+x_grid_1 <- seq(from = 0, to = qnorm(0.05, mean = 25, sd = sqrt(5)), length = 101)
+
+region_to_shade1 <- data.frame(
+  x = c(0, x_grid_1, qnorm(0.05, mean = 25, sd = sqrt(5))),
+  y = c(0, dnorm(x_grid_1, mean = 20, sd = sqrt(5), log = FALSE), 0)
+)
+
+ggplot(data = data.frame(x = c(0, 35)), mapping = aes(x = x)) +
+  stat_function(fun = dnorm, args = list(mean = 25, sd = sqrt(5))) +
+  stat_function(fun = dnorm, args = list(mean = 20, sd = sqrt(5))) +
+  geom_polygon(
+    mapping = aes(x = x, y = y),
+    fill = "orange",
+    data = region_to_shade1,
+    alpha = 0.3) +  geom_vline(xintercept = qnorm(0.05, mean = 25, sd = sqrt(5))) +
+  geom_vline(xintercept = qnorm(0.05, mean = 25, sd = sqrt(5))) +
+  coord_cartesian(xlim = c(10, 35), expand = TRUE) +
+  theme_bw() +
+  xlab(expression(bar(x))) +
+  ylab("density")
+```
+
+$1 - \beta = \int_{-\infty}^{q_5^{null}}f_{\bar{X}|\theta}(\bar{x} | 20) d \bar{x}$
+
+#### 2. Suppose that instead we were testing the hypotheses $H_0: \theta = 25$ vs. $H_A: \theta = 22.5$. Below is a picture showing the pdf $f_{\bar{X}|\theta}(\bar{x} | 22.5)$ of a $\text{Normal}(22.5, 5^2/5)$ distribution and the pdf $f_{\bar{X}|\theta}(\bar{x} | 25)$ of a $\text{Normal}(25, 5^2/5)$ distribution, along with a vertical line at $q_5^{null}$, the 5th percentile of the $\text{Normal}(25, 5^2/5)$ distribution.
+
+ * **Shade in the area corresponding to $1 - \beta$, the power of the likelihood ratio test if $H_A$ is correct.**
+ * **Show how you would calculate the power of the test as an integral of either $f_{\bar{X}|\theta}(\bar{x} | 22.5)$ or $f_{\bar{X}|\theta}(\bar{x} | 25)$**
+
+```{r, echo = FALSE, message=FALSE, cache = TRUE, fig.height = 1.25, fig.width = 7}
+x_grid_1 <- seq(from = 0, to = qnorm(0.05, mean = 25, sd = sqrt(5)), length = 101)
+
+region_to_shade1 <- data.frame(
+  x = c(0, x_grid_1, qnorm(0.05, mean = 25, sd = sqrt(5))),
+  y = c(0, dnorm(x_grid_1, mean = 22.5, sd = sqrt(5), log = FALSE), 0)
+)
+
+ggplot(data = data.frame(x = c(0, 35)), mapping = aes(x = x)) +
+  stat_function(fun = dnorm, args = list(mean = 25, sd = sqrt(5))) +
+  stat_function(fun = dnorm, args = list(mean = 22.5, sd = sqrt(5))) +
+  geom_polygon(
+    mapping = aes(x = x, y = y),
+    fill = "orange",
+    data = region_to_shade1,
+    alpha = 0.3) +  geom_vline(xintercept = qnorm(0.05, mean = 25, sd = sqrt(5))) +
+  geom_vline(xintercept = qnorm(0.05, mean = 25, sd = sqrt(5))) +
+  coord_cartesian(xlim = c(10, 35), expand = TRUE) +
+  theme_bw() +
+  xlab(expression(bar(x))) +
+  ylab("density")
+```
+
+$1 - \beta = \int_{-\infty}^{q_5^{null}}f_{\bar{X}|\theta}(\bar{x} | 22.5) d \bar{x}$
+
+#### 3. Suppose that instead we were testing the hypotheses $H_0: \theta = 25$ vs. $H_A: \theta = 17.5$. Below is a picture showing the pdf $f_{\bar{X}|\theta}(\bar{x} | 17.5)$ of a $\text{Normal}(17.5, 5^2/5)$ distribution and the pdf $f_{\bar{X}|\theta}(\bar{x} | 25)$ of a $\text{Normal}(25, 5^2/5)$ distribution, along with a vertical line at $q_5^{null}$, the 5th percentile of the $\text{Normal}(25, 5^2/5)$ distribution.
+
+ * **Shade in the area corresponding to $1 - \beta$, the power of the likelihood ratio test if $H_A$ is correct.**
+ * **Show how you would calculate the power of the test as an integral of either $f_{\bar{X}|\theta}(\bar{x} | 17.5)$ or $f_{\bar{X}|\theta}(\bar{x} | 25)$**
+
+```{r, echo = FALSE, message=FALSE, cache = TRUE, fig.height = 1.25, fig.width = 7}
+x_grid_1 <- seq(from = 0, to = qnorm(0.05, mean = 25, sd = sqrt(5)), length = 101)
+
+region_to_shade1 <- data.frame(
+  x = c(0, x_grid_1, qnorm(0.05, mean = 25, sd = sqrt(5))),
+  y = c(0, dnorm(x_grid_1, mean = 17.5, sd = sqrt(5), log = FALSE), 0)
+)
+
+ggplot(data = data.frame(x = c(0, 35)), mapping = aes(x = x)) +
+  stat_function(fun = dnorm, args = list(mean = 25, sd = sqrt(5))) +
+  stat_function(fun = dnorm, args = list(mean = 17.5, sd = sqrt(5))) +
+  geom_polygon(
+    mapping = aes(x = x, y = y),
+    fill = "orange",
+    data = region_to_shade1,
+    alpha = 0.3) +  geom_vline(xintercept = qnorm(0.05, mean = 25, sd = sqrt(5))) +
+  geom_vline(xintercept = qnorm(0.05, mean = 25, sd = sqrt(5))) +
+  coord_cartesian(xlim = c(10, 35), expand = TRUE) +
+  theme_bw() +
+  xlab(expression(bar(x))) +
+  ylab("density")
+```
+
+$1 - \beta = \int_{-\infty}^{q_5^{null}}f_{\bar{X}|\theta}(\bar{x} | 17.5) d \bar{x}$
+
+#### 4. For which of the alternative hypotheses above ($\theta = 17.5$, $\theta = 20$, or $\theta = 22.5$) is the power of the test largest?  For which is the power smallest?
+
+The power is largest for $\theta = 17.5$ and smallest for $\theta = 22.5$.
+
+\newpage
+
+#### Definition: power function
+
+The *power function* $K(\theta)$ for a test is the power of the test at $\theta$:
+
+$K(\theta) = \int_{R}f_{\mathbf{X}|\theta}(\mathbf{x} | \theta) d \mathbf{x}$
+
+where $R$ denotes the rejection region of the test (i.e., $R$ is the set of $\mathbf{x}$ such that the p-value is less than $\alpha$)
+
+#### Definition: Uniformly most powerful test
+
+A test with power function $K(\theta)$ if for any other test with power function $K'(\theta)$, $K(\theta) \geq K'(\theta)$ for all $\theta \in \Omega_0^c$ (i.e., it has at least as large of power as any other test for every possible parameter consistent with the alternative hypothesis).
+
+#### (Non-) Example
+
+Here is a plot of the power functions of 3 different tests of
+
+$H_0: \theta = 25$ vs. $H_A: \theta \neq 25$
+
+for our running example with $X_1, \ldots, X_n \simiid \text{Normal}(\theta, 5^2)$.
+
+ * Shown in black is the power function for a test that rejects $H_0$ if $\bar{x} \leq q_{0.025}^{null}$ or $q_{0.975}^{null} \leq \bar{x}$
+ * Shown in blue is the power function for a test that rejects $H_0$ if $\bar{x} \leq q_{0.05}^{null}$
+ * Shown in orange is the power function for a test that rejects $H_0$ if $q_{0.95}^{null} \leq \bar{x}$
+
+```{r, fig.height = 2, fig.width = 7, echo = TRUE}
+calc_power_two_sided <- function(theta) {
+  lower_cutoff <- qnorm(0.025, mean = 25, sd = sqrt(5))
+  upper_cutoff <- qnorm(0.975, mean = 25, sd = sqrt(5))
+  
+  power <- rep(NA, length(theta))
+  for(i in seq_along(theta)) {
+    power[i] <- pnorm(lower_cutoff, mean = theta[i], sd = sqrt(5)) +
+      pnorm(upper_cutoff, mean = theta[i], sd = sqrt(5), lower.tail = FALSE)
+  }
+  return(power)
+}
+
+calc_power_left_side <- function(theta) {
+  lower_cutoff <- qnorm(0.05, mean = 25, sd = sqrt(5))
+
+  power <- rep(NA, length(theta))
+  for(i in seq_along(theta)) {
+    power[i] <- pnorm(lower_cutoff, mean = theta[i], sd = sqrt(5))
+  }
+  return(power)
+}
+
+calc_power_right_side <- function(theta) {
+  upper_cutoff <- qnorm(0.95, mean = 25, sd = sqrt(5))
+
+  power <- rep(NA, length(theta))
+  for(i in seq_along(theta)) {
+    power[i] <- pnorm(upper_cutoff, mean = theta[i], sd = sqrt(5), lower.tail = FALSE)
+  }
+  
+  return(power)
+}
+
+ggplot(data = data.frame(theta = c(0, 50)), mapping = aes(x = theta)) +
+  stat_function(fun = calc_power_two_sided) +
+  stat_function(fun = calc_power_left_side, color = "cornflowerblue") +
+  stat_function(fun = calc_power_right_side, color = "orange") +
+  ylim(0, 1) +
+  geom_hline(yintercept = 0.05, linetype = 2) +
+  theme_bw()
+```
+
+ * By the Neyman-Pearson lemma, the left-sided test (blue) is most powerful for any $\theta_1 < \theta_0$
+ * By the Neyman-Pearson lemma, the right-sided test (orange) is most powerful for any $\theta_1 > \theta_0$
+ * Therefore, there is no test that is uniformly most powerful for a two-sided test about the mean of a normal distribution.

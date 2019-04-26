@@ -1,0 +1,134 @@
+---
+title: "Hypothesis Testing - Finishing the Paint Drying Example"
+output:
+  pdf_document:
+    fig_height: 3
+    fig_width: 5
+documentclass: extarticle
+geometry: margin=0.6in
+---
+
+\def\simiid{\stackrel{{\mbox{\text{\tiny i.i.d.}}}}{\sim}}
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, cache = FALSE)
+require(ggplot2)
+require(scales)
+require(dplyr)
+require(tidyr)
+require(readr)
+require(mosaic)
+```
+
+ * Data Model: $X_1, \ldots, X_5 \simiid \text{Normal}(\theta, 5^2)$
+
+ * We know that $\theta$ is either 10 (quick dry) or 25 (regular).
+
+ * We have a vague feeling that batch 1 is quick-dry; we will calculate a p-value to see how strong the evidence is that the batch we used is *not* 25 minutes.
+
+$H_0: \theta = 25$ vs. $H_A: \theta = 10$
+
+ * After collecting data, we observe a sample mean of $\bar{x} = 20$ minutes.
+
+ * We saw that the likelihood ratio test is *equivalent* to a test based on $\bar{x}$
+ 
+ * The p-value is $P(\bar{X} \leq 20 | \theta = 25)$ ("extreme" values of $\bar{x}$ are those that are at least as small as $\bar{x} = 20$)
+
+ * If $H_0$ is true, then $\bar{X} \sim \text{Normal}(25, 5^2/5)$
+
+```{r, echo = FALSE, message=FALSE, cache = TRUE, fig.height = 1.4}
+x_grid_1 <- seq(from = 0, to = 20, length = 101)
+
+region_to_shade1 <- data.frame(
+  x = c(0, x_grid_1, 20),
+  y = c(0, dnorm(x_grid_1, mean = 25, sd = sqrt(5), log = FALSE), 0)
+)
+
+hypothesized_vals <- data.frame(
+  Hypothesis = c("H0", "HA"),
+  theta = c(25, 10)
+)
+
+ggplot(data = data.frame(x = c(0, 30)), mapping = aes(x = x)) +
+  stat_function(fun = dnorm, args = list(mean = 25, sd = sqrt(5))) +
+  geom_polygon(
+    mapping = aes(x = x, y = y),
+    fill = "cornflowerblue",
+    data = region_to_shade1) +
+  geom_vline(xintercept = 20, size = 1.5) +
+  geom_vline(data = hypothesized_vals, mapping = aes(xintercept = theta, color = Hypothesis, linetype = Hypothesis), size = 1.5) +
+  coord_cartesian(xlim = c(0, 30), expand = TRUE) +
+  theme_bw()
+```
+
+```{r, echo = TRUE}
+pnorm(20, mean = 25, sd = 5)
+```
+
+**What about a test of $H_0: \theta = 25$ vs. $H_A: \theta = 0$?**
+
+```{r, echo = FALSE, message=FALSE, cache = TRUE, fig.height = 1.4}
+x_grid_1 <- seq(from = 0, to = 20, length = 101)
+
+region_to_shade1 <- data.frame(
+  x = c(0, x_grid_1, 20),
+  y = c(0, dnorm(x_grid_1, mean = 25, sd = sqrt(5), log = FALSE), 0)
+)
+
+hypothesized_vals <- data.frame(
+  Hypothesis = c("H0", "HA"),
+  theta = c(25, 0)
+)
+
+ggplot(data = data.frame(x = c(0, 30)), mapping = aes(x = x)) +
+  stat_function(fun = dnorm, args = list(mean = 25, sd = sqrt(5))) +
+  geom_polygon(
+    mapping = aes(x = x, y = y),
+    fill = "cornflowerblue",
+    data = region_to_shade1) +
+  geom_vline(xintercept = 20, size = 1.5) +
+  geom_vline(data = hypothesized_vals, mapping = aes(xintercept = theta, color = Hypothesis, linetype = Hypothesis), size = 1.5) +
+  coord_cartesian(xlim = c(0, 30), expand = TRUE) +
+  theme_bw()
+```
+
+```{r, echo = TRUE}
+pnorm(20, mean = 25, sd = 5)
+```
+
+**What about a test of $H_0: \theta = 25$ vs. $H_A: \theta = 20$?**
+
+```{r, echo = FALSE, message=FALSE, cache = TRUE, fig.height = 1.4}
+x_grid_1 <- seq(from = 0, to = 20, length = 101)
+
+region_to_shade1 <- data.frame(
+  x = c(0, x_grid_1, 20),
+  y = c(0, dnorm(x_grid_1, mean = 25, sd = sqrt(5), log = FALSE), 0)
+)
+
+hypothesized_vals <- data.frame(
+  Hypothesis = c("H0", "HA"),
+  theta = c(25, 20)
+)
+
+ggplot(data = data.frame(x = c(0, 30)), mapping = aes(x = x)) +
+  stat_function(fun = dnorm, args = list(mean = 25, sd = sqrt(5))) +
+  geom_polygon(
+    mapping = aes(x = x, y = y),
+    fill = "cornflowerblue",
+    data = region_to_shade1) +
+  geom_vline(xintercept = 20, size = 1.5) +
+  geom_vline(data = hypothesized_vals, mapping = aes(xintercept = theta, color = Hypothesis, linetype = Hypothesis), size = 1.5) +
+  coord_cartesian(xlim = c(0, 30), expand = TRUE) +
+  theme_bw()
+```
+
+```{r, echo = TRUE}
+pnorm(20, mean = 25, sd = 5)
+```
+
+**Main point: In this framework the null hypothesis is "privileged"**
+
+ * Everything is framed in terms of strength of evidence against the null hypothesis.
+ * p-value calculations done assuming $H_0$ is true
+ * In many examples (like this one), details of $H_A$ are relatively unimportant (here, only determines direction of "more extreme")

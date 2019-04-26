@@ -1,0 +1,57 @@
+---
+title: "Hypothesis Testing - Likelihood Ratio Warm-Up"
+output:
+  pdf_document:
+    fig_height: 3
+    fig_width: 5
+documentclass: extarticle
+geometry: margin=0.6in
+header-includes:
+  - \usepackage{booktabs}
+---
+
+\def\simiid{\stackrel{{\mbox{\text{\tiny i.i.d.}}}}{\sim}}
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, cache = FALSE)
+require(ggplot2)
+require(scales)
+require(dplyr)
+require(tidyr)
+require(readr)
+require(mosaic)
+```
+
+Adapted from Rice Exercise 9.4
+
+Suppose $X$ is a random variable that can take one of the values in the set $\{1, 2, 3, 4\}$.  $X$ follows one of two distributions, with probability mass functions given in the table below.  We want to conduct a test of the hypotheses
+
+$H_0$: the first distribution is correct
+
+$H_A$: the second distribution is correct
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{c c c c}
+\toprule
+$x$ & $f_X(x)$ for $H_0$ & $f_X(x)$ for $H_A$  & Likelihood Ratio\\
+\toprule
+1 & 0.2 & 0.1 & \\
+\midrule
+2 & 0.3 & 0.4 & \\
+\midrule
+3 & 0.3 & 0.1 & \\
+\midrule
+4 & 0.2 & 0.4 & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+#### 1. Fill in the table above with values of the likelihood ratio corresponding to each possible value of $x$.
+
+#### 2. Suppose we take a sample and we observe $x = 2$.  What is the p-value for the likelihood ratio test?
+
+\vspace{3cm}
+
+#### 3. In this example, what are the possible p-values for the likelihood ratio test?  (Find the p-values for the test if we observe $x = 1$, $x = 3$, and $x = 4$)
+

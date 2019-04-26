@@ -327,7 +327,7 @@ make_week_box("week11", FALSE, "Week 11: Apr 1 -- 5",
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week12", TRUE, "Week 12: Apr 8 -- 12",
+make_week_box("week12", FALSE, "Week 12: Apr 8 -- 12",
 "
 
 #### Mon, Apr 8
@@ -338,51 +338,71 @@ make_week_box("week12", TRUE, "Week 12: Apr 8 -- 12",
 
 #### Wed, Apr 10
  * **In Class**, we will work on:
+    * Warm up about likelihood ratio tests: [pdf](materials/20190410_more_htest/20190410_likelihood_ratio_practice.pdf)
     * Revisit example of tests about mean of a normal distribution with known variance, simple hypotheses from last class
+        * Wrap up discussion from last class
+        * A Bayesian approach
     * Some things to avoid in hypothesis testing
-    * Bayesian approach to analysis of normal distributions example
-    * Power, Neyman-Pearson Lemma
+        * ASA Statement on p-values: [pdf](materials/20190410_more_htest/The_ASA_Statement_on_p_values_-_Context_Process_and_Purpose_highlighted.pdf)
+        * Moving Beyond p < 0.05: [pdf](materials/20190410_more_htest/Wasserstein_beyond_p_005.pdf).  See especially
+            * Page 2
+            * First point from Hubbard et al., page 11
+            * Everything else...
+    * Bayesian approach to analysis of normal distributions example: [pdf](materials/20190410_more_htest/20190410_paint_Bayes.pdf)
+    * Jump into some things to avoid, just so we know about them:
+        * Type I and Type II errors, Power
 
 #### Fri, Apr 12
- * **In Class**, we will work on:
+ * **Class cancelled**
 "
   )
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week13", FALSE, "Week 13: Apr 15 -- 19",
+make_week_box("week13", TRUE, "Week 13: Apr 15 -- 19",
 "
 
 #### Mon, Apr 15
  * **In Class**, we will work on:
+    * Warm-up about power: [pdf](materials/20190415_power/20190415_power_warmup.pdf) Solutions: [pdf](materials/20190415_power/20190415_power_warmup_sol.pdf)
+    * Motivation for Neyman-Pearson Lemma: [pdf](materials/20190415_power/20190415_np_motivation.pdf) Solutions: [pdf](materials/20190415_power/20190415_np_motivation_sol.pdf)
+    * Power functions and uniformly most powerful tests discussed on the above handout.
 
 #### Wed, Apr 17
  * **In Class**, we will work on:
+    * Generalized likelihood ratio statistic; inverting tests to obtain confidence intervals.  Lecture notes: [pdf](materials/20190417_composite_LRT/lecture_notes.pdf)
 
 #### Fri, Apr 19
  * **In Class**, we will work on:
+    * Example of inverting likelihood ratio test to get confidence interval
+    * Start on worksheet about likelihood ratio tests and confidence intervals.  [pdf](materials/20190419_LRT_CI/20180419_LRT_CI.pdf)
 "
   )
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week14", FALSE, "Week 14: Apr 22 -- 26",
+make_week_box("week14", TRUE, "Week 14: Apr 22 -- 26",
 "
 
 #### Mon, Apr 22
  * **In Class**, we will work on:
+    * Finish talking through worksheet from last class.
+    * Introduce permutation tests: [pdf](materials/20190422_permutation_test/20180422_permutation_test_setup.pdf)
+    * Lab 17
 
 #### Wed, Apr 24
  * **In Class**, we will work on:
+    * Sufficient statistics and exponential families.  Lecture notes: [pdf](materials/20190424_sufficient_stat/lecture_notes.pdf)
 
 #### Fri, Apr 26
  * **In Class**, we will work on:
+    * Reminder of previous results about shrinkage estimators for a single parameter: [pdf](materials/20190426_shrinkage/20190426_normal_univar_bayes.pdf)
 "
   )
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week15", FALSE, "Week 15: Apr 29 -- 30",
+make_week_box("week15", TRUE, "Week 15: Apr 29 -- 30",
 "
 
 #### Mon, Apr 29

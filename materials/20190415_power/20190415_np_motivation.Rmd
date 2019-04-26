@@ -1,0 +1,165 @@
+---
+title: "Warm Up: Motivation for the Neyman-Pearson Lemma"
+output:
+  pdf_document:
+    fig_height: 3
+    fig_width: 5
+documentclass: extarticle
+geometry: margin=0.6in
+---
+
+\def\simiid{\stackrel{{\mbox{\text{\tiny i.i.d.}}}}{\sim}}
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, cache = FALSE)
+require(ggplot2)
+require(scales)
+require(dplyr)
+require(tidyr)
+require(readr)
+require(mosaic)
+```
+
+ * Data Model: $X_1, \ldots, X_5 \simiid \text{Normal}(\theta, 5^2)$
+
+ * Let's consider a test of the hypotheses $H_0: \theta = 25$ vs. $H_A: \theta = 20$
+
+ * If $H_0$ is correct, then $\bar{X} \sim \text{Normal}(25, 5^2/5)$.  If $H_A$ is correct, then $\bar{X} \sim \text{Normal}(20, 5^2/5)$
+
+#### 1. The following pictures can be used to illustrate 3 different tests based on the sampling distribution of $\bar{X}$, all with P(Type I Error | $H_0$ true) = 0.05.  For each test,
+
+ * **Shade in the area corresponding to the probability of a Type I Error**
+ * **Shade in the area corresponding to the power of the test**
+
+Test 1: Reject $H_0$ if $\bar{x} \leq 21.322$ (This is the likelihood ratio test: for values of $\bar{x} \leq 21.322$, the p-value is $\leq 0.05$.)
+
+```{r, echo = FALSE, message=FALSE, cache = TRUE, fig.height = 1.5, fig.width = 7}
+x_grid_1 <- seq(from = 0, to = qnorm(0.05, mean = 25, sd = sqrt(5)), length = 101)
+
+region_to_shade1 <- data.frame(
+  x = c(0, x_grid_1, qnorm(0.05, mean = 25, sd = sqrt(5))),
+  y = c(0, dnorm(x_grid_1, mean = 25, sd = sqrt(5), log = FALSE), 0)
+)
+
+hypothesized_vals <- data.frame(
+  Hypothesis = c("H0", "HA"),
+  theta = c(25, 10)
+)
+
+ggplot(data = data.frame(x = c(0, 35)), mapping = aes(x = x)) +
+  stat_function(fun = dnorm, args = list(mean = 25, sd = sqrt(5))) +
+  stat_function(fun = dnorm, args = list(mean = 20, sd = sqrt(5))) +
+#  geom_polygon(
+#    mapping = aes(x = x, y = y),
+#    fill = "cornflowerblue",
+#    data = region_to_shade1) +
+  geom_vline(xintercept = qnorm(0.05, mean = 25, sd = sqrt(5))) +
+  coord_cartesian(xlim = c(10, 35), expand = TRUE) +
+  theme_bw() +
+  xlab(expression(bar(x))) +
+  ylab("density")
+```
+
+Test 2: Reject $H_0$ if $\bar{x} \leq 20.617$ or $\bar{x} \geq 29.383$
+
+```{r, echo = FALSE, message=FALSE, cache = TRUE, fig.height = 1.5, fig.width = 7}
+x_grid_1 <- seq(from = 0, to = qnorm(0.025, mean = 25, sd = sqrt(5)), length = 101)
+
+region_to_shade1 <- data.frame(
+  x = c(0, x_grid_1, qnorm(0.025, mean = 25, sd = sqrt(5))),
+  y = c(0, dnorm(x_grid_1, mean = 25, sd = sqrt(5), log = FALSE), 0)
+)
+
+x_grid_2 <- seq(from = qnorm(0.975, mean = 25, sd = sqrt(5)), to = 35, length = 101)
+
+region_to_shade2 <- data.frame(
+  x = c(qnorm(0.975, mean = 25, sd = sqrt(5)), x_grid_2, 35),
+  y = c(0, dnorm(x_grid_2, mean = 25, sd = sqrt(5), log = FALSE), 0)
+)
+
+hypothesized_vals <- data.frame(
+  Hypothesis = c("H0", "HA"),
+  theta = c(25, 10)
+)
+
+ggplot(data = data.frame(x = c(0, 35)), mapping = aes(x = x)) +
+  stat_function(fun = dnorm, args = list(mean = 25, sd = sqrt(5))) +
+  stat_function(fun = dnorm, args = list(mean = 20, sd = sqrt(5))) +
+#  geom_polygon(
+#    mapping = aes(x = x, y = y),
+#    fill = "cornflowerblue",
+#    data = region_to_shade1) +
+#  geom_polygon(
+#    mapping = aes(x = x, y = y),
+#    fill = "cornflowerblue",
+#    data = region_to_shade2) +
+  geom_vline(xintercept = qnorm(0.025, mean = 25, sd = sqrt(5))) +
+  geom_vline(xintercept = qnorm(0.975, mean = 25, sd = sqrt(5))) +
+  coord_cartesian(xlim = c(10, 35), expand = TRUE) +
+  theme_bw() +
+  xlab(expression(bar(x))) +
+  ylab("density")
+```
+
+
+Test 3: Reject $H_0$ if $20.617 \leq \bar{x} \leq 21.322$ or $28.678 \leq \bar{x} \leq 29.383$
+
+```{r, echo = FALSE, message=FALSE, cache = TRUE, fig.height = 1.5, fig.width = 7}
+x_grid_1 <- seq(from = 20.617, to = 21.019, length = 101)
+
+region_to_shade1 <- data.frame(
+  x = c(x_grid_1[1], x_grid_1, tail(x_grid_1, 1)),
+  y = c(0, dnorm(x_grid_1, mean = 25, sd = sqrt(5), log = FALSE), 0)
+)
+
+x_grid_2 <- seq(from = 24.930, to = 25.070, length = 101)
+
+region_to_shade2 <- data.frame(
+  x = c(x_grid_2[1], x_grid_2, tail(x_grid_2, 1)),
+  y = c(0, dnorm(x_grid_2, mean = 25, sd = sqrt(5), log = FALSE), 0)
+)
+
+x_grid_3 <- seq(from = 28.981, to = 29.383, length = 101)
+
+region_to_shade3 <- data.frame(
+  x = c(x_grid_3[1], x_grid_3, tail(x_grid_3, 1)),
+  y = c(0, dnorm(x_grid_3, mean = 25, sd = sqrt(5), log = FALSE), 0)
+)
+
+hypothesized_vals <- data.frame(
+  Hypothesis = c("H0", "HA"),
+  theta = c(25, 10)
+)
+
+ggplot(data = data.frame(x = c(0, 35)), mapping = aes(x = x)) +
+  stat_function(fun = dnorm, args = list(mean = 25, sd = sqrt(5))) +
+  stat_function(fun = dnorm, args = list(mean = 20, sd = sqrt(5))) +
+  geom_vline(xintercept = qnorm(0.025, mean = 25, sd = sqrt(5))) +
+  geom_vline(xintercept = qnorm(0.025 + 0.025, mean = 25, sd = sqrt(5))) +
+#  geom_vline(xintercept = qnorm(0.5 - 0.0125, mean = 25, sd = sqrt(5))) +
+#  geom_vline(xintercept = qnorm(0.5 + 0.0125, mean = 25, sd = sqrt(5))) +
+  geom_vline(xintercept = qnorm(0.975 - 0.025, mean = 25, sd = sqrt(5))) +
+  geom_vline(xintercept = qnorm(0.975, mean = 25, sd = sqrt(5))) +
+#  geom_polygon(
+#    mapping = aes(x = x, y = y),
+#    fill = "cornflowerblue",
+#    data = region_to_shade1) +
+#  geom_polygon(
+#    mapping = aes(x = x, y = y),
+#    fill = "cornflowerblue",
+#    data = region_to_shade2) +
+#  geom_polygon(
+#    mapping = aes(x = x, y = y),
+#    fill = "cornflowerblue",
+#    data = region_to_shade3) +
+  coord_cartesian(xlim = c(10, 35), expand = TRUE) +
+  theme_bw() +
+  xlab(expression(bar(x))) +
+  ylab("density")
+```
+
+#### 2. Which of the tests above has the highest power?
+
+\vspace{1cm}
+
+#### 3. For the likelihood ratio test, write down how you would calculate the probability of making a Type I Error and the power of the test as suitable integrals of either $f_{\bar{X}|\theta}(\bar{x} | 20)$ or $f_{\bar{X}|\theta}(\bar{x} | 25)$.  (You will have 1 integral for the probability of a Type I Error and a second for the power of the test.)

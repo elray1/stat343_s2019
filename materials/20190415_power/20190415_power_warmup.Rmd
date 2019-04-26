@@ -1,0 +1,75 @@
+---
+title: "Warm Up: Power Functions for Hypothesis Tests"
+output:
+  pdf_document:
+    fig_height: 3
+    fig_width: 5
+documentclass: extarticle
+geometry: margin=0.6in
+---
+
+\def\simiid{\stackrel{{\mbox{\text{\tiny i.i.d.}}}}{\sim}}
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, cache = FALSE)
+require(ggplot2)
+require(scales)
+require(dplyr)
+require(tidyr)
+require(readr)
+require(mosaic)
+```
+
+ * Data Model: $X_1, \ldots, X_5 \simiid \text{Normal}(\theta, 5^2)$
+
+ * We saw that the likelihood ratio test is *equivalent* to a test based on $\bar{x}$.  The p-value is $P(\bar{X} \leq \bar{x} | \theta = 25)$ ("extreme" values of $\bar{x}$ are those that are at least as small as $\bar{x}$)
+
+#### 1. Consider a test of the hypotheses $H_0: \theta = 25$ vs. $H_A: \theta = 20$.  Below is a picture showing the pdf $f_{\bar{X}|\theta}(\bar{x} | 20)$ of a $\text{Normal}(20, 5^2/5)$ distribution and the pdf $f_{\bar{X}|\theta}(\bar{x} | 25)$ of a $\text{Normal}(25, 5^2/5)$ distribution, along with a vertical line at $q_5^{null}$, the 5th percentile of the $\text{Normal}(25, 5^2/5)$ distribution.
+
+ * **Shade in the area corresponding to $1 - \beta$, the power of the likelihood ratio test if $H_A$ is correct.**
+ * **Show how you would calculate the power of the test as an integral of either $f_{\bar{X}|\theta}(\bar{x} | 20)$ or $f_{\bar{X}|\theta}(\bar{x} | 25)$**
+
+```{r, echo = FALSE, message=FALSE, cache = TRUE, fig.height = 1.5, fig.width = 7}
+ggplot(data = data.frame(x = c(0, 35)), mapping = aes(x = x)) +
+  stat_function(fun = dnorm, args = list(mean = 25, sd = sqrt(5))) +
+  stat_function(fun = dnorm, args = list(mean = 20, sd = sqrt(5))) +
+  geom_vline(xintercept = qnorm(0.05, mean = 25, sd = sqrt(5))) +
+  coord_cartesian(xlim = c(10, 35), expand = TRUE) +
+  theme_bw() +
+  xlab(expression(bar(x))) +
+  ylab("density")
+```
+
+#### 2. Suppose that instead we were testing the hypotheses $H_0: \theta = 25$ vs. $H_A: \theta = 22.5$. Below is a picture showing the pdf $f_{\bar{X}|\theta}(\bar{x} | 22.5)$ of a $\text{Normal}(22.5, 5^2/5)$ distribution and the pdf $f_{\bar{X}|\theta}(\bar{x} | 25)$ of a $\text{Normal}(25, 5^2/5)$ distribution, along with a vertical line at $q_5^{null}$, the 5th percentile of the $\text{Normal}(25, 5^2/5)$ distribution.
+
+ * **Shade in the area corresponding to $1 - \beta$, the power of the likelihood ratio test if $H_A$ is correct.**
+ * **Show how you would calculate the power of the test as an integral of either $f_{\bar{X}|\theta}(\bar{x} | 22.5)$ or $f_{\bar{X}|\theta}(\bar{x} | 25)$**
+
+```{r, echo = FALSE, message=FALSE, cache = TRUE, fig.height = 1.5, fig.width = 7}
+ggplot(data = data.frame(x = c(0, 35)), mapping = aes(x = x)) +
+  stat_function(fun = dnorm, args = list(mean = 25, sd = sqrt(5))) +
+  stat_function(fun = dnorm, args = list(mean = 22.5, sd = sqrt(5))) +
+  geom_vline(xintercept = qnorm(0.05, mean = 25, sd = sqrt(5))) +
+  coord_cartesian(xlim = c(10, 35), expand = TRUE) +
+  theme_bw() +
+  xlab(expression(bar(x))) +
+  ylab("density")
+```
+
+#### 3. Suppose that instead we were testing the hypotheses $H_0: \theta = 25$ vs. $H_A: \theta = 17.5$. Below is a picture showing the pdf $f_{\bar{X}|\theta}(\bar{x} | 17.5)$ of a $\text{Normal}(17.5, 5^2/5)$ distribution and the pdf $f_{\bar{X}|\theta}(\bar{x} | 25)$ of a $\text{Normal}(25, 5^2/5)$ distribution, along with a vertical line at $q_5^{null}$, the 5th percentile of the $\text{Normal}(25, 5^2/5)$ distribution.
+
+ * **Shade in the area corresponding to $1 - \beta$, the power of the likelihood ratio test if $H_A$ is correct.**
+ * **Show how you would calculate the power of the test as an integral of either $f_{\bar{X}|\theta}(\bar{x} | 17.5)$ or $f_{\bar{X}|\theta}(\bar{x} | 25)$**
+
+```{r, echo = FALSE, message=FALSE, cache = TRUE, fig.height = 1.5, fig.width = 7}
+ggplot(data = data.frame(x = c(0, 35)), mapping = aes(x = x)) +
+  stat_function(fun = dnorm, args = list(mean = 25, sd = sqrt(5))) +
+  stat_function(fun = dnorm, args = list(mean = 17.5, sd = sqrt(5))) +
+  geom_vline(xintercept = qnorm(0.05, mean = 25, sd = sqrt(5))) +
+  coord_cartesian(xlim = c(10, 35), expand = TRUE) +
+  theme_bw() +
+  xlab(expression(bar(x))) +
+  ylab("density")
+```
+
+#### 4. For which of the alternative hypotheses above ($\theta = 17.5$, $\theta = 20$, or $\theta = 22.5$) is the power of the test largest?  For which is the power smallest?

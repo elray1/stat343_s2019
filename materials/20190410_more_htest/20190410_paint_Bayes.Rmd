@@ -1,0 +1,74 @@
+---
+title: "Bayesian Analysis of the Paint Drying Example"
+output:
+  pdf_document:
+    fig_height: 3
+    fig_width: 5
+documentclass: extarticle
+geometry: margin=0.6in
+---
+
+\def\simiid{\stackrel{{\mbox{\text{\tiny i.i.d.}}}}{\sim}}
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, cache = FALSE)
+require(ggplot2)
+require(scales)
+require(dplyr)
+require(tidyr)
+require(readr)
+require(mosaic)
+```
+
+ * Data Model: $X_1, \ldots, X_5 \simiid \text{Normal}(\theta, 5^2)$
+
+ * We know that $\theta$ is either 10 (quick dry) or 25 (regular).
+
+ * We don't know which value of theta is correct.  Suppose we adopt a prior with equal probablity for each value of $\theta$:
+ 
+$f_{\Theta}(10) = f_{\Theta}(25) = 0.5$
+
+ * Here's some algebra that says the joint pdf of $X_1, \ldots, X_n$ is proportional to the pdf of $\bar{X}$ (based on the data following a $\text{Normal}(\theta, \sigma^2)$ distribution):
+ 
+\begin{align*}
+f_{X_1, \ldots, X_n | \Theta}(x_1, \ldots, x_n | \theta) &= \prod_{i=1}^n f_{X_i | \Theta}(x_i | \theta) \\
+ &= \prod_{i = 1}^n \frac{1}{\sqrt{2 \pi} \sigma} \exp\left[ \frac{-1}{2 \sigma^2} (x_i - \theta)^2 \right] \\
+ &= \left(\frac{1}{\sqrt{2 \pi} \sigma}\right)^n \exp\left[ \frac{-1}{2 \sigma^2} \sum_{i=1}^n (x_i - \theta)^2 \right] \\
+ &= \left(\frac{1}{\sqrt{2 \pi} \sigma}\right)^n \exp\left[ \frac{-1}{2 \sigma^2} \sum_{i=1}^n (x_i - \bar{x} + \bar{x} - \theta)^2 \right] \\
+ &= \left(\frac{1}{\sqrt{2 \pi} \sigma}\right)^n \exp\left[ \frac{-1}{2 \sigma^2} \sum_{i=1}^n \left\{ (x_i - \bar{x})^2 + 2(x_i - \bar{x}) (\bar{x} - \theta) + (\bar{x} - \theta)^2 \right\} \right] \\
+ &= \left(\frac{1}{\sqrt{2 \pi} \sigma}\right)^n \exp\left[ \frac{-1}{2 \sigma^2} \sum_{i=1}^n (x_i - \bar{x})^2 \right] \exp\left[ \frac{-1}{2 \sigma^2} \sum_{i=1}^n 2(x_i - \bar{x}) (\bar{x} - \theta) \right] \exp\left[ \frac{-1}{2 \sigma^2} \sum_{i=1}^n (\bar{x} - \theta)^2 \right] \\
+ &= c \exp\left[ \frac{-1}{2 \sigma^2} 2 (\bar{x} - \theta) (n \bar{x} - n \bar{x}) \right] \exp\left[ \frac{-1}{2 \sigma^2} n (\bar{x} - \theta)^2 \right] \\
+ &= c \exp\left[ \frac{-1}{2 \sigma^2 / n} (\bar{x} - \theta)^2 \right] \\
+ &= c f_{\bar{X} | \Theta}(\bar{x} | \theta)
+\end{align*}
+
+ * Where $\bar{X} \sim \text{Normal}(\theta, \sigma^2/n)$
+
+#### Find the posterior probability that $\Theta = 25$ in terms of the pdf of $\bar{X}$ based on $\theta = 10$ and $\theta = 25$, $f_{\bar{X} | \Theta}(20 | 10)$ and $f_{\bar{X} | \Theta}(20 | 25)$.
+
+\newpage
+
+**Posterior probabilities if the two options are $\theta = 25$ and $\theta = 10$:**
+
+```{r, echo = TRUE}
+dnorm(20, mean = 25, sd = 5) / (dnorm(20, mean = 25, sd = 5) + dnorm(20, mean = 10, sd = 5))
+dnorm(20, mean = 10, sd = 5) / (dnorm(20, mean = 25, sd = 5) + dnorm(20, mean = 10, sd = 5))
+```
+
+\vspace{1cm}
+
+**Posterior probabilities if the two options are $\theta = 25$ and $\theta = 0$:**
+
+```{r, echo = TRUE}
+dnorm(20, mean = 25, sd = 5) / (dnorm(20, mean = 25, sd = 5) + dnorm(20, mean = 0, sd = 5))
+dnorm(20, mean = 0, sd = 5) / (dnorm(20, mean = 25, sd = 5) + dnorm(20, mean = 0, sd = 5))
+```
+
+\vspace{1cm}
+
+**Posterior probabilities if the two options are $\theta = 25$ and $\theta = 20$:**
+
+```{r, echo = TRUE}
+dnorm(20, mean = 25, sd = 5) / (dnorm(20, mean = 25, sd = 5) + dnorm(20, mean = 20, sd = 5))
+dnorm(20, mean = 20, sd = 5) / (dnorm(20, mean = 25, sd = 5) + dnorm(20, mean = 20, sd = 5))
+```
