@@ -1,0 +1,62 @@
+---
+title: "Stat 343 Final Review Problems"
+output: pdf_document
+header-includes:
+  - \usepackage{booktabs}
+geometry: margin=0.6in
+---
+
+\def\simiid{\stackrel{{\mbox{\text{\tiny i.i.d.}}}}{\sim}}
+
+## Final Structure and Coverage
+
+I haven't written the final yet, but it will likely have 3 kinds of questions:
+
+1) conceptual questions to make sure you understand what's going on.
+2) some problems where you're asked to do some math.
+3) a computational question.
+
+## Conceptual Topics
+
+ * All the things from the midterm
+ * Things about likelihood ratios, inverting confidence intervals/hypothesis tests, and p-values
+
+For examples, see the multiple choice problems on the most recent homework assignment.
+
+Here's one more.
+
+### Problem 1
+
+If n = 1,000,000,000, is there an unbiased estimator with lower variance than the MLE?  Justify your answer.
+
+\newpage
+
+## Example Worked Problems
+
+The midterm will have problems roughly similar in content to the examples below.
+
+### Problem 1
+
+Suppose that $Y_1, Y_2, \ldots, Y_n$ are i.i.d. samples from a distribution with pdf given by
+
+$f_Y(y|\theta) = \frac{1 + \theta y}{2}$ for $-1 < y < 1$ and $-1 < \theta < 1$.  An investigator is interested in testing $H_0: \theta = 0$ vs. $H_A: \theta = 0.5$.
+
+#### (a) Plot a picture of the pdfs of $Y_1$ under the null and alternative hypotheses.  (One plot, two lines).
+
+#### (b) Consider a sample of size $n$. Derive a general structure of the rejection region of the most powerful test of size $\alpha = 0.05$ for testing $H_0: \theta = 0$ vs. $H_A: \theta = 0.5$. By "general structure", I mean that you should find the test statistic and indicate in general what the rejection region of the test looks like, but you do not need to derive the exact critical value for the test.
+
+#### (c) Suppose now that $n = 1$. On your plot from part (a), show how you could calculate the p-value of the test if you observe $y = 0.5$.
+
+#### (d) Still working with $n = 1$, find the rejection region of the test.
+
+#### (e) Still working with $n = 1$, indicate on your picture the area corresponding to the power of the test.
+
+
+### Problem 2
+
+In the written part of Lab 13, you showed that if $X \sim \text{Binomial}(n, \theta)$, then the maximum likelihood estimator $\hat{\theta} = X/n$ has expected value $\theta$ and variance $\theta (1 - \theta)/n$.  Regarding $X$ as a sum of results of iid Bernoulli trials, find an approximation to the distribution of $\hat{\theta}$ if $n$ is large.  Use your approximation to find an approximate 95% confidence interval for $\theta$.  How could you use your confidence interval to conduct a test of $H_0: \theta = 0.2$?
+
+### Problem 3
+
+Consider a situation in which we've observed $x_1 = 1$, $x_2 = 2$, and $x_3 = 4$.  Calculate the bootstrap distribution of the median.  Your answer should be in the form of a table listing possible values of the median and their probabilities.  (Hint: there are 27 possibilities, and they are all equally likely).  Use the distribution to find a 90% confidence interval for the median based on the bootstrap percentile method.  Is it appropriate to use this approach?  Why or why not?
+
